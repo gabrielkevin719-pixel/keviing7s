@@ -13,6 +13,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: 'Privacy | Livia Andrade',
   description: 'Conteúdo exclusivo de Livia Andrade',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export const viewport: Viewport = {
