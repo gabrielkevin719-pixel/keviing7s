@@ -1243,16 +1243,14 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  🔥 Livia Andrade – Vazamento Exclusivo no Privacy 🔥
-{`Conteúdo premium liberado por um valor MUITO abaixo do habitual.
-Corpo escultural entregue sem filtros:
-💦 Boquetes profundos e molhados que vão até o limite
-🍑 Sentadas intensas, reboladas que hipnotizam
-🔞 Gemidos reais, orgasmos sem cortes, close-ups explícitos
-Material que era restrito aos assinantes mais fiéis… agora acessível por tempo limitado e por um preço que não vai se repetir.
-Não perca a chance de ver a Juliana se entregando de verdade.
-👉 Entre agora e garanta o seu antes que volte ao valor original.
-😈 Quantidade limitada • Acesso imediato • 100% sem censura`}
+{`🔥 O que você nunca viu da Livia Andrade… agora sem filtro
+💋 Bastidores + conteúdos que não vão pra TV
+😈 Aqui é onde o jogo muda de verdade
+Sem censura, sem roteiro… só o que você quer ver
+⏳ Acesso liberado por tempo limitado
+💸 +3.742 já entraram hoje… e você aí pensando
+🚫 Depois que sair, não volta mais
+👇 Entra agora e descobre o que esconderam de você`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
