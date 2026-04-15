@@ -1283,9 +1283,9 @@ Sem censura, sem roteiro… só o que você quer ver
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 19.90)}>
+                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
                         <span className="left"><span className="plan-label">30 Dias</span> <span className="mini-badge best">Mais popular 🔥</span></span>
-                        <span className="right">R$ 19,90</span>
+                        <span className="right">R$ 24,90</span>
                       </button>
 
                       <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 34.90)}>
