@@ -1217,9 +1217,9 @@ export default function PrivacyPage() {
               <div className="cover-image">
                 <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
 <div className="stats">
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 354</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 148</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> 20.2K</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 1.2K</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 856</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> 125K</span>
                 </div>
               </div>
 
@@ -1342,10 +1342,10 @@ Sem censura, sem roteiro… só o que você quer ver
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
                       <div className="lock-bubble">🔒</div>
-                      <div className="stats-pill">
-                        <span>45K</span>
-                        <span>3K</span>
-                      </div>
+<div className="stats-pill">
+                  <span>156K</span>
+                  <span>28K</span>
+                </div>
                     </div>
                     <footer className="feed-footer">
                       <span>🤍</span>
@@ -1375,10 +1375,10 @@ Sem censura, sem roteiro… só o que você quer ver
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
                       <div className="lock-bubble">🔒</div>
-                      <div className="stats-pill">
-                        <span>67K</span>
-                        <span>5K</span>
-                      </div>
+<div className="stats-pill">
+                  <span>198K</span>
+                  <span>35K</span>
+                </div>
                     </div>
                     <footer className="feed-footer">
                       <span>🤍</span>
@@ -1399,10 +1399,10 @@ Sem censura, sem roteiro… só o que você quer ver
                     <div className="feed-media">
                       <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/612609830_18553096732056780_3040291778020198154_n-QpMvCSNefkkg636zJgts2UVOtmv9y5.jpg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                       <div className="lock-bubble">🔒</div>
-                      <div className="stats-pill">
-                        <span>82K</span>
-                        <span>7K</span>
-                      </div>
+<div className="stats-pill">
+                  <span>245K</span>
+                  <span>42K</span>
+                </div>
                     </div>
                     <footer className="feed-footer">
                       <span>🤍</span>
