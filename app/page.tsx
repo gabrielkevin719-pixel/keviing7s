@@ -1263,9 +1263,9 @@ Sem censura, sem roteiro… só o que você quer ver
                 <div className="tag-popular">VEJA TUDO AGORA 🔥</div>
                 <span className="mini-badge promo header-promo">Promocional</span>
 
-                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 9.90)}>
+                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
                   <span className="plan-title">15 Dias</span>
-                  <span className="plan-price">R$ 9,90</span>
+                  <span className="plan-price">R$ 14,90</span>
                 </button>
                 <div className="perk-chip">NÃO PERCA ESSA OFERTA!</div>
 
@@ -1283,19 +1283,19 @@ Sem censura, sem roteiro… só o que você quer ver
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 14.90)}>
+                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 19.90)}>
                         <span className="left"><span className="plan-label">30 Dias</span> <span className="mini-badge best">Mais popular 🔥</span></span>
-                        <span className="right">R$ 14,90</span>
+                        <span className="right">R$ 19,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 24.90)}>
+                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 34.90)}>
                         <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
-                        <span className="right">R$ 24,90</span>
+                        <span className="right">R$ 34,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 32.90)}>
+                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 49.90)}>
                         <span className="left"><span className="plan-label">180 Dias</span> <span className="mini-badge premium">Exclusivo</span></span>
-                        <span className="right">R$ 32,90</span>
+                        <span className="right">R$ 49,90</span>
                       </button>
                     </>
                   )}
@@ -1434,10 +1434,10 @@ Sem censura, sem roteiro… só o que você quer ver
         </div>
 
         <div className="footer-cta">
-          <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 9.90)}>
-            <span className="plan-title">Veja tudo por apenas</span>
-            <span className="plan-price">R$ 9,90</span>
-          </button>
+<button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+                  <span className="plan-title">Veja tudo por apenas</span>
+                  <span className="plan-price">R$ 14,90</span>
+                </button>
         </div>
 
         <p className="footer-legal-links">
