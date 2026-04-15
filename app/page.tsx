@@ -506,15 +506,17 @@ export default function PrivacyPage() {
           gap: 8px;
           color: #111827;
           font-weight: 700;
-          white-space: nowrap;
           min-width: 0;
+          flex: 1;
+          overflow: hidden;
         }
 
-        .plan-outline .right {
+.plan-outline .right {
           color: #111827;
           font-weight: 800;
           white-space: nowrap;
-          flex: 0 0 auto;
+          flex-shrink: 0;
+          padding-left: 8px;
         }
 
         .plan-outline.featured {
@@ -1263,9 +1265,9 @@ Sem censura, sem roteiro… só o que você quer ver
                 <div className="tag-popular">VEJA TUDO AGORA 🔥</div>
                 <span className="mini-badge promo header-promo">Promocional</span>
 
-                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 9.90)}>
+                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
                   <span className="plan-title">15 Dias</span>
-                  <span className="plan-price">R$ 9,90</span>
+                  <span className="plan-price">R$ 14,90</span>
                 </button>
                 <div className="perk-chip">NÃO PERCA ESSA OFERTA!</div>
 
@@ -1283,19 +1285,19 @@ Sem censura, sem roteiro… só o que você quer ver
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 14.90)}>
+                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
                         <span className="left"><span className="plan-label">30 Dias</span> <span className="mini-badge best">Mais popular 🔥</span></span>
-                        <span className="right">R$ 14,90</span>
-                      </button>
-
-                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 24.90)}>
-                        <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
                         <span className="right">R$ 24,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 32.90)}>
+                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
+                        <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
+                        <span className="right">R$ 42,90</span>
+                      </button>
+
+                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
                         <span className="left"><span className="plan-label">180 Dias</span> <span className="mini-badge premium">Exclusivo</span></span>
-                        <span className="right">R$ 32,90</span>
+                        <span className="right">R$ 59,90</span>
                       </button>
                     </>
                   )}
@@ -1331,7 +1333,7 @@ Sem censura, sem roteiro… só o que você quer ver
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f17b9b9b-a3b3-430c-8490-212cde881494-UQibtH0uliANCF1FWINIS6Qq00DQV7.mp4" 
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/L%C3%ADvia%20Andrade%20%282%29-eIk7V8GImwQYb82nA3JHeVLDDyTVp9.mp4" 
                         poster="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png"
                         autoPlay 
                         loop 
@@ -1364,7 +1366,7 @@ Sem censura, sem roteiro… só o que você quer ver
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c0436eb0-2a28-48ae-9dec-4fa8addf8518-ARzYWJSEwX0Cdg8iWmZsrbkm3GfBae.mp4" 
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/L%C3%ADvia%20Andrade%20%281%29-OcZMZ7uT4x72E2FggXUqF4OR3IN9Gb.mp4" 
                         poster="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png"
                         autoPlay 
                         loop 
@@ -1395,7 +1397,7 @@ Sem censura, sem roteiro… só o que você quer ver
                       </div>
                     </header>
                     <div className="feed-media">
-                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/612609830_18553096732056780_3040291778020198154_n-QpMvCSNefkkg636zJgts2UVOtmv9y5.jpg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                       <div className="lock-bubble">🔒</div>
                       <div className="stats-pill">
                         <span>82K</span>
@@ -1434,10 +1436,10 @@ Sem censura, sem roteiro… só o que você quer ver
         </div>
 
         <div className="footer-cta">
-          <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 9.90)}>
-            <span className="plan-title">Veja tudo por apenas</span>
-            <span className="plan-price">R$ 9,90</span>
-          </button>
+<button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+                  <span className="plan-title">Veja tudo por apenas</span>
+                  <span className="plan-price">R$ 14,90</span>
+                </button>
         </div>
 
         <p className="footer-legal-links">
