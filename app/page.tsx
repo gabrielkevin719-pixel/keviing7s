@@ -510,12 +510,13 @@ export default function PrivacyPage() {
           min-width: 0;
         }
 
-        .plan-outline .right {
-          color: #111827;
-          font-weight: 800;
-          white-space: nowrap;
-          flex: 0 0 auto;
-        }
+.plan-outline .right {
+  color: #111827;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  }
 
         .plan-outline.featured {
           border-color: #ff6b3d;
@@ -1288,14 +1289,14 @@ Sem censura, sem roteiro… só o que você quer ver
                         <span className="right">R$ 24,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 34.90)}>
+                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
                         <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
-                        <span className="right">R$ 34,90</span>
+                        <span className="right">R$ 42,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 49.90)}>
+                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
                         <span className="left"><span className="plan-label">180 Dias</span> <span className="mini-badge premium">Exclusivo</span></span>
-                        <span className="right">R$ 49,90</span>
+                        <span className="right">R$ 59,90</span>
                       </button>
                     </>
                   )}
