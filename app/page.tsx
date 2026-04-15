@@ -1213,7 +1213,7 @@ export default function PrivacyPage() {
           <div className="profile-section">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha-jCfeQqfHeuja4aDnsXhtPhPSaizh0o.png" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
 <div className="stats">
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 354</span>
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 148</span>
