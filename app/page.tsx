@@ -1213,7 +1213,7 @@ export default function PrivacyPage() {
           <div className="profile-section">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha-jCfeQqfHeuja4aDnsXhtPhPSaizh0o.png" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
 <div className="stats">
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 354</span>
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 148</span>
@@ -1223,11 +1223,11 @@ export default function PrivacyPage() {
 
               <div className="profile-info">
                 <div className="profile-image">
-                  <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1-v995kfuDUbk7fBE3uizVb04kTqsIbS.png" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                  <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
                   <div className="profile-name">
-                    Vivi Noronha
+                    Livia Andrade
                     <span className="verified">
                       <svg aria-label="Verificado" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18" xmlns="http://www.w3.org/2000/svg">
                         <title>Verificado</title>
@@ -1235,7 +1235,7 @@ export default function PrivacyPage() {
                       </svg>
                     </span>
                   </div>
-                  <div className="profile-username">@noronhavivii</div>
+                  <div className="profile-username">@liviaandradereal</div>
                 </div>
               </div>
             </div>
@@ -1243,16 +1243,14 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  🔥 Vivi Noronha – Vazamento Exclusivo no Privacy 🔥
-{`Conteúdo premium liberado por um valor MUITO abaixo do habitual.
-Corpo escultural entregue sem filtros:
-💦 Boquetes profundos e molhados que vão até o limite
-🍑 Sentadas intensas, reboladas que hipnotizam
-🔞 Gemidos reais, orgasmos sem cortes, close-ups explícitos
-Material que era restrito aos assinantes mais fiéis… agora acessível por tempo limitado e por um preço que não vai se repetir.
-Não perca a chance de ver a Juliana se entregando de verdade.
-👉 Entre agora e garanta o seu antes que volte ao valor original.
-😈 Quantidade limitada • Acesso imediato • 100% sem censura`}
+{`🔥 O que você nunca viu da Livia Andrade… agora sem filtro
+💋 Bastidores + conteúdos que não vão pra TV
+😈 Aqui é onde o jogo muda de verdade
+Sem censura, sem roteiro… só o que você quer ver
+⏳ Acesso liberado por tempo limitado
+💸 +3.742 já entraram hoje… e você aí pensando
+🚫 Depois que sair, não volta mais
+👇 Entra agora e descobre o que esconderam de você`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
@@ -1324,10 +1322,10 @@ Não perca a chance de ver a Juliana se entregando de verdade.
                   {/* Video 1 */}
                   <article className="feed-card">
                     <header className="feed-header">
-                      <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1-v995kfuDUbk7fBE3uizVb04kTqsIbS.png" width={28} height={28} alt="Avatar" unoptimized />
+                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Vivi Noronha</div>
-                        <div className="feed-handle">@noronhavivii</div>
+                        <div className="feed-name">Livia Andrade</div>
+                        <div className="feed-handle">@liviaandradereal</div>
                       </div>
                     </header>
                     <div className="feed-media">
@@ -1357,10 +1355,10 @@ Não perca a chance de ver a Juliana se entregando de verdade.
                   {/* Video 2 */}
                   <article className="feed-card">
                     <header className="feed-header">
-                      <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1-v995kfuDUbk7fBE3uizVb04kTqsIbS.png" width={28} height={28} alt="Avatar" unoptimized />
+                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Vivi Noronha</div>
-                        <div className="feed-handle">@noronhavivii</div>
+                        <div className="feed-name">Livia Andrade</div>
+                        <div className="feed-handle">@liviaandradereal</div>
                       </div>
                     </header>
                     <div className="feed-media">
@@ -1390,10 +1388,10 @@ Não perca a chance de ver a Juliana se entregando de verdade.
                   {/* Imagem */}
                   <article className="feed-card">
                     <header className="feed-header">
-                      <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1-v995kfuDUbk7fBE3uizVb04kTqsIbS.png" width={28} height={28} alt="Avatar" unoptimized />
+                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Vivi Noronha</div>
-                        <div className="feed-handle">@noronhavivii</div>
+                        <div className="feed-name">Livia Andrade</div>
+                        <div className="feed-handle">@liviaandradereal</div>
                       </div>
                     </header>
                     <div className="feed-media">
