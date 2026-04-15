@@ -1395,7 +1395,7 @@ Sem censura, sem roteiro… só o que você quer ver
                       </div>
                     </header>
                     <div className="feed-media">
-                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/612609830_18553096732056780_3040291778020198154_n-QpMvCSNefkkg636zJgts2UVOtmv9y5.jpg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                       <div className="lock-bubble">🔒</div>
                       <div className="stats-pill">
                         <span>82K</span>
