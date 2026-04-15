@@ -506,17 +506,18 @@ export default function PrivacyPage() {
           gap: 8px;
           color: #111827;
           font-weight: 700;
-          white-space: nowrap;
           min-width: 0;
+          flex: 1;
+          overflow: hidden;
         }
 
 .plan-outline .right {
-  color: #111827;
-  font-weight: 800;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-left: auto;
-  }
+          color: #111827;
+          font-weight: 800;
+          white-space: nowrap;
+          flex-shrink: 0;
+          padding-left: 8px;
+        }
 
         .plan-outline.featured {
           border-color: #ff6b3d;
