@@ -1364,7 +1364,7 @@ Sem censura, sem roteiro… só o que você quer ver
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c0436eb0-2a28-48ae-9dec-4fa8addf8518-ARzYWJSEwX0Cdg8iWmZsrbkm3GfBae.mp4" 
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/L%C3%ADvia%20Andrade%20%281%29-OcZMZ7uT4x72E2FggXUqF4OR3IN9Gb.mp4" 
                         poster="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png"
                         autoPlay 
                         loop 
