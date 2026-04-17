@@ -371,7 +371,10 @@ export default function PrivacyPage() {
         .pricing-panel {
           max-width: 420px;
           margin: 0 auto;
-          padding: 0;
+          padding: 24px;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
 
         .pricing-section-title {
