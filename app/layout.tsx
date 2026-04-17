@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Privacy | Checkout Bia Miranda',
-  description: 'Conteudo exclusivo de Bia Miranda',
+  title: 'Privacy | Checkout Vivi Noronha',
+  description: 'Conteudo exclusivo de Vivi Noronha',
   icons: {
     icon: '/favicon.png',
   },
