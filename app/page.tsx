@@ -1252,7 +1252,7 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                   </div>
                 </header>
                 <div className="feed-media">
-                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3%20%281%29-9gKE8kTbUvc2m9h6jWMrYQam9m5GFH.png" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>245K</span>
