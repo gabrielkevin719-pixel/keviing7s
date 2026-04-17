@@ -1229,7 +1229,7 @@ export default function PrivacyPage() {
                 </div>
                 <div className="profile-text">
                   <div className="profile-name">
-                    Livia Andrade
+                    Bia Miranda
                     <span className="verified">
                       <svg aria-label="Verificado" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18" xmlns="http://www.w3.org/2000/svg">
                         <title>Verificado</title>
@@ -1237,7 +1237,7 @@ export default function PrivacyPage() {
                       </svg>
                     </span>
                   </div>
-                  <div className="profile-username">@liviaandradereal</div>
+                  <div className="profile-username">@Biamirandapessoal</div>
                 </div>
               </div>
             </div>
@@ -1245,14 +1245,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-{`🔥 O que você nunca viu da Livia Andrade… agora sem filtro
-💋 Bastidores + conteúdos que não vão pra TV
-😈 Aqui é onde o jogo muda de verdade
-Sem censura, sem roteiro… só o que você quer ver
-⏳ Acesso liberado por tempo limitado
-💸 +3.742 já entraram hoje… e você aí pensando
-🚫 Depois que sair, não volta mais
-👇 Entra agora e descobre o que esconderam de você`}
+{`A pimenta em uma versão ainda mais quente, vem ver tudo o que você sempre quis, a novinha mais gostosa do laranjinha 🌶️🔥`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
@@ -1326,8 +1319,8 @@ Sem censura, sem roteiro… só o que você quer ver
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
@@ -1359,8 +1352,8 @@ Sem censura, sem roteiro… só o que você quer ver
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
@@ -1392,8 +1385,8 @@ Sem censura, sem roteiro… só o que você quer ver
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
