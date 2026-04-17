@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
 
     // Normaliza o valor (substitui virgula por ponto se necessario)
     const amountNormalized = String(amount).replace(',', '.')
-    // Valor em centavos (multiplica por 100 e arredonda)
-    const amountInCents = Math.round(parseFloat(amountNormalized) * 100)
+    // Valor em reais (HooPay espera valor em reais, nao em centavos)
+    const amountValue = parseFloat(amountNormalized)
 
     // Cria o header de autenticacao Basic Auth
     const credentials = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 
     // Monta o payload para a API do HooPay conforme documentacao Postman
     const hoopayPayload = {
-      amount: amountInCents,
+      amount: amountValue,
       customer: {
         email: email || 'cliente@email.com',
         name: name || 'Cliente',
@@ -55,13 +55,13 @@ export async function POST(request: NextRequest) {
       products: [
         {
           title: `Assinatura Privacy - Plano ${plan || 'Premium'}`,
-          amount: amountInCents,
+          amount: amountValue,
           quantity: 1
         }
       ],
       payments: [
         {
-          amount: amountInCents,
+          amount: amountValue,
           type: 'pix'
         }
       ],
