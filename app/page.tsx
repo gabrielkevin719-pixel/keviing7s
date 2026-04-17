@@ -175,76 +175,48 @@ export default function PrivacyPage() {
         .nav-container {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 12px 24px;
+          justify-content: center;
+          padding: 16px 24px;
           max-width: 1200px;
           margin: 0 auto;
-          height: 60px;
-          background-color: #fff;
-          border-bottom: 1px solid #eee;
+          height: 56px;
+          background-color: #f7f5f3;
+          position: relative;
         }
 
         .logo {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-        }
-
-        .logo img {
-          height: 40px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        .right-container {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-
-        .search-container {
-          display: flex;
-          align-items: center;
-          width: 300px;
-          height: 40px;
-        }
-
-        .search-container input {
-          width: 100%;
-          height: 100%;
-          padding: 0 15px;
-          border: 1px solid #ddd;
-          border-radius: 20px;
-          font-size: 14px;
-        }
-
-        .search-button,
-        .icon-button {
-          width: 40px;
-          height: 40px;
-          border: none;
-          background: none;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
           justify-content: center;
-          border-radius: 50%;
-          transition: background-color 0.3s;
         }
 
-        .icon-button:hover {
-          background-color: #f5f5f5;
+        .logo-text {
+          font-size: 22px;
+          font-weight: 500;
+          color: #1f2937;
+          letter-spacing: -0.5px;
         }
 
-        .nav-icons {
-          display: flex;
-          gap: 15px;
+        .globe-icon {
+          position: absolute;
+          right: 24px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6b7280;
+          cursor: pointer;
         }
 
         .main-container {
-          max-width: 640px;
-          margin: 0 auto;
-          padding: 0 10px;
+          max-width: 580px;
+          margin: 24px auto;
+          padding: 0 16px;
+        }
+
+        .profile-card {
+          background: #ffffff;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
 
         .cover-section {
@@ -254,8 +226,9 @@ export default function PrivacyPage() {
         .cover-image {
           position: relative;
           width: 100%;
-          height: 280px;
+          height: 140px;
           overflow: hidden;
+          border-radius: 20px 20px 0 0;
         }
 
         .cover-image img {
@@ -266,44 +239,44 @@ export default function PrivacyPage() {
 
         .stats {
           position: absolute;
-          bottom: 12px;
+          top: 12px;
           right: 12px;
           display: flex;
-          gap: 16px;
-          color: white;
-          font-size: 13px;
+          gap: 12px;
+          color: #374151;
+          font-size: 12px;
           font-weight: 500;
-          text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
         .stats span {
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 4px;
         }
 
         .stats .stat-icon {
-          opacity: 0.9;
+          opacity: 0.7;
         }
 
         .profile-info {
           display: flex;
           align-items: flex-start;
           gap: 12px;
-          margin-top: -45px;
+          margin-top: -40px;
           padding: 0 20px;
           position: relative;
           z-index: 10;
         }
 
         .profile-image {
-          width: 90px;
-          height: 90px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
-          border: 3px solid #3b82f6;
+          border: 3px solid #ffffff;
           overflow: hidden;
           background: white;
           flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .profile-image img {
@@ -313,16 +286,16 @@ export default function PrivacyPage() {
         }
 
         .profile-text {
-          padding-top: 50px;
+          padding-top: 46px;
         }
 
         .profile-name {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 700;
           color: #111827;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 4px;
         }
 
         .verified svg {
@@ -331,20 +304,20 @@ export default function PrivacyPage() {
         }
 
         .profile-username {
-          color: #1da1f2;
-          font-size: 14px;
+          color: #9ca3af;
+          font-size: 13px;
         }
 
         .profile-bio {
-          padding: 16px;
+          padding: 16px 20px;
         }
 
         .bio-container {
-          margin-bottom: 16px;
+          margin-bottom: 12px;
         }
 
         .bio-text {
-          font-size: 14px;
+          font-size: 13px;
           color: #374151;
           line-height: 1.6;
           white-space: pre-line;
@@ -352,29 +325,50 @@ export default function PrivacyPage() {
         }
 
         .bio-text.collapsed {
-          max-height: 80px;
+          max-height: 60px;
         }
 
         .bio-toggle {
           background: none;
           border: none;
-          color: #ff6b3d;
-          font-weight: 600;
+          color: #f97316;
+          font-weight: 500;
           cursor: pointer;
-          font-size: 14px;
-          margin-top: 8px;
+          font-size: 13px;
+          margin-top: 6px;
           display: inline-block;
-          margin-bottom: 16px;
+          margin-bottom: 12px;
+        }
+
+        .social-icons {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+
+        .social-icon {
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #374151;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .social-icon:hover {
+          background: #f3f4f6;
         }
 
         /* Pricing panel - New Design */
         .pricing-panel {
-          max-width: 420px;
-          margin: 0 auto;
-          padding: 24px;
-          background: #ffffff;
-          border-radius: 16px;
-          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          box-shadow: none;
         }
 
         .pricing-section-title {
@@ -442,6 +436,8 @@ export default function PrivacyPage() {
         .chevron {
           color: #9ca3af;
           transition: transform 0.3s ease;
+          display: flex;
+          align-items: center;
         }
 
         /* Content toggle */
@@ -1033,23 +1029,14 @@ export default function PrivacyPage() {
         <nav className="navbar">
           <div className="nav-container">
             <div className="logo">
-              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-ZEeztdzgTd5GcT9ItLPoV2XrwlWv3F.svg" width={175} height={50} alt="Privacy Logo" unoptimized />
+              <span className="logo-text">privacy.</span>
             </div>
-            <div className="right-container">
-              <div className="search-container">
-                <input type="text" placeholder="Pesquise aqui..." />
-                <button className="search-button" title="Buscar">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                </button>
-              </div>
-              <div className="nav-icons">
-                <button className="icon-button" title="Adicionar">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <button className="icon-button" title="Mensagens">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                </button>
-              </div>
+            <div className="globe-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
             </div>
           </div>
         </nav>
@@ -1057,14 +1044,15 @@ export default function PrivacyPage() {
 
       <main>
         <div className="main-container">
-          <div className="profile-section">
+          <div className="profile-card">
             <div className="cover-section">
               <div className="cover-image">
                 <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
-<div className="stats">
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 1.2K</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 856</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> 125K</span>
+                <div className="stats">
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="20" x="2" y="2" rx="2"/><path d="m10 8 6 4-6 4V8z"/></svg> 20</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 36</span>
+                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 13.3K</span>
                 </div>
               </div>
 
@@ -1076,7 +1064,7 @@ export default function PrivacyPage() {
                   <div className="profile-name">
                     Bia Miranda
                     <span className="verified">
-                      <svg aria-label="Verificado" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18" xmlns="http://www.w3.org/2000/svg">
+                      <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
                         <title>Verificado</title>
                         <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fillRule="evenodd"></path>
                       </svg>
@@ -1090,16 +1078,21 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-{`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer
-😈 A mais desejada do laranjinha, sem freio e sem censura
-💦 Tudo que você sempre quis… agora na sua tela
-⏳ +3.742 já entraram hoje… e você aí pensando
-💸 Depois que sair do ar, não adianta chorar
-👇 Clica e descobre por conta própria`}
+                  A pimenta em uma versao ainda mais quente, vem ver tudo o que voce sempre quis, a novinha mais gostosa do laranjinha
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
-                  {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
+                  {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
                 </button>
+              </div>
+
+              <div className="social-icons">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                </a>
               </div>
 
               {/* Pricing Panel */}
@@ -1114,7 +1107,11 @@ export default function PrivacyPage() {
                 <div className="promotions">
                   <div className="promotions-header" onClick={() => setPromotionsOpen(!promotionsOpen)}>
                     <h4>Promoções</h4>
-                    <span className="chevron" style={{ transform: promotionsOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>⌄</span>
+                    <span className="chevron" style={{ transform: promotionsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </span>
                   </div>
 
                   {promotionsOpen && (
@@ -1137,113 +1134,6 @@ export default function PrivacyPage() {
                   )}
                 </div>
               </div>
-
-              <div className="content-toggle">
-                <button className="toggle-btn disabled" disabled>
-                  <span className="count">502</span> Posts
-                </button>
-                <span className="separator">•</span>
-                <button className="toggle-btn active">
-                  <span className="count">148</span> Videos
-                </button>
-                <span className="separator">•</span>
-                <button className="toggle-btn">
-                  <span className="count">354</span> Fotos
-                </button>
-              </div>
-
-              {/* Feed Gallery */}
-              <section className="feed-gallery">
-                <div className="feed-grid">
-                  {/* Video 1 */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <video 
-                        className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
-                        autoPlay
-                        loop
-                        controls
-                        playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                      />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>156K</span>
-                  <span>28K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-
-                  {/* Video 2 */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <video 
-                        className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
-                        autoPlay 
-                        loop 
-                        muted
-                        playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                      />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>198K</span>
-                  <span>35K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-
-                  {/* Imagem */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>245K</span>
-                  <span>42K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-                </div>
-              </section>
             </div>
           </div>
         </div>
