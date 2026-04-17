@@ -1,6 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const HOOPAY_API_URL = 'https://api.pay.hoopay.com.br/charge'
+const SYNCPAY_API_URL = 'https://api.syncpayments.com.br'
+const CLIENT_ID = '1674b902-b34b-48b2-b124-f96d55aecdaa'
+const CLIENT_SECRET = '03850936-49da-4b86-8df3-8ce7739d0802'
+
+// Funcao para obter o token de acesso
+async function getAccessToken() {
+  const response = await fetch(`${SYNCPAY_API_URL}/oauth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET
+    })
+  })
+
+  const data = await response.json()
+  
+  if (!response.ok) {
+    throw new Error(data.message || 'Erro ao obter token de acesso')
+  }
+
+  return data.access_token
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,111 +40,75 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Verifica se as credenciais estao configuradas
-    if (!process.env.HOOPAY_CLIENT_ID || !process.env.HOOPAY_CLIENT_SECRET) {
-      console.error('[v0] Credenciais HooPay nao configuradas')
-      return NextResponse.json(
-        { error: 'Configuracao de pagamento incompleta.' },
-        { status: 500 }
-      )
-    }
-
     // Remove formatacao do CPF (apenas numeros)
     const cpfClean = cpf ? cpf.replace(/\D/g, '') : ''
     
     // Remove formatacao do telefone (apenas numeros)
-    const phoneClean = phone ? phone.replace(/\D/g, '') : '00000000000'
+    const phoneClean = phone ? phone.replace(/\D/g, '') : ''
 
-    // Cria o header de autenticacao Basic Auth
-    const authString = `${process.env.HOOPAY_CLIENT_ID}:${process.env.HOOPAY_CLIENT_SECRET}`
-    const authBase64 = Buffer.from(authString).toString('base64')
+    // Obtem o token de acesso
+    const accessToken = await getAccessToken()
 
-    // Calcula o valor (HooPay usa valor em reais, nao centavos)
-    const amountValue = parseFloat(amount)
+    // Calcula o valor em centavos
+    const amountInCents = Math.round(parseFloat(amount) * 100)
 
-    // Obtem o IP do cliente de forma segura
-    const forwardedFor = request.headers.get('x-forwarded-for')
-    const realIp = request.headers.get('x-real-ip')
-    let clientIp = '177.0.0.1' // IP padrao caso nao consiga obter
-    
-    if (forwardedFor) {
-      // x-forwarded-for pode conter multiplos IPs, pega o primeiro
-      const firstIp = forwardedFor.split(',')[0].trim()
-      // Valida se e um IP valido (IPv4)
-      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(firstIp)) {
-        clientIp = firstIp
-      }
-    } else if (realIp && /^(\d{1,3}\.){3}\d{1,3}$/.test(realIp)) {
-      clientIp = realIp
-    }
-
-    // Monta o payload para a API do HooPay conforme documentacao
-    const hoopayPayload = {
-      amount: amountValue,
+    // Monta o payload para a API do SyncPayments
+    const syncPayPayload = {
+      amount: amountInCents,
+      paymentMethod: 'pix',
       customer: {
-        email: email,
         name: name,
-        phone: phoneClean,
-        document: cpfClean
+        email: email,
+        document: cpfClean,
+        phone: phoneClean
       },
-      products: [
-        {
-          title: `Assinatura Privacy - Plano ${plan || 'Premium'}`,
-          amount: amountValue,
-          quantity: 1
-        }
-      ],
-      payments: [
-        {
-          amount: amountValue,
-          type: 'pix'
-        }
-      ],
-      data: {
-        ip: clientIp,
-        callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://seu-dominio.com'}/api/webhook/hoopay`
+      pix: {
+        expiresInSeconds: 3600 // 1 hora para pagar
+      },
+      metadata: {
+        plan: plan || 'Premium',
+        description: `Assinatura Privacy - Plano ${plan || 'Premium'}`
       }
     }
 
-    console.log('[v0] Enviando para HooPay:', JSON.stringify(hoopayPayload, null, 2))
+    console.log('[v0] Enviando para SyncPay:', JSON.stringify(syncPayPayload, null, 2))
 
-    // Faz a requisicao para gerar o PIX com Basic Auth
-    const response = await fetch(HOOPAY_API_URL, {
+    // Faz a requisicao para gerar o PIX
+    const response = await fetch(`${SYNCPAY_API_URL}/v1/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Basic ${authBase64}`
+        'Authorization': `Bearer ${accessToken}`
       },
-      body: JSON.stringify(hoopayPayload)
+      body: JSON.stringify(syncPayPayload)
     })
 
     const data = await response.json()
-    console.log('[v0] Resposta HooPay PIX:', response.status, JSON.stringify(data, null, 2))
+    console.log('[v0] Resposta SyncPay PIX:', response.status, JSON.stringify(data, null, 2))
 
-    if (!response.ok || data.payment?.hasErrors) {
-      console.error('[HooPay Error]', data)
-      const errorMsg = data.errors?.[0]?.message || data.payment?.message || 'Erro ao gerar PIX. Tente novamente.'
+    if (!response.ok) {
+      console.error('[SyncPay Error]', data)
+      const errorMsg = data.message || data.error || 'Erro ao gerar PIX. Tente novamente.'
       return NextResponse.json(
         { error: errorMsg },
         { status: response.status }
       )
     }
 
-    // Extrai os dados do PIX da resposta conforme documentacao HooPay
-    const pixCharge = data.payment?.charges?.find((c: { type: string }) => c.type === 'pix' || c.type === 'PIX')
-    const pixPayload = pixCharge?.pixPayload // Codigo copia e cola
-    const pixQrCode = pixCharge?.pixQrCode // Imagem QR Code em base64
-    const pixIdentifier = pixCharge?.uuid || data.payment?.charges?.[0]?.uuid
+    // Extrai os dados do PIX da resposta
+    const pixCode = data.pix?.qrCode || data.pix?.emv || data.pix?.brcode || data.qrCode
+    const pixQrCodeImage = data.pix?.qrCodeImage || data.qrCodeImage
+    const transactionId = data.id || data.transactionId
 
     // Retorna os dados do PIX gerado
     return NextResponse.json({
       success: true,
-      pix_code: pixPayload,
-      pix_qrcode: pixQrCode,
-      identifier: pixIdentifier,
+      pix_code: pixCode,
+      pix_qrcode: pixQrCodeImage,
+      identifier: transactionId,
       amount: amount,
-      status: data.payment?.status,
+      status: data.status,
       message: 'PIX gerado com sucesso!'
     })
 
