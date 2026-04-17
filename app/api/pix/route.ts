@@ -34,7 +34,7 @@ async function getAccessToken() {
     throw new Error(data.message || data.error || 'Erro ao obter token de acesso')
   }
 
-  return data.token
+  return data.access_token
 }
 
 export async function POST(request: NextRequest) {
