@@ -1,84 +1,74 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const HOOPAY_API_URL = 'https://api.pay.hoopay.com.br'
-const CLIENT_ID = '9065a7048f688d93b268c26a8fc05f1f'
-const CLIENT_SECRET = '3398965cf073c04c35326536fefbfcb0c67878baf1cccb12eed2e4e6c67568e9'
+const SYNCPAY_API_URL = 'https://api.syncpayments.com.br'
+const CLIENT_ID = '1674b902-b34b-48b2-b124-f96d55aecdaa'
+const CLIENT_SECRET = '03850936-49da-4b86-8df3-8ce7739d0802'
+
+// Funcao para obter o token de acesso
+async function getAccessToken() {
+  const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/auth-token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET
+    })
+  })
+
+  const responseText = await response.text()
+  
+  if (responseText.startsWith('<!DOCTYPE') || responseText.startsWith('<html')) {
+    throw new Error('API retornou HTML em vez de JSON. Verifique a URL da API.')
+  }
+
+  let data
+  try {
+    data = JSON.parse(responseText)
+  } catch {
+    throw new Error(`Resposta invalida da API: ${responseText.substring(0, 200)}`)
+  }
+  
+  if (!response.ok) {
+    throw new Error(data.message || data.error || 'Erro ao obter token de acesso')
+  }
+
+  return data.token
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, cpf, phone, amount, plan } = body
+    const { amount, plan } = body
 
     // Validacoes basicas
-    if (!name || !email || !amount) {
+    if (!amount) {
       return NextResponse.json(
-        { error: 'Dados incompletos. Preencha todos os campos obrigatorios.' },
+        { error: 'Valor do pagamento e obrigatorio.' },
         { status: 400 }
       )
     }
 
-    // Remove formatacao do CPF (apenas numeros)
-    const cpfClean = cpf ? cpf.replace(/\D/g, '') : ''
-    
-    // Remove formatacao do telefone (apenas numeros)
-    const phoneClean = phone ? phone.replace(/\D/g, '') : ''
+    // Obter token de acesso
+    const accessToken = await getAccessToken()
 
-    // Obtem o IP do cliente de forma segura
-    const forwardedFor = request.headers.get('x-forwarded-for')
-    const realIp = request.headers.get('x-real-ip')
-    let clientIp = '177.0.0.1'
-    
-    if (forwardedFor) {
-      const firstIp = forwardedFor.split(',')[0].trim()
-      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(firstIp)) {
-        clientIp = firstIp
-      }
-    } else if (realIp && /^(\d{1,3}\.){3}\d{1,3}$/.test(realIp)) {
-      clientIp = realIp
+    // Monta o payload para a API do SyncPayments (CashIn PIX)
+    // Conforme documentacao: amount em reais (double), callbackUrl para webhook
+    const syncPayPayload = {
+      amount: parseFloat(amount),
+      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/syncpay`
     }
 
-    const amountValue = parseFloat(amount)
-
-    // Monta o payload para a API do HooPay conforme documentacao Postman
-    const hoopayPayload = {
-      amount: amountValue,
-      customer: {
-        email: email,
-        name: name,
-        phone: phoneClean || '11999999999',
-        document: cpfClean || ''
-      },
-      products: [
-        {
-          title: `Assinatura Privacy - ${plan || 'Premium'}`,
-          amount: amountValue,
-          quantity: 1
-        }
-      ],
-      payments: [
-        {
-          amount: amountValue,
-          type: 'pix'
-        }
-      ],
-      data: {
-        ip: clientIp,
-        callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/hoopay`
-      }
-    }
-
-    // Cria o header de autenticacao Basic Auth
-    const basicAuth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
-
-    // Faz a requisicao para gerar o PIX
-    const response = await fetch(`${HOOPAY_API_URL}/charge`, {
+    // Faz a requisicao para gerar o PIX (CashIn)
+    const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/cash-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Basic ${basicAuth}`
+        'Authorization': `Bearer ${accessToken}`
       },
-      body: JSON.stringify(hoopayPayload)
+      body: JSON.stringify(syncPayPayload)
     })
 
     const responseText = await response.text()
@@ -101,31 +91,27 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!response.ok || data.payment?.hasErrors) {
-      const errorMsg = data.errors?.[0]?.message || data.payment?.message || data.message || 'Erro ao gerar PIX'
+    if (!response.ok) {
+      const errorMsg = data.message || data.error || 'Erro ao gerar PIX'
       return NextResponse.json(
         { error: errorMsg },
         { status: response.status }
       )
     }
 
-    // Extrai os dados do PIX da resposta conforme documentacao HooPay
-    const pixCharge = data.payment?.charges?.find((c: { type: string }) => 
-      c.type === 'pix' || c.type === 'PIX'
-    )
-    const pixPayload = pixCharge?.pixPayload // Codigo copia e cola
-    const pixQrCode = pixCharge?.pixQrCode // Imagem QR Code em base64
-    const pixIdentifier = pixCharge?.uuid || data.payment?.charges?.[0]?.uuid
+    // Extrai os dados do PIX da resposta (formato SyncPay conforme documentacao)
+    // Resposta: { message, pix_code, identifier }
+    const pixCode = data.pix_code || data.emv || data.pix?.qrCode || data.qrCode
+    const transactionId = data.identifier || data.transaction_id || data.id
 
     // Retorna os dados do PIX gerado
     return NextResponse.json({
       success: true,
-      pix_code: pixPayload,
-      pix_qrcode: pixQrCode,
-      identifier: pixIdentifier,
+      pix_code: pixCode,
+      identifier: transactionId,
       amount: amount,
-      status: data.payment?.status || 'pending',
-      message: 'PIX gerado com sucesso!'
+      status: data.status || 'pending',
+      message: data.message || 'PIX gerado com sucesso!'
     })
 
   } catch (error) {
