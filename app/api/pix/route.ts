@@ -1,32 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const SYNCPAY_BASE_URL = 'https://api.syncpayments.com.br'
-const SYNCPAY_AUTH_URL = `${SYNCPAY_BASE_URL}/api/partner/v1/auth-token`
-const SYNCPAY_PIX_URL = `${SYNCPAY_BASE_URL}/api/partner/v1/cash-in`
-
-// Funcao para obter token de autenticacao
-async function getAuthToken(): Promise<string> {
-  const response = await fetch(SYNCPAY_AUTH_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-      client_id: process.env.SYNCPAY_CLIENT_ID,
-      client_secret: process.env.SYNCPAY_CLIENT_SECRET
-    })
-  })
-
-  const data = await response.json()
-  console.log('[v0] Auth response:', response.status, JSON.stringify(data, null, 2))
-
-  if (!response.ok) {
-    throw new Error(data.message || 'Erro ao autenticar com SyncPay')
-  }
-
-  return data.access_token || data.token
-}
+const HOOPAY_API_URL = 'https://api.pay.hoopay.com.br/charge'
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +8,7 @@ export async function POST(request: NextRequest) {
     const { name, email, cpf, phone, amount, plan } = body
 
     // Validacoes basicas
-    if (!name || !email || !cpf || !amount) {
+    if (!name || !email || !amount) {
       return NextResponse.json(
         { error: 'Dados incompletos. Preencha todos os campos obrigatorios.' },
         { status: 400 }
@@ -42,8 +16,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Verifica se as credenciais estao configuradas
-    if (!process.env.SYNCPAY_CLIENT_ID || !process.env.SYNCPAY_CLIENT_SECRET) {
-      console.error('[v0] Credenciais SyncPay nao configuradas')
+    if (!process.env.HOOPAY_CLIENT_ID || !process.env.HOOPAY_CLIENT_SECRET) {
+      console.error('[v0] Credenciais HooPay nao configuradas')
       return NextResponse.json(
         { error: 'Configuracao de pagamento incompleta.' },
         { status: 500 }
@@ -51,59 +25,101 @@ export async function POST(request: NextRequest) {
     }
 
     // Remove formatacao do CPF (apenas numeros)
-    const cpfClean = cpf.replace(/\D/g, '')
+    const cpfClean = cpf ? cpf.replace(/\D/g, '') : ''
     
     // Remove formatacao do telefone (apenas numeros)
     const phoneClean = phone ? phone.replace(/\D/g, '') : '00000000000'
 
-    // Obtem token de autenticacao
-    console.log('[v0] Obtendo token de autenticacao...')
-    const authToken = await getAuthToken()
-    console.log('[v0] Token obtido com sucesso')
+    // Cria o header de autenticacao Basic Auth
+    const authString = `${process.env.HOOPAY_CLIENT_ID}:${process.env.HOOPAY_CLIENT_SECRET}`
+    const authBase64 = Buffer.from(authString).toString('base64')
 
-    // Monta o payload para a API do SyncPay
-    const syncpayPayload = {
-      amount: parseFloat(amount),
-      description: `Assinatura Privacy - Plano ${plan}`,
-      webhook_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://seu-dominio.com'}/api/webhook/syncpay`,
-      client: {
-        name: name,
-        cpf: cpfClean,
+    // Calcula o valor (HooPay usa valor em reais, nao centavos)
+    const amountValue = parseFloat(amount)
+
+    // Obtem o IP do cliente de forma segura
+    const forwardedFor = request.headers.get('x-forwarded-for')
+    const realIp = request.headers.get('x-real-ip')
+    let clientIp = '177.0.0.1' // IP padrao caso nao consiga obter
+    
+    if (forwardedFor) {
+      // x-forwarded-for pode conter multiplos IPs, pega o primeiro
+      const firstIp = forwardedFor.split(',')[0].trim()
+      // Valida se e um IP valido (IPv4)
+      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(firstIp)) {
+        clientIp = firstIp
+      }
+    } else if (realIp && /^(\d{1,3}\.){3}\d{1,3}$/.test(realIp)) {
+      clientIp = realIp
+    }
+
+    // Monta o payload para a API do HooPay conforme documentacao
+    const hoopayPayload = {
+      amount: amountValue,
+      customer: {
         email: email,
-        phone: phoneClean
+        name: name,
+        phone: phoneClean,
+        document: cpfClean
+      },
+      products: [
+        {
+          title: `Assinatura Privacy - Plano ${plan || 'Premium'}`,
+          amount: amountValue,
+          quantity: 1
+        }
+      ],
+      payments: [
+        {
+          amount: amountValue,
+          type: 'pix'
+        }
+      ],
+      data: {
+        ip: clientIp,
+        callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://seu-dominio.com'}/api/webhook/hoopay`
       }
     }
 
-    console.log('[v0] Enviando para SyncPay:', JSON.stringify(syncpayPayload, null, 2))
+    console.log('[v0] Enviando para HooPay:', JSON.stringify(hoopayPayload, null, 2))
 
-    // Faz a requisicao para gerar o PIX
-    const response = await fetch(SYNCPAY_PIX_URL, {
+    // Faz a requisicao para gerar o PIX com Basic Auth
+    const response = await fetch(HOOPAY_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${authToken}`
+        'Authorization': `Basic ${authBase64}`
       },
-      body: JSON.stringify(syncpayPayload)
+      body: JSON.stringify(hoopayPayload)
     })
 
     const data = await response.json()
-    console.log('[v0] Resposta SyncPay PIX:', response.status, JSON.stringify(data, null, 2))
+    console.log('[v0] Resposta HooPay PIX:', response.status, JSON.stringify(data, null, 2))
 
-    if (!response.ok) {
-      console.error('[SyncPay Error]', data)
+    if (!response.ok || data.payment?.hasErrors) {
+      console.error('[HooPay Error]', data)
+      const errorMsg = data.errors?.[0]?.message || data.payment?.message || 'Erro ao gerar PIX. Tente novamente.'
       return NextResponse.json(
-        { error: data.message || 'Erro ao gerar PIX. Tente novamente.' },
+        { error: errorMsg },
         { status: response.status }
       )
     }
 
+    // Extrai os dados do PIX da resposta conforme documentacao HooPay
+    const pixCharge = data.payment?.charges?.find((c: { type: string }) => c.type === 'pix' || c.type === 'PIX')
+    const pixPayload = pixCharge?.pixPayload // Codigo copia e cola
+    const pixQrCode = pixCharge?.pixQrCode // Imagem QR Code em base64
+    const pixIdentifier = pixCharge?.uuid || data.payment?.charges?.[0]?.uuid
+
     // Retorna os dados do PIX gerado
     return NextResponse.json({
       success: true,
-      pix_code: data.pix_code || data.qr_code || data.emv,
-      identifier: data.identifier || data.transaction_id || data.id,
+      pix_code: pixPayload,
+      pix_qrcode: pixQrCode,
+      identifier: pixIdentifier,
       amount: amount,
+      status: data.payment?.status,
       message: 'PIX gerado com sucesso!'
     })
 
