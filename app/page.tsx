@@ -571,6 +571,17 @@ export default function PrivacyPage() {
           font-size: 22px;
         }
 
+        .privacy-watermark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 120px;
+          height: auto;
+          opacity: 0.6;
+          pointer-events: none;
+        }
+
         .stats-pill {
           position: absolute;
           bottom: 10px;
@@ -1029,14 +1040,10 @@ export default function PrivacyPage() {
         <nav className="navbar">
           <div className="nav-container">
             <div className="logo">
-              <span className="logo-text">privacy.</span>
+              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-black-x9vfF42uSamWBvcXtkHvdmGRD53EqX.svg" width={86} height={18} alt="Privacy Logo" unoptimized />
             </div>
             <div className="globe-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
+              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/globe-gAiK6gs7MagVRsgKpFhB5lAbv596ed.svg" width={22} height={22} alt="Globe" unoptimized />
             </div>
           </div>
         </nav>
@@ -1169,11 +1176,11 @@ export default function PrivacyPage() {
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
                     autoPlay
                     loop
-                    controls
+                    muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                   />
-                  <div className="lock-bubble">🔒</div>
+                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
                   <div className="stats-pill">
                     <span>156K</span>
                     <span>28K</span>
@@ -1205,7 +1212,7 @@ export default function PrivacyPage() {
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                   />
-                  <div className="lock-bubble">🔒</div>
+                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
                   <div className="stats-pill">
                     <span>198K</span>
                     <span>35K</span>
@@ -1229,7 +1236,7 @@ export default function PrivacyPage() {
                 </header>
                 <div className="feed-media">
                   <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
-                  <div className="lock-bubble">🔒</div>
+                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
                   <div className="stats-pill">
                     <span>245K</span>
                     <span>42K</span>
