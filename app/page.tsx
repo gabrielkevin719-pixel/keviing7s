@@ -746,31 +746,32 @@ export default function PrivacyPage() {
         }
 
         .pix-modal-header {
-          background: linear-gradient(135deg, #ff7a1a, #ff6b3d);
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           padding: 18px 20px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          border-radius: 16px 16px 0 0;
         }
 
         .pix-modal-header-text {
-          color: #fff;
+          color: #1f2937;
           font-size: 13px;
           font-weight: 600;
           opacity: 0.9;
         }
 
         .pix-modal-plan-label {
-          color: #fff;
+          color: #1f2937;
           font-size: 20px;
           font-weight: 800;
           margin-top: 2px;
         }
 
         .pix-modal-close {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.5);
           border: none;
-          color: #fff;
+          color: #1f2937;
           width: 36px;
           height: 36px;
           border-radius: 50%;
@@ -808,7 +809,7 @@ export default function PrivacyPage() {
         }
 
         .pix-form-input:focus {
-          border-color: #ff6b3d;
+          border-color: #f8a68a;
         }
 
         .pix-form-error {
@@ -819,13 +820,13 @@ export default function PrivacyPage() {
 
         .pix-submit-btn {
           width: 100%;
-          background: linear-gradient(135deg, #ff7a1a, #ff6b3d);
-          color: #fff;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
+          color: #1f2937;
           border: none;
-          border-radius: 12px;
+          border-radius: 999px;
           padding: 15px;
           font-size: 16px;
-          font-weight: 800;
+          font-weight: 700;
           cursor: pointer;
           font-family: 'Montserrat', sans-serif;
           letter-spacing: 0.3px;
@@ -839,8 +840,8 @@ export default function PrivacyPage() {
         .pix-spinner {
           width: 44px;
           height: 44px;
-          border: 4px solid #ffe0d0;
-          border-top-color: #ff6b3d;
+          border: 4px solid #fcd5c5;
+          border-top-color: #f8a68a;
           border-radius: 50%;
           animation: spinPix 0.8s linear infinite;
           margin: 0 auto 16px;
