@@ -272,23 +272,28 @@ export default function PrivacyPage() {
         .profile-image-wrapper {
           position: relative;
           flex-shrink: 0;
+          width: 86px;
+          height: 86px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .profile-image-border {
           position: absolute;
-          top: -8px;
-          left: -8px;
-          width: 96px;
-          height: 96px;
+          top: 0;
+          left: 0;
+          width: 86px;
+          height: 86px;
+          z-index: 0;
         }
 
         .profile-image {
-          width: 80px;
-          height: 80px;
+          width: 76px;
+          height: 76px;
           border-radius: 50%;
           overflow: hidden;
           background: white;
-          flex-shrink: 0;
           position: relative;
           z-index: 1;
         }
