@@ -310,7 +310,7 @@ export default function PrivacyPage() {
         }
 
         .profile-username {
-          color: #9ca3af;
+          color: #111827;
           font-size: 13px;
         }
 
