@@ -1326,7 +1326,7 @@ export default function PrivacyPage() {
                     <div className="feed-media">
                       <Image 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.14.29-VHyEDwp7VrJIkMI07iJclIxeaQDeNq.jpeg"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.16-wDgOGlhElsGzzOnfuRtGAb63NdIzKu.jpeg"
                         width={400}
                         height={711}
                         alt="Previa"
@@ -1533,7 +1533,7 @@ export default function PrivacyPage() {
 
             {pixModalState === 'error' && (
               <div className="pix-error">
-                <div className="pix-error-icon">⚠️</div>
+                <div className="pix-error-icon">��️</div>
                 <p className="pix-error-text">{pixError || 'Erro ao gerar PIX. Tente novamente.'}</p>
                 <button style={{ background: '#6b7280', color: '#fff', border: 'none', borderRadius: '12px', padding: '12px 28px', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }} onClick={fecharPixModal}>
                   Fechar
