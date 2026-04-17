@@ -43,29 +43,41 @@ export async function POST(request: NextRequest) {
       clientIp = realIp
     }
 
-    // Monta o payload para a API do HooPay conforme documentacao Postman
-    // Nota: products usa "price" e payments usa "type" apenas (sem amount)
+    // Monta o payload para a API do HooPay conforme formato testado e funcionando
     const hoopayPayload = {
+      amount: amountValue,
       customer: {
         email: email || 'cliente@email.com',
         name: name || 'Cliente',
         phone: phoneClean,
         document: cpfClean
       },
+      address: {
+        zipcode: '01310-100',
+        street: 'Avenida Paulista',
+        streetNumber: '1000',
+        neighborhood: 'Bela Vista',
+        complement: 'Apto 1',
+        city: 'Sao Paulo',
+        state: 'SP'
+      },
       products: [
         {
-          title: `Assinatura Privacy - Plano ${plan || 'Premium'}`,
-          price: amountValue,
+          title: 'PIX',
+          amount: amountValue,
           quantity: 1
         }
       ],
       payments: [
         {
-          type: 'pix'
+          type: 'pix',
+          amount: amountValue
         }
       ],
-      ip: clientIp,
-      callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/hoopay`
+      data: {
+        ip: clientIp,
+        callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/hoopay`
+      }
     }
 
     // Faz a requisicao para gerar o PIX
