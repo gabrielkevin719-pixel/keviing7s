@@ -1,5 +1,5 @@
 "use client"
-
+// Bia Miranda Privacy Page
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
