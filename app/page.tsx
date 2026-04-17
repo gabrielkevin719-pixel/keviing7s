@@ -269,31 +269,15 @@ export default function PrivacyPage() {
           z-index: 10;
         }
 
-        .profile-image-wrapper {
-          position: relative;
-          flex-shrink: 0;
-          width: 80px;
-          height: 80px;
-        }
-
-        .profile-image-border {
-          position: absolute;
-          top: -4px;
-          left: -4px;
-          width: 88px;
-          height: 100px;
-          z-index: 2;
-          pointer-events: none;
-        }
-
         .profile-image {
           width: 80px;
           height: 80px;
           border-radius: 50%;
+          border: 3px solid #ffffff;
           overflow: hidden;
           background: white;
-          position: relative;
-          z-index: 1;
+          flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .profile-image img {
@@ -1081,18 +1065,8 @@ export default function PrivacyPage() {
               </div>
 
               <div className="profile-info">
-                <div className="profile-image-wrapper">
-                  <Image 
-                    className="profile-image-border" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark%20%281%29-RRbY4h5NHamGvH5OR9B5vmi4e4IXYT.svg" 
-                    width={88} 
-                    height={100} 
-                    alt="" 
-                    unoptimized 
-                  />
-                  <div className="profile-image">
-                    <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
-                  </div>
+                <div className="profile-image">
+                  <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
                   <div className="profile-name">
