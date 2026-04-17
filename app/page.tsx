@@ -238,27 +238,6 @@ export default function PrivacyPage() {
           object-fit: cover;
         }
 
-        .stats {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          display: flex;
-          gap: 12px;
-          color: #374151;
-          font-size: 12px;
-          font-weight: 500;
-        }
-
-        .stats span {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .stats .stat-icon {
-          opacity: 0.7;
-        }
-
         .profile-info {
           display: flex;
           align-items: flex-start;
@@ -267,6 +246,36 @@ export default function PrivacyPage() {
           padding: 0 20px;
           position: relative;
           z-index: 10;
+        }
+
+        .profile-text {
+          flex: 1;
+        }
+
+        .profile-header-row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          padding-top: 46px;
+        }
+
+        .stats {
+          display: flex;
+          gap: 10px;
+          color: #6b7280;
+          font-size: 12px;
+          font-weight: 400;
+          flex-shrink: 0;
+        }
+
+        .stats span {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+        }
+
+        .stats .stat-icon {
+          opacity: 0.6;
         }
 
         .profile-image {
@@ -284,10 +293,6 @@ export default function PrivacyPage() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-        }
-
-        .profile-text {
-          padding-top: 46px;
         }
 
         .profile-name {
@@ -1056,12 +1061,6 @@ export default function PrivacyPage() {
             <div className="cover-section">
               <div className="cover-image">
                 <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
-                <div className="stats">
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="20" x="2" y="2" rx="2"/><path d="m10 8 6 4-6 4V8z"/></svg> 20</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 36</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 13.3K</span>
-                </div>
               </div>
 
               <div className="profile-info">
@@ -1069,16 +1068,26 @@ export default function PrivacyPage() {
                   <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
-                  <div className="profile-name">
-                    Bia Miranda
-                    <span className="verified">
-                      <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
-                        <title>Verificado</title>
-                        <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fillRule="evenodd"></path>
-                      </svg>
-                    </span>
+                  <div className="profile-header-row">
+                    <div>
+                      <div className="profile-name">
+                        Bia Miranda
+                        <span className="verified">
+                          <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <title>Verificado</title>
+                            <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fillRule="evenodd"></path>
+                          </svg>
+                        </span>
+                      </div>
+                      <div className="profile-username">@Biamirandapessoal</div>
+                    </div>
+                    <div className="stats">
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="20" x="2" y="2" rx="2"/><path d="m10 8 6 4-6 4V8z"/></svg> 20</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 36</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 13.3K</span>
+                    </div>
                   </div>
-                  <div className="profile-username">@Biamirandapessoal</div>
                 </div>
               </div>
             </div>
