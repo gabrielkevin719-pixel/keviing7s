@@ -1136,6 +1136,113 @@ export default function PrivacyPage() {
               </div>
             </div>
           </div>
+
+          <div className="content-toggle">
+            <button className="toggle-btn disabled" disabled>
+              <span className="count">502</span> Posts
+            </button>
+            <span className="separator">•</span>
+            <button className="toggle-btn active">
+              <span className="count">148</span> Videos
+            </button>
+            <span className="separator">•</span>
+            <button className="toggle-btn">
+              <span className="count">354</span> Fotos
+            </button>
+          </div>
+
+          {/* Feed Gallery */}
+          <section className="feed-gallery">
+            <div className="feed-grid">
+              {/* Video 1 */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <video 
+                    className="locked-media" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
+                    autoPlay
+                    loop
+                    controls
+                    playsInline
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                  />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>156K</span>
+                    <span>28K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+
+              {/* Video 2 */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <video 
+                    className="locked-media" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
+                    autoPlay 
+                    loop 
+                    muted
+                    playsInline
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                  />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>198K</span>
+                    <span>35K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+
+              {/* Imagem */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>245K</span>
+                    <span>42K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+            </div>
+          </section>
         </div>
 
         {/* FAQ */}
