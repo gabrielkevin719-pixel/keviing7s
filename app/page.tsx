@@ -1180,7 +1180,7 @@ export default function PrivacyPage() {
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                   />
-                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
+                  <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>156K</span>
                     <span>28K</span>
@@ -1212,7 +1212,7 @@ export default function PrivacyPage() {
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                   />
-                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
+                  <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>198K</span>
                     <span>35K</span>
@@ -1236,7 +1236,7 @@ export default function PrivacyPage() {
                 </header>
                 <div className="feed-media">
                   <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
-                  <Image className="privacy-watermark" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark-87Y72fupG4nmUFGA3Zb56Q7NWa4YJ4.svg" width={120} height={137} alt="Privacy" unoptimized />
+                  <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>245K</span>
                     <span>42K</span>
