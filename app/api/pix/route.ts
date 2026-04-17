@@ -6,16 +6,15 @@ const CLIENT_SECRET = '03850936-49da-4b86-8df3-8ce7739d0802'
 
 // Funcao para obter o token de acesso
 async function getAccessToken() {
-  const response = await fetch(`${SYNCPAY_API_URL}/oauth/token`, {
+  const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/auth-token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
+    body: JSON.stringify({
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET
-    }).toString()
+    })
   })
 
   const responseText = await response.text()
@@ -66,29 +65,17 @@ export async function POST(request: NextRequest) {
     // Calcula o valor em centavos
     const amountInCents = Math.round(parseFloat(amount) * 100)
 
-    // Monta o payload para a API do SyncPayments
+    // Monta o payload para a API do SyncPayments (CashIn PIX)
     const syncPayPayload = {
-      amount: amountInCents,
-      paymentMethod: 'pix',
-      customer: {
-        name: name,
-        email: email,
-        document: cpfClean,
-        phone: phoneClean
-      },
-      pix: {
-        expiresInSeconds: 3600 // 1 hora para pagar
-      },
-      metadata: {
-        plan: plan || 'Premium',
-        description: `Assinatura Privacy - Plano ${plan || 'Premium'}`
-      }
+      value: amountInCents,
+      webhook_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/syncpay`,
+      external_reference: `privacy_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     }
 
     console.log('[v0] Enviando para SyncPay:', JSON.stringify(syncPayPayload, null, 2))
 
-    // Faz a requisicao para gerar o PIX
-    const response = await fetch(`${SYNCPAY_API_URL}/v1/transactions`, {
+    // Faz a requisicao para gerar o PIX (CashIn)
+    const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/pix/cash-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -128,10 +115,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Extrai os dados do PIX da resposta
-    const pixCode = data.pix?.qrCode || data.pix?.emv || data.pix?.brcode || data.qrCode
-    const pixQrCodeImage = data.pix?.qrCodeImage || data.qrCodeImage
-    const transactionId = data.id || data.transactionId
+    // Extrai os dados do PIX da resposta (formato SyncPay)
+    const pixCode = data.emv || data.pix?.emv || data.pix?.qrCode || data.qrCode || data.brcode
+    const pixQrCodeImage = data.qrcode || data.qr_code || data.pix?.qrCodeImage || data.qrCodeImage
+    const transactionId = data.transaction_id || data.id || data.transactionId
 
     // Retorna os dados do PIX gerado
     return NextResponse.json({
@@ -140,7 +127,7 @@ export async function POST(request: NextRequest) {
       pix_qrcode: pixQrCodeImage,
       identifier: transactionId,
       amount: amount,
-      status: data.status,
+      status: data.status || 'pending',
       message: 'PIX gerado com sucesso!'
     })
 
