@@ -14,7 +14,7 @@ async function getAccessToken(): Promise<string> {
     return cachedToken.token
   }
 
-  const response = await fetch(`${SYNCPAY_API_URL}/api/auth/oauth/token`, {
+  const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/auth-token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -70,8 +70,8 @@ export async function POST(request: NextRequest) {
 
     // Normaliza o valor (substitui virgula por ponto se necessario)
     const amountNormalized = String(amount).replace(',', '.')
-    // Valor em centavos para SyncPay
-    const amountInCents = Math.round(parseFloat(amountNormalized) * 100)
+    // Valor em reais (double) para SyncPay - NAO converter para centavos
+    const amountValue = parseFloat(amountNormalized)
 
     // Obtem o token de autenticacao
     const accessToken = await getAccessToken()
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     // Monta o payload para a API do SyncPay
     const syncpayPayload = {
-      amount: amountInCents,
+      amount: amountValue,
       description: plan || 'Pagamento via PIX',
       webhook_url: webhookUrl,
       client: {
