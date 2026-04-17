@@ -1314,7 +1314,7 @@ export default function PrivacyPage() {
               {/* Feed Gallery */}
               <section className="feed-gallery">
                 <div className="feed-grid">
-                  {/* Foto 1 */}
+                  {/* Video 1 */}
                   <article className="feed-card">
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
@@ -1324,14 +1324,14 @@ export default function PrivacyPage() {
                       </div>
                     </header>
                     <div className="feed-media">
-                      <Image 
+                      <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.16-wDgOGlhElsGzzOnfuRtGAb63NdIzKu.jpeg"
-                        width={400}
-                        height={711}
-                        alt="Previa"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                        unoptimized
                       />
                       <div className="lock-bubble">🔒</div>
 <div className="stats-pill">
