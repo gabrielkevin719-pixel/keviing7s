@@ -367,213 +367,55 @@ export default function PrivacyPage() {
           margin-bottom: 16px;
         }
 
-        /* Pricing panel */
+        /* Pricing panel - New Design */
         .pricing-panel {
-          background: #ffffff;
-          border: 1px solid #ececec;
-          border-radius: 12px;
-          padding: 16px;
-          box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-          max-width: 380px;
+          max-width: 420px;
           margin: 0 auto;
+          padding: 0;
         }
 
-        .pricing-panel h3 {
-          font-size: 18px;
-          font-weight: 700;
+        .pricing-section-title {
+          font-size: 14px;
+          font-weight: 500;
           color: #111827;
           margin: 0 0 10px 0;
         }
 
-        .tag-popular {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: #fff1e6;
-          color: #b45309;
-          font-weight: 700;
-          font-size: 12px;
-          padding: 6px 10px;
-          border-radius: 999px;
-          margin-bottom: 10px;
-        }
-
-        .header-promo {
-          margin-left: 8px;
-          vertical-align: middle;
-          display: inline-flex;
-        }
-
-        .plan-primary {
+        .plan-card {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
-          background: linear-gradient(180deg, #ff7a1a 0%, #ff6b3d 100%);
-          color: #ffffff;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           border: none;
-          border-radius: 10px;
-          padding: 14px 16px;
-          cursor: pointer;
-          box-shadow: 0 10px 24px rgba(255, 107, 61, 0.28);
-          transition: transform 0.06s ease, box-shadow 0.25s ease;
-          font-weight: 800;
-          position: relative;
-          overflow: hidden;
-          text-decoration: none;
-        }
-
-        .plan-primary:hover {
-          box-shadow: 0 14px 30px rgba(255, 107, 61, 0.38);
-          transform: translateY(-1px);
-        }
-
-        .plan-primary:active {
-          transform: translateY(1px);
-        }
-
-        .plan-primary .plan-title {
-          font-size: 16px;
-          letter-spacing: 0.3px;
-        }
-
-        .plan-primary .plan-price {
-          font-size: 20px;
-          letter-spacing: 0.3px;
-          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
-        }
-
-        .plan-primary .plan-price::after {
-          content: "  →";
-          font-weight: 900;
-        }
-
-        /* Shimmer effect */
-        .plan-primary::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -60%;
-          width: 40%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0) 100%);
-          transform: skewX(-20deg);
-          animation: shimmer 2.4s infinite;
-        }
-
-        @keyframes shimmer {
-          0% { left: -60%; }
-          100% { left: 120%; }
-        }
-
-        .perk-chip {
-          display: inline-block;
-          margin-top: 8px;
-          background: #ffe8d9;
-          color: #7c2d12;
           border-radius: 999px;
-          padding: 6px 10px;
-          font-weight: 800;
-          font-size: 12px;
-        }
-
-        .plan-outline {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: nowrap;
-          gap: 12px;
-          background: #ffffff;
-          border: 1px solid #f5b490;
-          border-radius: 10px;
-          padding: 12px 14px;
-          margin-top: 10px;
+          padding: 16px 24px;
+          margin-bottom: 8px;
           cursor: pointer;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          transition: transform 0.15s ease, box-shadow 0.2s ease;
           text-decoration: none;
         }
 
-        .plan-outline:hover {
-          border-color: #ff6b3d;
-          box-shadow: 0 6px 16px rgba(255, 107, 61, 0.12);
+        .plan-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(248, 166, 138, 0.35);
         }
 
-        .plan-outline .left {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: #111827;
+        .plan-card:active {
+          transform: translateY(0);
+        }
+
+        .plan-card .plan-title {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1f2937;
+          letter-spacing: 0.2px;
+        }
+
+        .plan-card .plan-price {
+          font-size: 15px;
           font-weight: 700;
-          min-width: 0;
-          flex: 1;
-          overflow: hidden;
-        }
-
-.plan-outline .right {
-          color: #111827;
-          font-weight: 800;
-          white-space: nowrap;
-          flex-shrink: 0;
-          padding-left: 8px;
-        }
-
-        .plan-outline.featured {
-          border-color: #ff6b3d;
-          background: #fff7f3;
-          box-shadow: 0 8px 20px rgba(255, 107, 61, 0.12);
-        }
-
-        .plan-outline.featured .left::before {
-          content: "👑";
-          display: inline-block;
-          margin-right: 6px;
-          font-size: 16px;
-        }
-
-        .mini-badge {
-          display: inline-flex;
-          align-items: center;
-          padding: 3px 8px;
-          font-size: 12px;
-          font-weight: 600;
-          color: #6b7280;
-          background: #f3f4f6;
-          border-radius: 999px;
-          white-space: nowrap;
-        }
-
-        .mini-badge.best {
-          background: #fff1e6;
-          color: #b45309;
-        }
-
-        .mini-badge.premium {
-          background: #e9f5ff;
-          color: #0b62a4;
-        }
-
-        .mini-badge.promo {
-          background: #ecfdf5;
-          color: #047857;
-        }
-
-        .trust-inline {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 10px;
-          color: #6b7280;
-          font-size: 12px;
-          font-weight: 600;
-          white-space: nowrap;
-          flex-wrap: nowrap;
-        }
-
-        .trust-inline i {
-          color: #10b981;
-          margin-right: 4px;
+          color: #1f2937;
         }
 
         .promotions {
@@ -589,7 +431,7 @@ export default function PrivacyPage() {
         }
 
         .promotions-header h4 {
-          font-size: 0.875rem;
+          font-size: 14px;
           font-weight: 500;
           color: #111827;
         }
@@ -1259,21 +1101,12 @@ export default function PrivacyPage() {
 
               {/* Pricing Panel */}
               <div className="pricing-panel">
-                <h3>Assinaturas</h3>
-                <div className="tag-popular">VEJA TUDO AGORA 🔥</div>
-                <span className="mini-badge promo header-promo">Promocional</span>
-
-                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+                <p className="pricing-section-title">Assinaturas</p>
+                
+                <button className="plan-card" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
                   <span className="plan-title">15 Dias</span>
                   <span className="plan-price">R$ 14,90</span>
                 </button>
-                <div className="perk-chip">NÃO PERCA ESSA OFERTA!</div>
-
-                <div className="trust-inline">
-                  <span>🔒 Pagamento 100% seguro</span>
-                  <span>•</span>
-                  <span>⚡ Acesso imediato</span>
-                </div>
 
                 <div className="promotions">
                   <div className="promotions-header" onClick={() => setPromotionsOpen(!promotionsOpen)}>
@@ -1283,19 +1116,19 @@ export default function PrivacyPage() {
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
-                        <span className="left"><span className="plan-label">30 Dias</span> <span className="mini-badge best">Mais popular 🔥</span></span>
-                        <span className="right">R$ 24,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
+                        <span className="plan-title">30 Dias (40% off)</span>
+                        <span className="plan-price">R$ 24,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
-                        <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
-                        <span className="right">R$ 42,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
+                        <span className="plan-title">90 Dias (50% off)</span>
+                        <span className="plan-price">R$ 42,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
-                        <span className="left"><span className="plan-label">180 Dias</span> <span className="mini-badge premium">Exclusivo</span></span>
-                        <span className="right">R$ 59,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
+                        <span className="plan-title">180 Dias (60% off)</span>
+                        <span className="plan-price">R$ 59,90</span>
                       </button>
                     </>
                   )}
