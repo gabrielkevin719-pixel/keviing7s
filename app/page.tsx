@@ -1072,7 +1072,7 @@ export default function PrivacyPage() {
                   <div className="profile-header-row">
                     <div>
                       <div className="profile-name">
-                        Bia Miranda
+                        Vivi Noronha
                         <span className="verified">
                           <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
                             <title>Verificado</title>
@@ -1080,7 +1080,7 @@ export default function PrivacyPage() {
                           </svg>
                         </span>
                       </div>
-                      <div className="profile-username">@Biamirandapessoal</div>
+                      <div className="profile-username">@noronhavivi</div>
                     </div>
                     <div className="stats">
                       <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
@@ -1096,9 +1096,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  {`A pimenta que você não consegue parar de provar… 🌶️
-Conteúdos exclusivos, sem censura e sem limites 😈
-Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
+                  {`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer 😈 A mais desejada do laranjinha, sem freio e sem censura 💦 Tudo que você sempre quis… agora na sua tela ⏳ +3.742 já entraram hoje… e você aí pensando 💸 Depois que sair do ar, não adianta chorar 👇 Clica e descobre por conta própria`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
@@ -1179,8 +1177,8 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 <header className="feed-header">
                   <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
@@ -1213,8 +1211,8 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 <header className="feed-header">
                   <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
@@ -1247,8 +1245,8 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 <header className="feed-header">
                   <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
