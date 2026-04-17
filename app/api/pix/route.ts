@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
 
     // Obter token de acesso
     const accessToken = await getAccessToken()
+    console.log('[v0] Token obtido:', accessToken ? accessToken.substring(0, 20) + '...' : 'VAZIO')
 
     // Monta o payload para a API do SyncPayments (CashIn PIX)
     // Conforme documentacao: amount em reais (double), callbackUrl para webhook
@@ -72,6 +73,8 @@ export async function POST(request: NextRequest) {
     })
 
     const responseText = await response.text()
+    console.log('[v0] Resposta PIX status:', response.status)
+    console.log('[v0] Resposta PIX body:', responseText.substring(0, 300))
     
     // Verifica se a resposta e HTML (erro)
     if (responseText.startsWith('<!DOCTYPE') || responseText.startsWith('<html')) {
