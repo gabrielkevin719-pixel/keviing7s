@@ -175,76 +175,49 @@ export default function PrivacyPage() {
         .nav-container {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 12px 24px;
+          justify-content: center;
+          padding: 16px 24px;
           max-width: 1200px;
           margin: 0 auto;
-          height: 60px;
-          background-color: #fff;
-          border-bottom: 1px solid #eee;
+          height: 56px;
+          background-color: #f7f5f3;
+          position: relative;
+          border-bottom: 1px solid #e5e5e5;
         }
 
         .logo {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-        }
-
-        .logo img {
-          height: 40px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        .right-container {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-
-        .search-container {
-          display: flex;
-          align-items: center;
-          width: 300px;
-          height: 40px;
-        }
-
-        .search-container input {
-          width: 100%;
-          height: 100%;
-          padding: 0 15px;
-          border: 1px solid #ddd;
-          border-radius: 20px;
-          font-size: 14px;
-        }
-
-        .search-button,
-        .icon-button {
-          width: 40px;
-          height: 40px;
-          border: none;
-          background: none;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
           justify-content: center;
-          border-radius: 50%;
-          transition: background-color 0.3s;
         }
 
-        .icon-button:hover {
-          background-color: #f5f5f5;
+        .logo-text {
+          font-size: 22px;
+          font-weight: 500;
+          color: #1f2937;
+          letter-spacing: -0.5px;
         }
 
-        .nav-icons {
-          display: flex;
-          gap: 15px;
+        .globe-icon {
+          position: absolute;
+          right: 24px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6b7280;
+          cursor: pointer;
         }
 
         .main-container {
-          max-width: 640px;
-          margin: 0 auto;
-          padding: 0 10px;
+          max-width: 580px;
+          margin: 24px auto;
+          padding: 0 16px;
+        }
+
+        .profile-card {
+          background: #ffffff;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
 
         .cover-section {
@@ -254,8 +227,9 @@ export default function PrivacyPage() {
         .cover-image {
           position: relative;
           width: 100%;
-          height: 280px;
+          height: 140px;
           overflow: hidden;
+          border-radius: 20px 20px 0 0;
         }
 
         .cover-image img {
@@ -264,46 +238,55 @@ export default function PrivacyPage() {
           object-fit: cover;
         }
 
-        .stats {
-          position: absolute;
-          bottom: 12px;
-          right: 12px;
-          display: flex;
-          gap: 16px;
-          color: white;
-          font-size: 13px;
-          font-weight: 500;
-          text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-        }
-
-        .stats span {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-        }
-
-        .stats .stat-icon {
-          opacity: 0.9;
-        }
-
         .profile-info {
           display: flex;
           align-items: flex-start;
           gap: 12px;
-          margin-top: -45px;
+          margin-top: -40px;
           padding: 0 20px;
           position: relative;
           z-index: 10;
         }
 
+        .profile-text {
+          flex: 1;
+        }
+
+        .profile-header-row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          padding-top: 46px;
+        }
+
+        .stats {
+          display: flex;
+          gap: 10px;
+          color: #6b7280;
+          font-size: 12px;
+          font-weight: 400;
+          flex-shrink: 0;
+        }
+
+        .stats span {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+        }
+
+        .stats .stat-icon {
+          opacity: 0.6;
+        }
+
         .profile-image {
-          width: 90px;
-          height: 90px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
-          border: 3px solid #3b82f6;
+          border: 3px solid #ffffff;
           overflow: hidden;
           background: white;
           flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .profile-image img {
@@ -312,17 +295,13 @@ export default function PrivacyPage() {
           object-fit: cover;
         }
 
-        .profile-text {
-          padding-top: 50px;
-        }
-
         .profile-name {
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 700;
           color: #111827;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 4px;
         }
 
         .verified svg {
@@ -331,20 +310,20 @@ export default function PrivacyPage() {
         }
 
         .profile-username {
-          color: #1da1f2;
-          font-size: 14px;
+          color: #111827;
+          font-size: 13px;
         }
 
         .profile-bio {
-          padding: 16px;
+          padding: 16px 20px;
         }
 
         .bio-container {
-          margin-bottom: 16px;
+          margin-bottom: 12px;
         }
 
         .bio-text {
-          font-size: 14px;
+          font-size: 13px;
           color: #374151;
           line-height: 1.6;
           white-space: pre-line;
@@ -352,228 +331,94 @@ export default function PrivacyPage() {
         }
 
         .bio-text.collapsed {
-          max-height: 80px;
+          max-height: 60px;
         }
 
         .bio-toggle {
           background: none;
           border: none;
-          color: #ff6b3d;
-          font-weight: 600;
+          color: #f97316;
+          font-weight: 500;
           cursor: pointer;
-          font-size: 14px;
-          margin-top: 8px;
+          font-size: 13px;
+          margin-top: 6px;
           display: inline-block;
-          margin-bottom: 16px;
+          margin-bottom: 12px;
         }
 
-        /* Pricing panel */
+        .social-icons {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+
+        .social-icon {
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #374151;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .social-icon:hover {
+          background: #f3f4f6;
+        }
+
+        /* Pricing panel - New Design */
         .pricing-panel {
-          background: #ffffff;
-          border: 1px solid #ececec;
-          border-radius: 12px;
-          padding: 16px;
-          box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-          max-width: 380px;
-          margin: 0 auto;
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          box-shadow: none;
         }
 
-        .pricing-panel h3 {
-          font-size: 18px;
-          font-weight: 700;
+        .pricing-section-title {
+          font-size: 14px;
+          font-weight: 500;
           color: #111827;
           margin: 0 0 10px 0;
         }
 
-        .tag-popular {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: #fff1e6;
-          color: #b45309;
-          font-weight: 700;
-          font-size: 12px;
-          padding: 6px 10px;
-          border-radius: 999px;
-          margin-bottom: 10px;
-        }
-
-        .header-promo {
-          margin-left: 8px;
-          vertical-align: middle;
-          display: inline-flex;
-        }
-
-        .plan-primary {
+        .plan-card {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
-          background: linear-gradient(180deg, #ff7a1a 0%, #ff6b3d 100%);
-          color: #ffffff;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           border: none;
-          border-radius: 10px;
-          padding: 14px 16px;
-          cursor: pointer;
-          box-shadow: 0 10px 24px rgba(255, 107, 61, 0.28);
-          transition: transform 0.06s ease, box-shadow 0.25s ease;
-          font-weight: 800;
-          position: relative;
-          overflow: hidden;
-          text-decoration: none;
-        }
-
-        .plan-primary:hover {
-          box-shadow: 0 14px 30px rgba(255, 107, 61, 0.38);
-          transform: translateY(-1px);
-        }
-
-        .plan-primary:active {
-          transform: translateY(1px);
-        }
-
-        .plan-primary .plan-title {
-          font-size: 16px;
-          letter-spacing: 0.3px;
-        }
-
-        .plan-primary .plan-price {
-          font-size: 20px;
-          letter-spacing: 0.3px;
-          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
-        }
-
-        .plan-primary .plan-price::after {
-          content: "  →";
-          font-weight: 900;
-        }
-
-        /* Shimmer effect */
-        .plan-primary::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -60%;
-          width: 40%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0) 100%);
-          transform: skewX(-20deg);
-          animation: shimmer 2.4s infinite;
-        }
-
-        @keyframes shimmer {
-          0% { left: -60%; }
-          100% { left: 120%; }
-        }
-
-        .perk-chip {
-          display: inline-block;
-          margin-top: 8px;
-          background: #ffe8d9;
-          color: #7c2d12;
           border-radius: 999px;
-          padding: 6px 10px;
-          font-weight: 800;
-          font-size: 12px;
-        }
-
-        .plan-outline {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: nowrap;
-          gap: 12px;
-          background: #ffffff;
-          border: 1px solid #f5b490;
-          border-radius: 10px;
-          padding: 12px 14px;
-          margin-top: 10px;
+          padding: 16px 24px;
+          margin-bottom: 8px;
           cursor: pointer;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          transition: transform 0.15s ease, box-shadow 0.2s ease;
           text-decoration: none;
         }
 
-        .plan-outline:hover {
-          border-color: #ff6b3d;
-          box-shadow: 0 6px 16px rgba(255, 107, 61, 0.12);
+        .plan-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(248, 166, 138, 0.35);
         }
 
-        .plan-outline .left {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: #111827;
+        .plan-card:active {
+          transform: translateY(0);
+        }
+
+        .plan-card .plan-title {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1f2937;
+          letter-spacing: 0.2px;
+        }
+
+        .plan-card .plan-price {
+          font-size: 15px;
           font-weight: 700;
-          min-width: 0;
-          flex: 1;
-          overflow: hidden;
-        }
-
-.plan-outline .right {
-          color: #111827;
-          font-weight: 800;
-          white-space: nowrap;
-          flex-shrink: 0;
-          padding-left: 8px;
-        }
-
-        .plan-outline.featured {
-          border-color: #ff6b3d;
-          background: #fff7f3;
-          box-shadow: 0 8px 20px rgba(255, 107, 61, 0.12);
-        }
-
-        .plan-outline.featured .left::before {
-          content: "👑";
-          display: inline-block;
-          margin-right: 6px;
-          font-size: 16px;
-        }
-
-        .mini-badge {
-          display: inline-flex;
-          align-items: center;
-          padding: 3px 8px;
-          font-size: 12px;
-          font-weight: 600;
-          color: #6b7280;
-          background: #f3f4f6;
-          border-radius: 999px;
-          white-space: nowrap;
-        }
-
-        .mini-badge.best {
-          background: #fff1e6;
-          color: #b45309;
-        }
-
-        .mini-badge.premium {
-          background: #e9f5ff;
-          color: #0b62a4;
-        }
-
-        .mini-badge.promo {
-          background: #ecfdf5;
-          color: #047857;
-        }
-
-        .trust-inline {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 10px;
-          color: #6b7280;
-          font-size: 12px;
-          font-weight: 600;
-          white-space: nowrap;
-          flex-wrap: nowrap;
-        }
-
-        .trust-inline i {
-          color: #10b981;
-          margin-right: 4px;
+          color: #1f2937;
         }
 
         .promotions {
@@ -589,7 +434,7 @@ export default function PrivacyPage() {
         }
 
         .promotions-header h4 {
-          font-size: 0.875rem;
+          font-size: 14px;
           font-weight: 500;
           color: #111827;
         }
@@ -597,6 +442,8 @@ export default function PrivacyPage() {
         .chevron {
           color: #9ca3af;
           transition: transform 0.3s ease;
+          display: flex;
+          align-items: center;
         }
 
         /* Content toggle */
@@ -728,6 +575,17 @@ export default function PrivacyPage() {
           box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
           color: #9ca3af;
           font-size: 22px;
+        }
+
+        .privacy-watermark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 120px;
+          height: auto;
+          opacity: 0.6;
+          pointer-events: none;
         }
 
         .stats-pill {
@@ -888,31 +746,32 @@ export default function PrivacyPage() {
         }
 
         .pix-modal-header {
-          background: linear-gradient(135deg, #ff7a1a, #ff6b3d);
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           padding: 18px 20px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          border-radius: 16px 16px 0 0;
         }
 
         .pix-modal-header-text {
-          color: #fff;
+          color: #1f2937;
           font-size: 13px;
           font-weight: 600;
           opacity: 0.9;
         }
 
         .pix-modal-plan-label {
-          color: #fff;
+          color: #1f2937;
           font-size: 20px;
           font-weight: 800;
           margin-top: 2px;
         }
 
         .pix-modal-close {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.5);
           border: none;
-          color: #fff;
+          color: #1f2937;
           width: 36px;
           height: 36px;
           border-radius: 50%;
@@ -950,7 +809,7 @@ export default function PrivacyPage() {
         }
 
         .pix-form-input:focus {
-          border-color: #ff6b3d;
+          border-color: #f8a68a;
         }
 
         .pix-form-error {
@@ -961,13 +820,13 @@ export default function PrivacyPage() {
 
         .pix-submit-btn {
           width: 100%;
-          background: linear-gradient(135deg, #ff7a1a, #ff6b3d);
-          color: #fff;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
+          color: #1f2937;
           border: none;
-          border-radius: 12px;
+          border-radius: 999px;
           padding: 15px;
           font-size: 16px;
-          font-weight: 800;
+          font-weight: 700;
           cursor: pointer;
           font-family: 'Montserrat', sans-serif;
           letter-spacing: 0.3px;
@@ -981,8 +840,8 @@ export default function PrivacyPage() {
         .pix-spinner {
           width: 44px;
           height: 44px;
-          border: 4px solid #ffe0d0;
-          border-top-color: #ff6b3d;
+          border: 4px solid #fcd5c5;
+          border-top-color: #f8a68a;
           border-radius: 50%;
           animation: spinPix 0.8s linear infinite;
           margin: 0 auto 16px;
@@ -1188,23 +1047,10 @@ export default function PrivacyPage() {
         <nav className="navbar">
           <div className="nav-container">
             <div className="logo">
-              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-ZEeztdzgTd5GcT9ItLPoV2XrwlWv3F.svg" width={175} height={50} alt="Privacy Logo" unoptimized />
+              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-black-x9vfF42uSamWBvcXtkHvdmGRD53EqX.svg" width={86} height={18} alt="Privacy Logo" unoptimized />
             </div>
-            <div className="right-container">
-              <div className="search-container">
-                <input type="text" placeholder="Pesquise aqui..." />
-                <button className="search-button" title="Buscar">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                </button>
-              </div>
-              <div className="nav-icons">
-                <button className="icon-button" title="Adicionar">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <button className="icon-button" title="Mensagens">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                </button>
-              </div>
+            <div className="globe-icon">
+              <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/globe-gAiK6gs7MagVRsgKpFhB5lAbv596ed.svg" width={22} height={22} alt="Globe" unoptimized />
             </div>
           </div>
         </nav>
@@ -1212,15 +1058,10 @@ export default function PrivacyPage() {
 
       <main>
         <div className="main-container">
-          <div className="profile-section">
+          <div className="profile-card">
             <div className="cover-section">
               <div className="cover-image">
                 <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
-<div className="stats">
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 1.2K</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 856</span>
-                  <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> 125K</span>
-                </div>
               </div>
 
               <div className="profile-info">
@@ -1228,16 +1069,26 @@ export default function PrivacyPage() {
                   <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
-                  <div className="profile-name">
-                    Bia Miranda
-                    <span className="verified">
-                      <svg aria-label="Verificado" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18" xmlns="http://www.w3.org/2000/svg">
-                        <title>Verificado</title>
-                        <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fillRule="evenodd"></path>
-                      </svg>
-                    </span>
+                  <div className="profile-header-row">
+                    <div>
+                      <div className="profile-name">
+                        Bia Miranda
+                        <span className="verified">
+                          <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
+                            <title>Verificado</title>
+                            <path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fillRule="evenodd"></path>
+                          </svg>
+                        </span>
+                      </div>
+                      <div className="profile-username">@Biamirandapessoal</div>
+                    </div>
+                    <div className="stats">
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="20" x="2" y="2" rx="2"/><path d="m10 8 6 4-6 4V8z"/></svg> 20</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 36</span>
+                      <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 13.3K</span>
+                    </div>
                   </div>
-                  <div className="profile-username">@Biamirandapessoal</div>
                 </div>
               </div>
             </div>
@@ -1245,171 +1096,173 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-{`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer
-😈 A mais desejada do laranjinha, sem freio e sem censura
-💦 Tudo que você sempre quis… agora na sua tela
-⏳ +3.742 já entraram hoje… e você aí pensando
-💸 Depois que sair do ar, não adianta chorar
-👇 Clica e descobre por conta própria`}
+                  {`A pimenta que você não consegue parar de provar… 🌶️
+Conteúdos exclusivos, sem censura e sem limites 😈
+Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
-                  {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
+                  {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
                 </button>
+              </div>
+
+              <div className="social-icons">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                </a>
               </div>
 
               {/* Pricing Panel */}
               <div className="pricing-panel">
-                <h3>Assinaturas</h3>
-                <div className="tag-popular">VEJA TUDO AGORA 🔥</div>
-                <span className="mini-badge promo header-promo">Promocional</span>
-
-                <button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+                <p className="pricing-section-title">Assinaturas</p>
+                
+                <button className="plan-card" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
                   <span className="plan-title">15 Dias</span>
                   <span className="plan-price">R$ 14,90</span>
                 </button>
-                <div className="perk-chip">NÃO PERCA ESSA OFERTA!</div>
-
-                <div className="trust-inline">
-                  <span>🔒 Pagamento 100% seguro</span>
-                  <span>•</span>
-                  <span>⚡ Acesso imediato</span>
-                </div>
 
                 <div className="promotions">
                   <div className="promotions-header" onClick={() => setPromotionsOpen(!promotionsOpen)}>
                     <h4>Promoções</h4>
-                    <span className="chevron" style={{ transform: promotionsOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}>⌄</span>
+                    <span className="chevron" style={{ transform: promotionsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </span>
                   </div>
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-outline featured" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
-                        <span className="left"><span className="plan-label">30 Dias</span> <span className="mini-badge best">Mais popular 🔥</span></span>
-                        <span className="right">R$ 24,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
+                        <span className="plan-title">30 Dias (40% off)</span>
+                        <span className="plan-price">R$ 24,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
-                        <span className="left"><span className="plan-label">90 Dias</span> <span className="mini-badge best">Melhor oferta</span></span>
-                        <span className="right">R$ 42,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
+                        <span className="plan-title">90 Dias (50% off)</span>
+                        <span className="plan-price">R$ 42,90</span>
                       </button>
 
-                      <button className="plan-outline" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
-                        <span className="left"><span className="plan-label">180 Dias</span> <span className="mini-badge premium">Exclusivo</span></span>
-                        <span className="right">R$ 59,90</span>
+                      <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
+                        <span className="plan-title">180 Dias (60% off)</span>
+                        <span className="plan-price">R$ 59,90</span>
                       </button>
                     </>
                   )}
                 </div>
               </div>
-
-              <div className="content-toggle">
-                <button className="toggle-btn disabled" disabled>
-                  <span className="count">502</span> Posts
-                </button>
-                <span className="separator">•</span>
-                <button className="toggle-btn active">
-                  <span className="count">148</span> Videos
-                </button>
-                <span className="separator">•</span>
-                <button className="toggle-btn">
-                  <span className="count">354</span> Fotos
-                </button>
-              </div>
-
-              {/* Feed Gallery */}
-              <section className="feed-gallery">
-                <div className="feed-grid">
-                  {/* Video 1 */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <video 
-                        className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
-                        autoPlay
-                        loop
-                        controls
-                        playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                      />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>156K</span>
-                  <span>28K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-
-                  {/* Video 2 */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <video 
-                        className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
-                        autoPlay 
-                        loop 
-                        muted
-                        playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                      />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>198K</span>
-                  <span>35K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-
-                  {/* Imagem */}
-                  <article className="feed-card">
-                    <header className="feed-header">
-                      <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
-                      <div className="feed-head-text">
-                        <div className="feed-name">Bia Miranda</div>
-                        <div className="feed-handle">@Biamirandapessoal</div>
-                      </div>
-                    </header>
-                    <div className="feed-media">
-                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
-                      <div className="lock-bubble">🔒</div>
-<div className="stats-pill">
-                  <span>245K</span>
-                  <span>42K</span>
-                </div>
-                    </div>
-                    <footer className="feed-footer">
-                      <span>🤍</span>
-                      <span>💬</span>
-                      <span>🔖</span>
-                    </footer>
-                  </article>
-                </div>
-              </section>
             </div>
           </div>
+
+          <div className="content-toggle">
+            <button className="toggle-btn disabled" disabled>
+              <span className="count">502</span> Posts
+            </button>
+            <span className="separator">•</span>
+            <button className="toggle-btn active">
+              <span className="count">148</span> Videos
+            </button>
+            <span className="separator">•</span>
+            <button className="toggle-btn">
+              <span className="count">354</span> Fotos
+            </button>
+          </div>
+
+          {/* Feed Gallery */}
+          <section className="feed-gallery">
+            <div className="feed-grid">
+              {/* Video 1 */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <video 
+                    className="locked-media" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                  />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>156K</span>
+                    <span>28K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+
+              {/* Video 2 */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <video 
+                    className="locked-media" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
+                    autoPlay 
+                    loop 
+                    muted
+                    playsInline
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                  />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>198K</span>
+                    <span>35K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+
+              {/* Imagem */}
+              <article className="feed-card">
+                <header className="feed-header">
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <div className="feed-head-text">
+                    <div className="feed-name">Bia Miranda</div>
+                    <div className="feed-handle">@Biamirandapessoal</div>
+                  </div>
+                </header>
+                <div className="feed-media">
+                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                  <div className="lock-bubble">🔒</div>
+                  <div className="stats-pill">
+                    <span>245K</span>
+                    <span>42K</span>
+                  </div>
+                </div>
+                <footer className="feed-footer">
+                  <span>🤍</span>
+                  <span>💬</span>
+                  <span>🔖</span>
+                </footer>
+              </article>
+            </div>
+          </section>
         </div>
 
         {/* FAQ */}
@@ -1432,10 +1285,10 @@ export default function PrivacyPage() {
         </div>
 
         <div className="footer-cta">
-<button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
-                  <span className="plan-title">Veja tudo por apenas</span>
-                  <span className="plan-price">R$ 14,90</span>
-                </button>
+          <button className="plan-card" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+            <span className="plan-title">Veja tudo por apenas</span>
+            <span className="plan-price">R$ 14,90</span>
+          </button>
         </div>
 
         <p className="footer-legal-links">
