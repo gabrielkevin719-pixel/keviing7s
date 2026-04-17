@@ -37,6 +37,22 @@ export async function POST(request: NextRequest) {
     // Calcula o valor (HooPay usa valor em reais, nao centavos)
     const amountValue = parseFloat(amount)
 
+    // Obtem o IP do cliente de forma segura
+    const forwardedFor = request.headers.get('x-forwarded-for')
+    const realIp = request.headers.get('x-real-ip')
+    let clientIp = '177.0.0.1' // IP padrao caso nao consiga obter
+    
+    if (forwardedFor) {
+      // x-forwarded-for pode conter multiplos IPs, pega o primeiro
+      const firstIp = forwardedFor.split(',')[0].trim()
+      // Valida se e um IP valido (IPv4)
+      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(firstIp)) {
+        clientIp = firstIp
+      }
+    } else if (realIp && /^(\d{1,3}\.){3}\d{1,3}$/.test(realIp)) {
+      clientIp = realIp
+    }
+
     // Monta o payload para a API do HooPay conforme documentacao
     const hoopayPayload = {
       amount: amountValue,
@@ -60,7 +76,7 @@ export async function POST(request: NextRequest) {
         }
       ],
       data: {
-        ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || '192.168.0.1',
+        ip: clientIp,
         callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://seu-dominio.com'}/api/webhook/hoopay`
       }
     }
