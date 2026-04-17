@@ -1245,7 +1245,12 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-{`A pimenta em uma versão ainda mais quente, vem ver tudo o que você sempre quis, a novinha mais gostosa do laranjinha 🌶️🔥`}
+{`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer
+😈 A mais desejada do laranjinha, sem freio e sem censura
+💦 Tudo que você sempre quis… agora na sua tela
+⏳ +3.742 já entraram hoje… e você aí pensando
+💸 Depois que sair do ar, não adianta chorar
+👇 Clica e descobre por conta própria`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
@@ -1326,10 +1331,10 @@ export default function PrivacyPage() {
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
                         autoPlay
                         loop
-                        muted
+                        controls
                         playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
@@ -1358,10 +1363,10 @@ export default function PrivacyPage() {
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4" 
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
                         autoPlay 
                         loop 
-                        controls
+                        muted
                         playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
@@ -1533,7 +1538,7 @@ export default function PrivacyPage() {
 
             {pixModalState === 'error' && (
               <div className="pix-error">
-                <div className="pix-error-icon">���️</div>
+                <div className="pix-error-icon">�������️</div>
                 <p className="pix-error-text">{pixError || 'Erro ao gerar PIX. Tente novamente.'}</p>
                 <button style={{ background: '#6b7280', color: '#fff', border: 'none', borderRadius: '12px', padding: '12px 28px', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }} onClick={fecharPixModal}>
                   Fechar
