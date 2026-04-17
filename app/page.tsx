@@ -1066,7 +1066,7 @@ export default function PrivacyPage() {
 
               <div className="profile-info">
                 <div className="profile-image">
-                  <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                  <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
                   <div className="profile-header-row">
@@ -1177,7 +1177,7 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Video 1 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
                     <div className="feed-name">Bia Miranda</div>
                     <div className="feed-handle">@Biamirandapessoal</div>
@@ -1211,7 +1211,7 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Video 2 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
                     <div className="feed-name">Bia Miranda</div>
                     <div className="feed-handle">@Biamirandapessoal</div>
@@ -1245,7 +1245,7 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Imagem */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
                     <div className="feed-name">Bia Miranda</div>
                     <div className="feed-handle">@Biamirandapessoal</div>
