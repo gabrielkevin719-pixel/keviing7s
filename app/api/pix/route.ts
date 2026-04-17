@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
     const cpfClean = cpf?.replace(/\D/g, '') || '00000000000'
     const phoneClean = phone?.replace(/\D/g, '') || '11999999999'
 
-    // Valor em centavos
-    const amountInCents = Math.round(parseFloat(amount) * 100)
+    // Valor em centavos (usa toFixed para evitar imprecisao de ponto flutuante)
+    const amountInCents = parseInt((parseFloat(amount).toFixed(2).replace('.', '')), 10)
 
     // Cria o header de autenticacao Basic Auth
     const credentials = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
