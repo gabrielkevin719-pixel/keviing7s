@@ -66,16 +66,16 @@ export async function POST(request: NextRequest) {
     const amountInCents = Math.round(parseFloat(amount) * 100)
 
     // Monta o payload para a API do SyncPayments (CashIn PIX)
+    // Conforme documentacao: amount em reais (double), callbackUrl para webhook
     const syncPayPayload = {
-      value: amountInCents,
-      webhook_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/syncpay`,
-      external_reference: `privacy_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      amount: parseFloat(amount),
+      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://keviing7s.vercel.app'}/api/webhook/syncpay`
     }
 
     console.log('[v0] Enviando para SyncPay:', JSON.stringify(syncPayPayload, null, 2))
 
     // Faz a requisicao para gerar o PIX (CashIn)
-    const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/pix/cash-in`, {
+    const response = await fetch(`${SYNCPAY_API_URL}/api/partner/v1/cash-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,20 +115,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Extrai os dados do PIX da resposta (formato SyncPay)
-    const pixCode = data.emv || data.pix?.emv || data.pix?.qrCode || data.qrCode || data.brcode
-    const pixQrCodeImage = data.qrcode || data.qr_code || data.pix?.qrCodeImage || data.qrCodeImage
-    const transactionId = data.transaction_id || data.id || data.transactionId
+    // Extrai os dados do PIX da resposta (formato SyncPay conforme documentacao)
+    // Resposta: { message, pix_code, identifier }
+    const pixCode = data.pix_code || data.emv || data.pix?.qrCode || data.qrCode
+    const transactionId = data.identifier || data.transaction_id || data.id
 
     // Retorna os dados do PIX gerado
     return NextResponse.json({
       success: true,
       pix_code: pixCode,
-      pix_qrcode: pixQrCodeImage,
       identifier: transactionId,
       amount: amount,
       status: data.status || 'pending',
-      message: 'PIX gerado com sucesso!'
+      message: data.message || 'PIX gerado com sucesso!'
     })
 
   } catch (error) {
