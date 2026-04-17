@@ -1061,7 +1061,7 @@ export default function PrivacyPage() {
           <div className="profile-card">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
+                <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} unoptimized />
               </div>
 
               <div className="profile-info">
