@@ -7,10 +7,15 @@ export async function POST(request: NextRequest) {
     
     console.log('[SyncPay Webhook] Recebido:', JSON.stringify(body, null, 2))
 
-    const { identifier, status, amount } = body
+    // SyncPay pode enviar diferentes formatos de payload
+    const identifier = body.identifier || body.id || body.transaction_id
+    const status = body.status || body.payment_status
+    const amount = body.amount || body.value
 
-    // Verifica o status do pagamento
-    if (status === 'paid' || status === 'completed' || status === 'approved') {
+    // Status de pagamento confirmado no SyncPay
+    const paidStatuses = ['paid', 'completed', 'approved', 'confirmed', 'success']
+    
+    if (paidStatuses.includes(status?.toLowerCase())) {
       // Pagamento confirmado!
       console.log(`[SyncPay Webhook] Pagamento confirmado! ID: ${identifier}, Valor: ${amount}`)
       
@@ -25,9 +30,12 @@ export async function POST(request: NextRequest) {
       //   where: { identifier },
       //   data: { status: 'paid', paidAt: new Date() }
       // })
+    } else if (status?.toLowerCase() === 'expired' || status?.toLowerCase() === 'cancelled') {
+      // Pagamento expirado ou cancelado
+      console.log(`[SyncPay Webhook] Pagamento ${status}! ID: ${identifier}`)
     }
 
-    return NextResponse.json({ received: true })
+    return NextResponse.json({ received: true, status: 'ok' })
 
   } catch (error) {
     console.error('[SyncPay Webhook Error]', error)
@@ -40,5 +48,9 @@ export async function POST(request: NextRequest) {
 
 // Aceita requisicoes GET para verificacao do endpoint
 export async function GET() {
-  return NextResponse.json({ status: 'Webhook SyncPay ativo' })
+  return NextResponse.json({ 
+    status: 'active',
+    provider: 'SyncPay',
+    message: 'Webhook SyncPay ativo e pronto para receber notificacoes'
+  })
 }
