@@ -9,19 +9,33 @@ async function getAccessToken() {
   const response = await fetch(`${SYNCPAY_API_URL}/oauth/token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify({
+    body: new URLSearchParams({
       grant_type: 'client_credentials',
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET
-    })
+    }).toString()
   })
 
-  const data = await response.json()
+  const responseText = await response.text()
+  console.log('[v0] Token response status:', response.status)
+  console.log('[v0] Token response:', responseText.substring(0, 500))
+  
+  // Verifica se a resposta e HTML (erro)
+  if (responseText.startsWith('<!DOCTYPE') || responseText.startsWith('<html')) {
+    throw new Error('API retornou HTML em vez de JSON. Verifique a URL da API.')
+  }
+
+  let data
+  try {
+    data = JSON.parse(responseText)
+  } catch {
+    throw new Error(`Resposta invalida da API: ${responseText.substring(0, 200)}`)
+  }
   
   if (!response.ok) {
-    throw new Error(data.message || 'Erro ao obter token de acesso')
+    throw new Error(data.message || data.error || 'Erro ao obter token de acesso')
   }
 
   return data.access_token
@@ -84,8 +98,26 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(syncPayPayload)
     })
 
-    const data = await response.json()
-    console.log('[v0] Resposta SyncPay PIX:', response.status, JSON.stringify(data, null, 2))
+    const responseText = await response.text()
+    console.log('[v0] Resposta SyncPay PIX:', response.status, responseText.substring(0, 500))
+    
+    // Verifica se a resposta e HTML (erro)
+    if (responseText.startsWith('<!DOCTYPE') || responseText.startsWith('<html')) {
+      return NextResponse.json(
+        { error: 'API retornou HTML em vez de JSON. Verifique a URL da API.' },
+        { status: 500 }
+      )
+    }
+
+    let data
+    try {
+      data = JSON.parse(responseText)
+    } catch {
+      return NextResponse.json(
+        { error: `Resposta invalida da API: ${responseText.substring(0, 200)}` },
+        { status: 500 }
+      )
+    }
 
     if (!response.ok) {
       console.error('[SyncPay Error]', data)
