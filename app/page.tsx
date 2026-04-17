@@ -1186,12 +1186,14 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MW99mEQP_720p-cVwcozR3cE63jN9e48fifC4Av5nMnS.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
+                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1218,12 +1220,14 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FjuP8fkp_720p-0nDEFeqyxNTiVgtR5kqFYfjuZmSShe.mp4" 
                     autoPlay 
                     loop 
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
+                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
