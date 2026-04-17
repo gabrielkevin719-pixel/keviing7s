@@ -1215,7 +1215,7 @@ export default function PrivacyPage() {
           <div className="profile-section">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
 <div className="stats">
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 1.2K</span>
                   <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m10 8 6 4-6 4V8z"/><rect width="20" height="20" x="2" y="2" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> 856</span>
@@ -1229,7 +1229,7 @@ export default function PrivacyPage() {
                 </div>
                 <div className="profile-text">
                   <div className="profile-name">
-                    Livia Andrade
+                    Bia Miranda
                     <span className="verified">
                       <svg aria-label="Verificado" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18" xmlns="http://www.w3.org/2000/svg">
                         <title>Verificado</title>
@@ -1237,7 +1237,7 @@ export default function PrivacyPage() {
                       </svg>
                     </span>
                   </div>
-                  <div className="profile-username">@liviaandradereal</div>
+                  <div className="profile-username">@Biamirandapessoal</div>
                 </div>
               </div>
             </div>
@@ -1245,14 +1245,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-{`🔥 O que você nunca viu da Livia Andrade… agora sem filtro
-💋 Bastidores + conteúdos que não vão pra TV
-😈 Aqui é onde o jogo muda de verdade
-Sem censura, sem roteiro… só o que você quer ver
-⏳ Acesso liberado por tempo limitado
-💸 +3.742 já entraram hoje… e você aí pensando
-🚫 Depois que sair, não volta mais
-👇 Entra agora e descobre o que esconderam de você`}
+{`A pimenta em uma versão ainda mais quente, vem ver tudo o que você sempre quis, a novinha mais gostosa do laranjinha 🌶️🔥`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
@@ -1321,25 +1314,24 @@ Sem censura, sem roteiro… só o que você quer ver
               {/* Feed Gallery */}
               <section className="feed-gallery">
                 <div className="feed-grid">
-                  {/* Video 1 */}
+                  {/* Foto 1 */}
                   <article className="feed-card">
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
-                      <video 
+                      <Image 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/L%C3%ADvia%20Andrade%20%282%29-eIk7V8GImwQYb82nA3JHeVLDDyTVp9.mp4" 
-                        poster="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png"
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.16-wDgOGlhElsGzzOnfuRtGAb63NdIzKu.jpeg"
+                        width={400}
+                        height={711}
+                        alt="Previa"
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                        unoptimized
                       />
                       <div className="lock-bubble">🔒</div>
 <div className="stats-pill">
@@ -1359,18 +1351,17 @@ Sem censura, sem roteiro… só o que você quer ver
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/L%C3%ADvia%20Andrade%20%281%29-OcZMZ7uT4x72E2FggXUqF4OR3IN9Gb.mp4" 
-                        poster="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3-N5usWuVCIFlv0Xy8xFG1vfoVGyNHsz.png"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4" 
                         autoPlay 
                         loop 
-                        muted 
+                        controls
                         playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
@@ -1392,12 +1383,12 @@ Sem censura, sem roteiro… só o que você quer ver
                     <header className="feed-header">
                       <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                       <div className="feed-head-text">
-                        <div className="feed-name">Livia Andrade</div>
-                        <div className="feed-handle">@liviaandradereal</div>
+                        <div className="feed-name">Bia Miranda</div>
+                        <div className="feed-handle">@Biamirandapessoal</div>
                       </div>
                     </header>
                     <div className="feed-media">
-                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/612609830_18553096732056780_3040291778020198154_n-QpMvCSNefkkg636zJgts2UVOtmv9y5.jpg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                      <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                       <div className="lock-bubble">🔒</div>
 <div className="stats-pill">
                   <span>245K</span>
@@ -1542,7 +1533,7 @@ Sem censura, sem roteiro… só o que você quer ver
 
             {pixModalState === 'error' && (
               <div className="pix-error">
-                <div className="pix-error-icon">⚠️</div>
+                <div className="pix-error-icon">���️</div>
                 <p className="pix-error-text">{pixError || 'Erro ao gerar PIX. Tente novamente.'}</p>
                 <button style={{ background: '#6b7280', color: '#fff', border: 'none', borderRadius: '12px', padding: '12px 28px', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }} onClick={fecharPixModal}>
                   Fechar
