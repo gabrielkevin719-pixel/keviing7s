@@ -1265,10 +1265,10 @@ export default function PrivacyPage() {
         </div>
 
         <div className="footer-cta">
-<button className="plan-primary" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
-                  <span className="plan-title">Veja tudo por apenas</span>
-                  <span className="plan-price">R$ 14,90</span>
-                </button>
+          <button className="plan-card" onClick={() => abrirPixDireto('15 Dias', 14.90)}>
+            <span className="plan-title">Veja tudo por apenas</span>
+            <span className="plan-price">R$ 14,90</span>
+          </button>
         </div>
 
         <p className="footer-legal-links">
