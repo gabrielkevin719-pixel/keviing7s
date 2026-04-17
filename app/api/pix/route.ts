@@ -43,24 +43,35 @@ export async function POST(request: NextRequest) {
       clientIp = realIp
     }
 
-    // Monta o payload para a API do HooPay conforme documentacao Postman
+    // Monta o payload para a API do HooPay conforme formato testado e funcionando
     const hoopayPayload = {
+      amount: amountValue,
       customer: {
         email: email || 'cliente@email.com',
         name: name || 'Cliente',
         phone: phoneClean,
         document: cpfClean
       },
+      address: {
+        zipcode: '01310-100',
+        street: 'Avenida Paulista',
+        streetNumber: '1000',
+        neighborhood: 'Bela Vista',
+        complement: 'Apto 1',
+        city: 'Sao Paulo',
+        state: 'SP'
+      },
       products: [
         {
           title: 'PIX',
-          price: amountValue,
+          amount: amountValue,
           quantity: 1
         }
       ],
       payments: [
         {
-          type: 'pix'
+          type: 'pix',
+          amount: amountValue
         }
       ],
       data: {
