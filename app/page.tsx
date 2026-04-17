@@ -182,6 +182,7 @@ export default function PrivacyPage() {
           height: 56px;
           background-color: #f7f5f3;
           position: relative;
+          border-bottom: 1px solid #e5e5e5;
         }
 
         .logo {
