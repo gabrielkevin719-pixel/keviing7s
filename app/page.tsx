@@ -1061,18 +1061,18 @@ export default function PrivacyPage() {
           <div className="profile-card">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 75%' }} unoptimized />
+                <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} unoptimized />
               </div>
 
               <div className="profile-info">
                 <div className="profile-image">
-                  <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                  <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
                   <div className="profile-header-row">
                     <div>
                       <div className="profile-name">
-                        Bia Miranda
+                        Vivi Noronha
                         <span className="verified">
                           <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
                             <title>Verificado</title>
@@ -1080,7 +1080,7 @@ export default function PrivacyPage() {
                           </svg>
                         </span>
                       </div>
-                      <div className="profile-username">@Biamirandapessoal</div>
+                      <div className="profile-username">@noronhavivi</div>
                     </div>
                     <div className="stats">
                       <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
@@ -1096,9 +1096,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  {`A pimenta que você não consegue parar de provar… 🌶️
-Conteúdos exclusivos, sem censura e sem limites 😈
-Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
+                  {`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer 😈 A mais desejada do laranjinha, sem freio e sem censura 💦 Tudo que você sempre quis… agora na sua tela ⏳ +3.742 já entraram hoje… e você aí pensando 💸 Depois que sair do ar, não adianta chorar 👇 Clica e descobre por conta própria`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
@@ -1177,21 +1175,23 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Video 1 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MW99mEQP_720p-cVwcozR3cE63jN9e48fifC4Av5nMnS.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
+                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1209,21 +1209,23 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Video 2 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202026-04-17%20at%2011.03.25-EXg70Z0UiQ7wTuJws7JoeO8EzP5BDN.mp4" 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FjuP8fkp_720p-0nDEFeqyxNTiVgtR5kqFYfjuZmSShe.mp4" 
                     autoPlay 
                     loop 
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
+                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
+                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1241,14 +1243,14 @@ Se você chegou até aqui, já sabe o que quer… só falta clicar 👇`}
               {/* Imagem */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Bia Miranda</div>
-                    <div className="feed-handle">@Biamirandapessoal</div>
+                    <div className="feed-name">Vivi Noronha</div>
+                    <div className="feed-handle">@noronhavivi</div>
                   </div>
                 </header>
                 <div className="feed-media">
-                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-17%20at%2001.21.15-kMkjPBx9nInnc0eSj0N6X2Q2EcJ3Jt.jpeg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3%20%281%29-9gKE8kTbUvc2m9h6jWMrYQam9m5GFH.png" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>245K</span>
