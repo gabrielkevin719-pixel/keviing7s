@@ -1358,10 +1358,10 @@ export default function PrivacyPage() {
                     <div className="feed-media">
                       <video 
                         className="locked-media" 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AEhapCZQ_720p%20-%20Trim-ZfIfyZXOtpZiWGUkx8jsCDgIHarRtY.mp4" 
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/yURvKUye_720p-cSRLGMvym4G5IozY89vqmulPhxzlyu.mp4" 
                         autoPlay 
                         loop 
-                        muted 
+                        controls
                         playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
                       />
