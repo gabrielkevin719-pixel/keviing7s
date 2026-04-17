@@ -272,25 +272,23 @@ export default function PrivacyPage() {
         .profile-image-wrapper {
           position: relative;
           flex-shrink: 0;
-          width: 86px;
-          height: 86px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 80px;
+          height: 80px;
         }
 
         .profile-image-border {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 86px;
-          height: 86px;
-          z-index: 0;
+          top: -4px;
+          left: -4px;
+          width: 88px;
+          height: 100px;
+          z-index: 2;
+          pointer-events: none;
         }
 
         .profile-image {
-          width: 76px;
-          height: 76px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
           overflow: hidden;
           background: white;
@@ -1087,8 +1085,8 @@ export default function PrivacyPage() {
                   <Image 
                     className="profile-image-border" 
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/privacy-logo-media-watermark%20%281%29-RRbY4h5NHamGvH5OR9B5vmi4e4IXYT.svg" 
-                    width={96} 
-                    height={96} 
+                    width={88} 
+                    height={100} 
                     alt="" 
                     unoptimized 
                   />
