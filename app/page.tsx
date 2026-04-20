@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { QRCodeSVG } from 'qrcode.react'
 
 export default function PrivacyPage() {
   const [bioExpanded, setBioExpanded] = useState(false)
@@ -328,6 +329,7 @@ export default function PrivacyPage() {
           line-height: 1.6;
           white-space: pre-line;
           overflow: hidden;
+          font-weight: 700;
         }
 
         .bio-text.collapsed {
@@ -384,19 +386,54 @@ export default function PrivacyPage() {
           margin: 0 0 10px 0;
         }
 
+        .plan-card-wrapper {
+          position: relative;
+          width: 100%;
+          margin-bottom: 12px;
+          margin-top: 16px;
+        }
+
+        .plan-card-wrapper:first-child {
+          margin-top: 0;
+        }
+
+        .plan-badge {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 10px;
+          font-weight: 700;
+          padding: 4px 12px;
+          border-radius: 999px;
+          z-index: 1;
+          letter-spacing: 0.5px;
+          white-space: nowrap;
+        }
+
+        .plan-badge.popular {
+          background: #ef4444;
+          color: #fff;
+        }
+
+        .plan-badge.best-value {
+          background: #10b981;
+          color: #fff;
+        }
+
         .plan-card {
           width: 100%;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           border: none;
-          border-radius: 999px;
-          padding: 16px 24px;
-          margin-bottom: 8px;
+          border-radius: 20px;
+          padding: 16px 20px;
           cursor: pointer;
           transition: transform 0.15s ease, box-shadow 0.2s ease;
           text-decoration: none;
+          text-align: left;
         }
 
         .plan-card:hover {
@@ -408,17 +445,33 @@ export default function PrivacyPage() {
           transform: translateY(0);
         }
 
+        .plan-card-content {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
+        }
+
         .plan-card .plan-title {
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
           color: #1f2937;
           letter-spacing: 0.2px;
         }
 
+        .plan-card .plan-description {
+          font-size: 12px;
+          font-weight: 500;
+          color: #4b5563;
+          line-height: 1.4;
+        }
+
         .plan-card .plan-price {
-          font-size: 15px;
-          font-weight: 700;
+          font-size: 16px;
+          font-weight: 800;
           color: #1f2937;
+          white-space: nowrap;
+          margin-left: 12px;
         }
 
         .promotions {
@@ -717,14 +770,14 @@ export default function PrivacyPage() {
           margin: 0 8px;
         }
 
-        /* PIX Modal */
+        /* PIX Modal - Novo Design */
         .pix-modal-overlay {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.82);
+          background: rgba(0, 0, 0, 0.6);
           z-index: 99999;
           padding: 16px;
           box-sizing: border-box;
@@ -737,12 +790,189 @@ export default function PrivacyPage() {
         .pix-modal-container {
           background: #fff;
           border-radius: 20px;
-          max-width: 420px;
+          max-width: 400px;
           width: 100%;
-          margin: 20px 0;
+          margin: 40px 0;
           overflow: hidden;
           font-family: 'Montserrat', sans-serif;
           position: relative;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .pix-modal-close {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.3);
+          border: none;
+          color: #fff;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          font-size: 16px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+          transition: background 0.2s;
+        }
+
+        .pix-modal-close:hover {
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        .pix-modal-banner {
+          position: relative;
+          width: 100%;
+          height: 100px;
+          overflow: hidden;
+        }
+
+        .pix-modal-banner img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .pix-modal-profile-section {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 0 20px;
+          margin-top: -28px;
+          position: relative;
+          z-index: 5;
+        }
+
+        .pix-modal-avatar {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          border: 3px solid #fff;
+          overflow: hidden;
+          flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .pix-modal-avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .pix-modal-profile-info {
+          padding-top: 30px;
+        }
+
+        .pix-modal-profile-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: #111827;
+        }
+
+        .pix-modal-profile-handle {
+          font-size: 13px;
+          color: #6b7280;
+        }
+
+        .pix-modal-benefits {
+          padding: 16px 20px 0;
+        }
+
+        .pix-modal-benefits-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 10px;
+        }
+
+        .pix-modal-benefit-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          color: #374151;
+          margin-bottom: 6px;
+        }
+
+        .pix-modal-benefit-check {
+          color: #f97316;
+          font-size: 14px;
+        }
+
+        .pix-modal-payment-section {
+          padding: 20px;
+        }
+
+        .pix-modal-payment-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 4px;
+        }
+
+        .pix-modal-payment-label {
+          font-size: 12px;
+          color: #9ca3af;
+          margin-bottom: 2px;
+        }
+
+        .pix-modal-payment-value {
+          font-size: 20px;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 16px;
+        }
+
+        .pix-qr-wrapper {
+          display: flex;
+          justify-content: center;
+          padding: 16px;
+          background: #fff;
+          border: 2px solid #e5e7eb;
+          border-radius: 12px;
+          margin-bottom: 16px;
+        }
+
+        .pix-code-box {
+          background: #f0f9ff;
+          border: 1px solid #bae6fd;
+          border-radius: 8px;
+          padding: 12px;
+          margin-bottom: 12px;
+        }
+
+        .pix-code-text-new {
+          font-size: 10px;
+          color: #0369a1;
+          word-break: break-all;
+          font-family: monospace;
+          line-height: 1.4;
+          text-align: center;
+        }
+
+        .pix-copy-btn-new {
+          width: 100%;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
+          color: #1f2937;
+          border: none;
+          border-radius: 999px;
+          padding: 14px;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: pointer;
+          font-family: 'Montserrat', sans-serif;
+          transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .pix-copy-btn-new:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(248, 166, 138, 0.35);
+        }
+
+        .pix-copy-btn-new:active {
+          transform: translateY(0);
         }
 
         .pix-modal-header {
@@ -766,20 +996,6 @@ export default function PrivacyPage() {
           font-size: 20px;
           font-weight: 800;
           margin-top: 2px;
-        }
-
-        .pix-modal-close {
-          background: rgba(255, 255, 255, 0.5);
-          border: none;
-          color: #1f2937;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          font-size: 18px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
         .pix-modal-form {
@@ -1096,7 +1312,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  {`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer 😈 A mais desejada do laranjinha, sem freio e sem censura 💦 Tudo que você sempre quis… agora na sua tela ⏳ +3.742 já entraram hoje… e você aí pensando 💸 Depois que sair do ar, não adianta chorar 👇 Clica e descobre por conta própria`}
+                  {`Sem filtro. Sem censura. Do jeito que você quer 🔥 O lado que não te mostram… tá aqui. Milhares já estão vendo — você tá atrasado. Depois que sai, já era. 👇 Entra agora… se aguenta.`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
@@ -1134,20 +1350,37 @@ export default function PrivacyPage() {
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
-                        <span className="plan-title">30 Dias (40% off)</span>
-                        <span className="plan-price">R$ 24,90</span>
-                      </button>
+                      <div className="plan-card-wrapper" style={{ marginTop: 0 }}>
+                        <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
+                          <div className="plan-card-content">
+                            <span className="plan-title">30 Dias (40% off)</span>
+                            <span className="plan-description">Acesso básico. Sem privilégios.</span>
+                          </div>
+                          <span className="plan-price">R$ 24,90</span>
+                        </button>
+                      </div>
 
-                      <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
-                        <span className="plan-title">90 Dias (50% off)</span>
-                        <span className="plan-price">R$ 42,90</span>
-                      </button>
+                      <div className="plan-card-wrapper">
+                        <span className="plan-badge popular">MAIS ESCOLHIDO</span>
+                        <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
+                          <div className="plan-card-content">
+                            <span className="plan-title">90 Dias (50% off)</span>
+                            <span className="plan-description">Quem entra aqui não quer pouco. Conteúdos exclusivos + prioridade.</span>
+                          </div>
+                          <span className="plan-price">R$ 42,90</span>
+                        </button>
+                      </div>
 
-                      <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
-                        <span className="plan-title">180 Dias (60% off)</span>
-                        <span className="plan-price">R$ 59,90</span>
-                      </button>
+                      <div className="plan-card-wrapper">
+                        <span className="plan-badge best-value">MELHOR VALOR</span>
+                        <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
+                          <div className="plan-card-content">
+                            <span className="plan-title">180 Dias (60% off)</span>
+                            <span className="plan-description">Acesso total. Sem limites. Tudo liberado + conteúdos que nem sempre ficam.</span>
+                          </div>
+                          <span className="plan-price">R$ 59,90</span>
+                        </button>
+                      </div>
                     </>
                   )}
                 </div>
@@ -1190,8 +1423,6 @@ export default function PrivacyPage() {
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
-                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1224,8 +1455,6 @@ export default function PrivacyPage() {
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
-                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1304,13 +1533,21 @@ export default function PrivacyPage() {
       {showPixModal && (
         <div className="pix-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) fecharPixModal() }}>
           <div className="pix-modal-container">
-            <div className="pix-modal-header">
-              <div>
-                <div className="pix-modal-header-text">Pagamento via Pix</div>
-                <div className="pix-modal-plan-label">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+            {/* Header - apenas para form, loading, success, error */}
+            {pixModalState !== 'pix' && (
+              <div className="pix-modal-header">
+                <div>
+                  <div className="pix-modal-header-text">Pagamento via Pix</div>
+                  <div className="pix-modal-plan-label">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+                </div>
+                <button className="pix-modal-close" style={{ position: 'relative', top: 'auto', right: 'auto', background: 'rgba(255,255,255,0.5)', color: '#1f2937' }} onClick={fecharPixModal}>✕</button>
               </div>
+            )}
+
+            {/* Botão fechar para estado PIX */}
+            {pixModalState === 'pix' && (
               <button className="pix-modal-close" onClick={fecharPixModal}>✕</button>
-            </div>
+            )}
 
             {pixModalState === 'form' && (
               <div className="pix-modal-form">
@@ -1332,6 +1569,9 @@ export default function PrivacyPage() {
                 </div>
                 <div style={{ marginBottom: '20px' }}>
                   <label className="pix-form-label">E-mail</label>
+                  <p style={{ fontSize: '12px', color: '#f97316', fontWeight: 500, marginBottom: '8px', marginTop: '2px' }}>
+                    Receba o acesso direto no seu e-mail
+                  </p>
                   <input
                     className="pix-form-input"
                     type="email"
@@ -1361,25 +1601,86 @@ export default function PrivacyPage() {
             )}
 
             {pixModalState === 'pix' && (
-              <div className="pix-content">
-                <p style={{ fontSize: '13px', color: '#6b7280', fontWeight: 600, textAlign: 'center', marginBottom: '12px' }}>
-                  Escaneie o QR Code para pagar
-                </p>
-                <div className="pix-qr-container">
-                  <Image className="pix-qr-img" src={pixQrUrl} width={200} height={200} alt="QR Code PIX" />
+              <>
+                {/* Banner */}
+                <div className="pix-modal-banner">
+                  <Image 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png" 
+                    width={400} 
+                    height={100} 
+                    alt="Banner" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    unoptimized 
+                  />
                 </div>
-                <div className="pix-code-container">
-                  <span className="pix-code-text">{pixCode}</span>
-                  <button className="pix-copy-btn" onClick={copiarPix}>📋 Copiar</button>
+
+                {/* Profile Section */}
+                <div className="pix-modal-profile-section">
+                  <div className="pix-modal-avatar">
+                    <Image 
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" 
+                      width={56} 
+                      height={56} 
+                      alt="Avatar" 
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      unoptimized 
+                    />
+                  </div>
+                  <div className="pix-modal-profile-info">
+                    <div className="pix-modal-profile-name">Vivi Noronha</div>
+                    <div className="pix-modal-profile-handle">@noronhavivi</div>
+                  </div>
                 </div>
-                <div className="pix-status">
-                  <div className="pix-status-dot"></div>
-                  <span>Aguardando pagamento...</span>
+
+                {/* Benefits */}
+                <div className="pix-modal-benefits">
+                  <h3 className="pix-modal-benefits-title">Benefícios exclusivos</h3>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Acesso ao conteúdo</span>
+                  </div>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Chat exclusivo com o criador</span>
+                  </div>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Cancele a qualquer hora</span>
+                  </div>
                 </div>
-                <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center' }}>
-                  QR Code expira em <strong>{pixTimer}</strong>
-                </p>
-              </div>
+
+                {/* Payment Section */}
+                <div className="pix-modal-payment-section">
+                  <h3 className="pix-modal-payment-title">Formas de pagamento</h3>
+                  <p className="pix-modal-payment-label">Valor</p>
+                  <p className="pix-modal-payment-value">R$ {pixAmount.toFixed(2).replace('.', ',')}</p>
+
+                  {/* QR Code */}
+                  <div className="pix-qr-wrapper">
+                    <QRCodeSVG 
+                      value={pixCode} 
+                      size={180}
+                      level="M"
+                      includeMargin={false}
+                    />
+                  </div>
+
+                  {/* PIX Code Box */}
+                  <div className="pix-code-box">
+                    <p className="pix-code-text-new">{pixCode}</p>
+                  </div>
+
+                  {/* Copy Button */}
+                  <button className="pix-copy-btn-new" onClick={copiarPix}>
+                    Copiar chave Pix
+                  </button>
+
+                  {/* Timer */}
+                  <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center', marginTop: '12px' }}>
+                    Expira em <strong>{pixTimer}</strong>
+                  </p>
+                </div>
+              </>
             )}
 
             {pixModalState === 'success' && (
