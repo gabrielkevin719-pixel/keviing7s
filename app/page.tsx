@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { QRCodeSVG } from 'qrcode.react'
 
 export default function PrivacyPage() {
   const [bioExpanded, setBioExpanded] = useState(false)
@@ -717,14 +718,14 @@ export default function PrivacyPage() {
           margin: 0 8px;
         }
 
-        /* PIX Modal */
+        /* PIX Modal - Novo Design */
         .pix-modal-overlay {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.82);
+          background: rgba(0, 0, 0, 0.6);
           z-index: 99999;
           padding: 16px;
           box-sizing: border-box;
@@ -737,12 +738,189 @@ export default function PrivacyPage() {
         .pix-modal-container {
           background: #fff;
           border-radius: 20px;
-          max-width: 420px;
+          max-width: 400px;
           width: 100%;
-          margin: 20px 0;
+          margin: 40px 0;
           overflow: hidden;
           font-family: 'Montserrat', sans-serif;
           position: relative;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .pix-modal-close {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.3);
+          border: none;
+          color: #fff;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          font-size: 16px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+          transition: background 0.2s;
+        }
+
+        .pix-modal-close:hover {
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        .pix-modal-banner {
+          position: relative;
+          width: 100%;
+          height: 100px;
+          overflow: hidden;
+        }
+
+        .pix-modal-banner img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .pix-modal-profile-section {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 0 20px;
+          margin-top: -28px;
+          position: relative;
+          z-index: 5;
+        }
+
+        .pix-modal-avatar {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          border: 3px solid #fff;
+          overflow: hidden;
+          flex-shrink: 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .pix-modal-avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .pix-modal-profile-info {
+          padding-top: 30px;
+        }
+
+        .pix-modal-profile-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: #111827;
+        }
+
+        .pix-modal-profile-handle {
+          font-size: 13px;
+          color: #6b7280;
+        }
+
+        .pix-modal-benefits {
+          padding: 16px 20px 0;
+        }
+
+        .pix-modal-benefits-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 10px;
+        }
+
+        .pix-modal-benefit-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          color: #374151;
+          margin-bottom: 6px;
+        }
+
+        .pix-modal-benefit-check {
+          color: #f97316;
+          font-size: 14px;
+        }
+
+        .pix-modal-payment-section {
+          padding: 20px;
+        }
+
+        .pix-modal-payment-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 4px;
+        }
+
+        .pix-modal-payment-label {
+          font-size: 12px;
+          color: #9ca3af;
+          margin-bottom: 2px;
+        }
+
+        .pix-modal-payment-value {
+          font-size: 20px;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 16px;
+        }
+
+        .pix-qr-wrapper {
+          display: flex;
+          justify-content: center;
+          padding: 16px;
+          background: #fff;
+          border: 2px solid #e5e7eb;
+          border-radius: 12px;
+          margin-bottom: 16px;
+        }
+
+        .pix-code-box {
+          background: #f0f9ff;
+          border: 1px solid #bae6fd;
+          border-radius: 8px;
+          padding: 12px;
+          margin-bottom: 12px;
+        }
+
+        .pix-code-text-new {
+          font-size: 10px;
+          color: #0369a1;
+          word-break: break-all;
+          font-family: monospace;
+          line-height: 1.4;
+          text-align: center;
+        }
+
+        .pix-copy-btn-new {
+          width: 100%;
+          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
+          color: #1f2937;
+          border: none;
+          border-radius: 999px;
+          padding: 14px;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: pointer;
+          font-family: 'Montserrat', sans-serif;
+          transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .pix-copy-btn-new:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(248, 166, 138, 0.35);
+        }
+
+        .pix-copy-btn-new:active {
+          transform: translateY(0);
         }
 
         .pix-modal-header {
@@ -766,20 +944,6 @@ export default function PrivacyPage() {
           font-size: 20px;
           font-weight: 800;
           margin-top: 2px;
-        }
-
-        .pix-modal-close {
-          background: rgba(255, 255, 255, 0.5);
-          border: none;
-          color: #1f2937;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          font-size: 18px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
         .pix-modal-form {
@@ -1304,13 +1468,21 @@ export default function PrivacyPage() {
       {showPixModal && (
         <div className="pix-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) fecharPixModal() }}>
           <div className="pix-modal-container">
-            <div className="pix-modal-header">
-              <div>
-                <div className="pix-modal-header-text">Pagamento via Pix</div>
-                <div className="pix-modal-plan-label">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+            {/* Header - apenas para form, loading, success, error */}
+            {pixModalState !== 'pix' && (
+              <div className="pix-modal-header">
+                <div>
+                  <div className="pix-modal-header-text">Pagamento via Pix</div>
+                  <div className="pix-modal-plan-label">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+                </div>
+                <button className="pix-modal-close" style={{ position: 'relative', top: 'auto', right: 'auto', background: 'rgba(255,255,255,0.5)', color: '#1f2937' }} onClick={fecharPixModal}>✕</button>
               </div>
+            )}
+
+            {/* Botão fechar para estado PIX */}
+            {pixModalState === 'pix' && (
               <button className="pix-modal-close" onClick={fecharPixModal}>✕</button>
-            </div>
+            )}
 
             {pixModalState === 'form' && (
               <div className="pix-modal-form">
@@ -1361,25 +1533,86 @@ export default function PrivacyPage() {
             )}
 
             {pixModalState === 'pix' && (
-              <div className="pix-content">
-                <p style={{ fontSize: '13px', color: '#6b7280', fontWeight: 600, textAlign: 'center', marginBottom: '12px' }}>
-                  Escaneie o QR Code para pagar
-                </p>
-                <div className="pix-qr-container">
-                  <Image className="pix-qr-img" src={pixQrUrl} width={200} height={200} alt="QR Code PIX" />
+              <>
+                {/* Banner */}
+                <div className="pix-modal-banner">
+                  <Image 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png" 
+                    width={400} 
+                    height={100} 
+                    alt="Banner" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    unoptimized 
+                  />
                 </div>
-                <div className="pix-code-container">
-                  <span className="pix-code-text">{pixCode}</span>
-                  <button className="pix-copy-btn" onClick={copiarPix}>📋 Copiar</button>
+
+                {/* Profile Section */}
+                <div className="pix-modal-profile-section">
+                  <div className="pix-modal-avatar">
+                    <Image 
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" 
+                      width={56} 
+                      height={56} 
+                      alt="Avatar" 
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      unoptimized 
+                    />
+                  </div>
+                  <div className="pix-modal-profile-info">
+                    <div className="pix-modal-profile-name">Vivi Noronha</div>
+                    <div className="pix-modal-profile-handle">@noronhavivi</div>
+                  </div>
                 </div>
-                <div className="pix-status">
-                  <div className="pix-status-dot"></div>
-                  <span>Aguardando pagamento...</span>
+
+                {/* Benefits */}
+                <div className="pix-modal-benefits">
+                  <h3 className="pix-modal-benefits-title">Benefícios exclusivos</h3>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Acesso ao conteúdo</span>
+                  </div>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Chat exclusivo com o criador</span>
+                  </div>
+                  <div className="pix-modal-benefit-item">
+                    <span className="pix-modal-benefit-check">✓</span>
+                    <span>Cancele a qualquer hora</span>
+                  </div>
                 </div>
-                <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center' }}>
-                  QR Code expira em <strong>{pixTimer}</strong>
-                </p>
-              </div>
+
+                {/* Payment Section */}
+                <div className="pix-modal-payment-section">
+                  <h3 className="pix-modal-payment-title">Formas de pagamento</h3>
+                  <p className="pix-modal-payment-label">Valor</p>
+                  <p className="pix-modal-payment-value">R$ {pixAmount.toFixed(2).replace('.', ',')}</p>
+
+                  {/* QR Code */}
+                  <div className="pix-qr-wrapper">
+                    <QRCodeSVG 
+                      value={pixCode} 
+                      size={180}
+                      level="M"
+                      includeMargin={false}
+                    />
+                  </div>
+
+                  {/* PIX Code Box */}
+                  <div className="pix-code-box">
+                    <p className="pix-code-text-new">{pixCode}</p>
+                  </div>
+
+                  {/* Copy Button */}
+                  <button className="pix-copy-btn-new" onClick={copiarPix}>
+                    Copiar chave Pix
+                  </button>
+
+                  {/* Timer */}
+                  <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center', marginTop: '12px' }}>
+                    Expira em <strong>{pixTimer}</strong>
+                  </p>
+                </div>
+              </>
             )}
 
             {pixModalState === 'success' && (
