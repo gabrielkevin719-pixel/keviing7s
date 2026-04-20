@@ -1504,6 +1504,9 @@ export default function PrivacyPage() {
                 </div>
                 <div style={{ marginBottom: '20px' }}>
                   <label className="pix-form-label">E-mail</label>
+                  <p style={{ fontSize: '12px', color: '#f97316', fontWeight: 500, marginBottom: '8px', marginTop: '2px' }}>
+                    Receba o acesso direto no seu e-mail
+                  </p>
                   <input
                     className="pix-form-input"
                     type="email"
