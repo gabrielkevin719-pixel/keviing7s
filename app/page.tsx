@@ -388,12 +388,17 @@ export default function PrivacyPage() {
         .plan-card-wrapper {
           position: relative;
           width: 100%;
-          margin-bottom: 8px;
+          margin-bottom: 12px;
+          margin-top: 16px;
+        }
+
+        .plan-card-wrapper:first-child {
+          margin-top: 0;
         }
 
         .plan-badge {
           position: absolute;
-          top: -10px;
+          top: -12px;
           left: 50%;
           transform: translateX(-50%);
           font-size: 10px;
@@ -1327,10 +1332,12 @@ export default function PrivacyPage() {
 
                   {promotionsOpen && (
                     <>
-                      <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
-                        <span className="plan-title">30 Dias (40% off)</span>
-                        <span className="plan-price">R$ 24,90</span>
-                      </button>
+                      <div className="plan-card-wrapper" style={{ marginTop: 0 }}>
+                        <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
+                          <span className="plan-title">30 Dias (40% off)</span>
+                          <span className="plan-price">R$ 24,90</span>
+                        </button>
+                      </div>
 
                       <div className="plan-card-wrapper">
                         <span className="plan-badge popular">MAIS POPULAR</span>
