@@ -329,6 +329,7 @@ export default function PrivacyPage() {
           line-height: 1.6;
           white-space: pre-line;
           overflow: hidden;
+          font-weight: 700;
         }
 
         .bio-text.collapsed {
