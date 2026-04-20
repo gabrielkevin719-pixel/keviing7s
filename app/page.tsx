@@ -1422,8 +1422,6 @@ export default function PrivacyPage() {
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
-                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
@@ -1456,8 +1454,6 @@ export default function PrivacyPage() {
                     muted
                     playsInline
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} 
-                    onMouseEnter={(e) => { e.currentTarget.muted = false }}
-                    onMouseLeave={(e) => { e.currentTarget.muted = true }}
                   />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
