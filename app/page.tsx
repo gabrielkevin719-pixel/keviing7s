@@ -423,15 +423,16 @@ export default function PrivacyPage() {
         .plan-card {
           width: 100%;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
           border: none;
-          border-radius: 999px;
-          padding: 16px 24px;
+          border-radius: 20px;
+          padding: 16px 20px;
           cursor: pointer;
           transition: transform 0.15s ease, box-shadow 0.2s ease;
           text-decoration: none;
+          text-align: left;
         }
 
         .plan-card:hover {
@@ -443,17 +444,33 @@ export default function PrivacyPage() {
           transform: translateY(0);
         }
 
+        .plan-card-content {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
+        }
+
         .plan-card .plan-title {
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
           color: #1f2937;
           letter-spacing: 0.2px;
         }
 
+        .plan-card .plan-description {
+          font-size: 12px;
+          font-weight: 500;
+          color: #4b5563;
+          line-height: 1.4;
+        }
+
         .plan-card .plan-price {
-          font-size: 15px;
-          font-weight: 700;
+          font-size: 16px;
+          font-weight: 800;
           color: #1f2937;
+          white-space: nowrap;
+          margin-left: 12px;
         }
 
         .promotions {
@@ -1334,15 +1351,21 @@ export default function PrivacyPage() {
                     <>
                       <div className="plan-card-wrapper" style={{ marginTop: 0 }}>
                         <button className="plan-card" onClick={() => abrirPixDireto('30 Dias', 24.90)}>
-                          <span className="plan-title">30 Dias (40% off)</span>
+                          <div className="plan-card-content">
+                            <span className="plan-title">30 Dias (40% off)</span>
+                            <span className="plan-description">Acesso básico. Sem privilégios.</span>
+                          </div>
                           <span className="plan-price">R$ 24,90</span>
                         </button>
                       </div>
 
                       <div className="plan-card-wrapper">
-                        <span className="plan-badge popular">MAIS POPULAR</span>
+                        <span className="plan-badge popular">MAIS ESCOLHIDO</span>
                         <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
-                          <span className="plan-title">90 Dias (50% off)</span>
+                          <div className="plan-card-content">
+                            <span className="plan-title">90 Dias (50% off)</span>
+                            <span className="plan-description">Quem entra aqui não quer pouco. Conteúdos exclusivos + prioridade.</span>
+                          </div>
                           <span className="plan-price">R$ 42,90</span>
                         </button>
                       </div>
@@ -1350,7 +1373,10 @@ export default function PrivacyPage() {
                       <div className="plan-card-wrapper">
                         <span className="plan-badge best-value">MELHOR VALOR</span>
                         <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
-                          <span className="plan-title">180 Dias (60% off)</span>
+                          <div className="plan-card-content">
+                            <span className="plan-title">180 Dias (60% off)</span>
+                            <span className="plan-description">Acesso total. Sem limites. Tudo liberado + conteúdos que nem sempre ficam.</span>
+                          </div>
                           <span className="plan-price">R$ 59,90</span>
                         </button>
                       </div>
