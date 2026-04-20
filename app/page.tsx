@@ -385,6 +385,36 @@ export default function PrivacyPage() {
           margin: 0 0 10px 0;
         }
 
+        .plan-card-wrapper {
+          position: relative;
+          width: 100%;
+          margin-bottom: 8px;
+        }
+
+        .plan-badge {
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 10px;
+          font-weight: 700;
+          padding: 4px 12px;
+          border-radius: 999px;
+          z-index: 1;
+          letter-spacing: 0.5px;
+          white-space: nowrap;
+        }
+
+        .plan-badge.popular {
+          background: #ef4444;
+          color: #fff;
+        }
+
+        .plan-badge.best-value {
+          background: #10b981;
+          color: #fff;
+        }
+
         .plan-card {
           width: 100%;
           display: flex;
@@ -394,7 +424,6 @@ export default function PrivacyPage() {
           border: none;
           border-radius: 999px;
           padding: 16px 24px;
-          margin-bottom: 8px;
           cursor: pointer;
           transition: transform 0.15s ease, box-shadow 0.2s ease;
           text-decoration: none;
@@ -1303,15 +1332,21 @@ export default function PrivacyPage() {
                         <span className="plan-price">R$ 24,90</span>
                       </button>
 
-                      <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
-                        <span className="plan-title">90 Dias (50% off)</span>
-                        <span className="plan-price">R$ 42,90</span>
-                      </button>
+                      <div className="plan-card-wrapper">
+                        <span className="plan-badge popular">MAIS POPULAR</span>
+                        <button className="plan-card" onClick={() => abrirPixDireto('90 Dias', 42.90)}>
+                          <span className="plan-title">90 Dias (50% off)</span>
+                          <span className="plan-price">R$ 42,90</span>
+                        </button>
+                      </div>
 
-                      <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
-                        <span className="plan-title">180 Dias (60% off)</span>
-                        <span className="plan-price">R$ 59,90</span>
-                      </button>
+                      <div className="plan-card-wrapper">
+                        <span className="plan-badge best-value">MELHOR VALOR</span>
+                        <button className="plan-card" onClick={() => abrirPixDireto('180 Dias', 59.90)}>
+                          <span className="plan-title">180 Dias (60% off)</span>
+                          <span className="plan-price">R$ 59,90</span>
+                        </button>
+                      </div>
                     </>
                   )}
                 </div>
