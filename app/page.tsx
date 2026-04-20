@@ -1260,7 +1260,7 @@ export default function PrivacyPage() {
             <div className="profile-bio">
               <div className="bio-container">
                 <p className={`bio-text ${!bioExpanded ? 'collapsed' : ''}`}>
-                  {`🔥 Conteúdo sem filtro, direto ao ponto… do jeito que você quer 😈 A mais desejada do laranjinha, sem freio e sem censura 💦 Tudo que você sempre quis… agora na sua tela ⏳ +3.742 já entraram hoje… e você aí pensando 💸 Depois que sair do ar, não adianta chorar 👇 Clica e descobre por conta própria`}
+                  {`Sem filtro. Sem censura. Do jeito que você quer 🔥 O lado que não te mostram… tá aqui. Milhares já estão vendo — você tá atrasado. Depois que sai, já era. 👇 Entra agora… se aguenta.`}
                 </p>
                 <button className="bio-toggle" onClick={() => setBioExpanded(!bioExpanded)}>
                   {bioExpanded ? 'Mostrar menos' : 'Ler mais'}
