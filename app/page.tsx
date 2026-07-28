@@ -14,47 +14,44 @@ export default function PrivacyPage() {
   const [pixIdentifier, setPixIdentifier] = useState('')
   const [pixTimer, setPixTimer] = useState('15:00')
   const [pixError, setPixError] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerCpf, setCustomerCpf] = useState('')
+  const [formErrors, setFormErrors] = useState<{ email?: string; cpf?: string }>({})
   
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const pollRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Gera CPF válido
-  const gerarCpfValido = () => {
-    const n = Array.from({ length: 9 }, () => Math.floor(Math.random() * 9))
-    let s1 = 0
-    for (let i = 0; i < 9; i++) s1 += n[i] * (10 - i)
-    let d1 = (s1 * 10) % 11
-    if (d1 === 10 || d1 === 11) d1 = 0
-    let s2 = 0
-    for (let i = 0; i < 9; i++) s2 += n[i] * (11 - i)
-    s2 += d1 * 2
-    let d2 = (s2 * 10) % 11
-    if (d2 === 10 || d2 === 11) d2 = 0
-    return n.concat([d1, d2]).join('')
+  const formatCpf = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 11)
+    return digits
+      .replace(/^(\d{3})(\d)/, '$1.$2')
+      .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+      .replace(/\.(\d{3})(\d)/, '.$1-$2')
   }
 
-  const gerarDadosAleatorios = () => {
-    const nomes = ["Ana Lima", "Carlos Souza", "Mariana Costa", "Pedro Alves", "Fernanda Silva", "Rafael Gomes"]
-    const emails = ["mail", "inbox", "msg", "acesso", "conta"]
-    const domains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com.br"]
+  const isValidCpf = (value: string) => {
+    const cpf = value.replace(/\D/g, '')
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false
 
-    const nome = nomes[Math.floor(Math.random() * nomes.length)]
-    const email = emails[Math.floor(Math.random() * emails.length)] + Math.floor(Math.random() * 9999) + '@' + domains[Math.floor(Math.random() * domains.length)]
-
-    return {
-      nome,
-      email,
-      cpf: gerarCpfValido(),
-      phone: '119' + Math.floor(Math.random() * 90000000 + 10000000)
+    const calculateDigit = (length: number) => {
+      const sum = cpf
+        .slice(0, length)
+        .split('')
+        .reduce((total, digit, index) => total + Number(digit) * (length + 1 - index), 0)
+      const remainder = (sum * 10) % 11
+      return remainder === 10 ? 0 : remainder
     }
+
+    return calculateDigit(9) === Number(cpf[9]) && calculateDigit(10) === Number(cpf[10])
   }
 
   const abrirPixDireto = (planLabel: string, amount: number) => {
     setPixPlanLabel(planLabel)
     setPixAmount(amount)
-    setPixModalState('loading')
+    setPixError('')
+    setFormErrors({})
+    setPixModalState('form')
     setShowPixModal(true)
-    gerarPix(planLabel, amount)
   }
 
   const fecharPixModal = () => {
@@ -63,10 +60,28 @@ export default function PrivacyPage() {
     if (pollRef.current) clearInterval(pollRef.current)
   }
 
-  const gerarPix = async (planLabel: string, amount: number) => {
-    setPixModalState('loading')
+  const handlePixSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-    const dados = gerarDadosAleatorios()
+    const email = customerEmail.trim().toLowerCase()
+    const errors: { email?: string; cpf?: string } = {}
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = 'Digite um e-mail válido.'
+    }
+    if (!isValidCpf(customerCpf)) {
+      errors.cpf = 'Digite um CPF válido.'
+    }
+
+    setFormErrors(errors)
+    if (Object.keys(errors).length > 0) return
+
+    void gerarPix(pixPlanLabel, pixAmount, email, customerCpf.replace(/\D/g, ''))
+  }
+
+  const gerarPix = async (planLabel: string, amount: number, email: string, cpf: string) => {
+    setPixModalState('loading')
+    setPixError('')
 
     try {
       // Chama a API do SyncPay
@@ -76,11 +91,9 @@ export default function PrivacyPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: dados.nome,
-          email: dados.email,
-          cpf: dados.cpf,
-          phone: dados.phone,
-          amount: amount,
+          email,
+          cpf,
+          amount,
           plan: planLabel
         })
       })
@@ -147,9 +160,22 @@ export default function PrivacyPage() {
           box-sizing: border-box;
         }
 
+        html {
+          background-color: #f5f5f5;
+          color-scheme: light;
+          overflow-x: hidden;
+        }
+
         body {
+          min-width: 0;
           font-family: 'Montserrat', sans-serif;
           background-color: #f5f5f5;
+          overflow-x: hidden;
+        }
+
+        button,
+        input {
+          font-family: inherit;
         }
 
         .nav-container {
@@ -866,10 +892,109 @@ export default function PrivacyPage() {
           display: flex;
         }
 
+        .pix-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding: 20px;
+        }
+
+        .pix-form-heading {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .pix-form-title {
+          color: #1f2937;
+          font-size: 20px;
+          font-weight: 800;
+          margin: 0;
+        }
+
+        .pix-form-subtitle {
+          color: #6b7280;
+          font-size: 13px;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        .pix-form-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .pix-form-label {
+          color: #374151;
+          font-size: 13px;
+          font-weight: 700;
+        }
+
+        .pix-form-input {
+          width: 100%;
+          box-sizing: border-box;
+          border: 1.5px solid #d1d5db;
+          border-radius: 12px;
+          color: #1f2937;
+          background: #fff;
+          font: inherit;
+          font-size: 16px;
+          padding: 13px 14px;
+          outline: none;
+        }
+
+        .pix-form-input:focus {
+          border-color: #ff6b3d;
+          box-shadow: 0 0 0 3px rgba(255, 107, 61, 0.14);
+        }
+
+        .pix-form-input[aria-invalid='true'] {
+          border-color: #dc2626;
+        }
+
+        .pix-form-error {
+          color: #dc2626;
+          font-size: 12px;
+          margin: 0;
+        }
+
+        .pix-email-notice {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          border-radius: 12px;
+          background: #fff5f0;
+          color: #374151;
+          font-size: 12px;
+          line-height: 1.5;
+          padding: 12px;
+        }
+
+        .pix-email-notice svg {
+          color: #ff6b3d;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        .pix-form-summary {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: #374151;
+          font-size: 13px;
+          font-weight: 600;
+        }
+
+        .pix-form-summary strong {
+          color: #1f2937;
+          font-size: 17px;
+        }
+
         .pix-submit-btn {
           width: 100%;
-          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
-          color: #1f2937;
+          background: #ff6b3d;
+          color: #fff;
           border: none;
           border-radius: 999px;
           padding: 15px;
@@ -878,6 +1003,10 @@ export default function PrivacyPage() {
           cursor: pointer;
           font-family: 'Montserrat', sans-serif;
           letter-spacing: 0.3px;
+        }
+
+        .pix-submit-btn:hover {
+          background: #e85b30;
         }
 
         .pix-loading {
@@ -1255,6 +1384,30 @@ export default function PrivacyPage() {
         }
 
         @media (max-width: 600px) {
+          .navbar,
+          .nav-container {
+            width: 100%;
+          }
+
+          .nav-container {
+            height: 52px;
+            padding: 8px 16px;
+          }
+
+          .logo img {
+            width: 78px;
+            height: auto;
+          }
+
+          .globe-icon {
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
           .top-bar-content {
             gap: 10px;
             justify-content: center;
@@ -1272,13 +1425,15 @@ export default function PrivacyPage() {
           }
 
           .main-container {
-            margin: 16px auto;
-            padding: 0 12px;
+            width: 100%;
+            margin: 10px auto 16px;
+            padding: 0 8px;
           }
 
           .profile-info {
             gap: 10px;
-            padding: 0 14px;
+            margin-top: -34px;
+            padding: 0 12px;
           }
 
           .profile-image {
@@ -1290,24 +1445,58 @@ export default function PrivacyPage() {
             flex-direction: column;
             align-items: stretch;
             gap: 8px;
-            padding-top: 40px;
+            padding-top: 36px;
           }
 
           .profile-name {
             font-size: 16px;
+            line-height: 1.3;
+          }
+
+          .profile-username {
+            font-size: 12px;
           }
 
           .stats {
-            gap: 12px;
-            flex-wrap: wrap;
+            width: 100%;
+            gap: 8px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            font-size: 11px;
+          }
+
+          .stats span {
+            white-space: nowrap;
           }
 
           .profile-bio {
-            padding: 16px 14px;
+            padding: 12px;
+          }
+
+          .bio-text {
+            font-size: 12px;
+            line-height: 1.55;
+          }
+
+          .bio-toggle {
+            min-height: 44px;
+            margin: 0;
+            padding: 10px 0;
+          }
+
+          .social-icons {
+            gap: 8px;
+            margin-bottom: 14px;
+          }
+
+          .social-icon {
+            width: 44px;
+            height: 44px;
           }
 
           .plan-card {
-            padding: 14px 18px;
+            min-height: 48px;
+            padding: 12px 16px;
           }
 
           .plan-card .plan-title,
@@ -1326,26 +1515,105 @@ export default function PrivacyPage() {
             height: 132px;
           }
 
+          .content-toggle {
+            width: 100%;
+            gap: 4px;
+            margin: 14px 0;
+            flex-wrap: nowrap;
+          }
+
+          .toggle-btn {
+            min-height: 44px;
+            padding: 8px 10px;
+            font-size: 12px;
+            white-space: nowrap;
+          }
+
           .content-tabs {
             overflow-x: auto;
+            scrollbar-width: none;
+          }
+
+          .content-tabs::-webkit-scrollbar {
+            display: none;
           }
 
           .tab-item {
-            min-width: 96px;
-            padding: 14px 10px;
-            font-size: 13px;
+            min-width: 88px;
+            min-height: 44px;
+            padding: 12px 8px;
+            font-size: 12px;
+          }
+
+          .feed-gallery {
+            margin-top: 12px;
+            padding: 0;
           }
 
           .feed-grid {
             grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .feed-media {
+            aspect-ratio: 4 / 5;
+          }
+
+          .lock-bubble {
+            width: 58px;
+            height: 58px;
+          }
+
+          .feed-footer {
+            min-height: 44px;
+            padding: 8px 10px;
+          }
+
+          .info-container {
+            margin: 14px auto;
+            padding: 0 8px;
           }
 
           .faq-container {
-            padding: 20px 14px;
+            padding: 14px 12px;
+          }
+
+          .faq-titulo {
+            margin-bottom: 8px;
+            font-size: 16px;
+          }
+
+          .faq-item {
+            padding: 6px 0;
+          }
+
+          .faq-question {
+            min-height: 44px;
+            font-size: 12px;
+            line-height: 1.4;
+          }
+
+          .faq-answer {
+            padding: 8px 0 8px 28px;
+            font-size: 12px;
           }
 
           .footer-cta {
-            padding: 0 12px;
+            margin-top: 18px;
+            padding: 0 8px;
+          }
+
+          .footer-legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 12px;
+            padding: 12px 16px 20px;
+            line-height: 1.5;
+          }
+
+          .footer-legal-links .separator {
+            display: none;
           }
 
           .pix-modal-overlay {
@@ -1462,6 +1730,178 @@ export default function PrivacyPage() {
           .plan-card .plan-title,
           .plan-card .plan-price {
             font-size: 13px;
+          }
+
+          .main-container {
+            padding: 0 6px;
+          }
+
+          .cover-image {
+            height: 112px;
+          }
+
+          .profile-image {
+            width: 64px;
+            height: 64px;
+          }
+
+          .profile-header-row {
+            padding-top: 30px;
+          }
+
+          .profile-bio {
+            padding: 10px;
+          }
+
+          .plan-card {
+            padding: 10px 12px;
+          }
+
+          .content-toggle {
+            overflow-x: auto;
+            justify-content: flex-start;
+            scrollbar-width: none;
+          }
+
+          .content-toggle::-webkit-scrollbar {
+            display: none;
+          }
+
+          .feed-header {
+            padding: 8px;
+          }
+
+          .stats-pill {
+            bottom: 8px;
+            left: 8px;
+            gap: 8px;
+            padding: 6px 9px;
+            font-size: 10px;
+          }
+
+          .pix-modal-overlay {
+            align-items: center;
+            padding: max(6px, env(safe-area-inset-top)) 6px max(6px, env(safe-area-inset-bottom));
+          }
+
+          .pix-modal-container {
+            max-height: calc(100dvh - 12px);
+            min-height: 0;
+            margin: 0;
+            border-radius: 16px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+          }
+
+          .pix-modal-cover {
+            height: 96px;
+            border-radius: 16px 16px 0 0;
+          }
+
+          .pix-modal-avatar {
+            bottom: -28px;
+            left: 14px;
+            width: 64px;
+            height: 64px;
+            border-width: 3px;
+          }
+
+          .pix-modal-profile {
+            min-height: 36px;
+            padding: 32px 14px 2px 88px;
+          }
+
+          .pix-form {
+            gap: 10px;
+            padding: 12px 14px 14px;
+          }
+
+          .pix-form-title {
+            font-size: 18px;
+          }
+
+          .pix-form-subtitle,
+          .pix-email-notice {
+            font-size: 11px;
+          }
+
+          .pix-email-notice {
+            padding: 9px;
+          }
+
+          .pix-form-field {
+            gap: 4px;
+          }
+
+          .pix-form-input {
+            padding: 10px 12px;
+          }
+
+          .pix-submit-btn {
+            min-height: 44px;
+            padding: 10px 14px;
+          }
+
+          .pix-loading,
+          .pix-error {
+            min-height: 220px;
+            padding: 20px 14px;
+          }
+
+          .pix-content {
+            padding: 10px 14px 0;
+          }
+
+          .pix-benefits-title {
+            font-size: 16px;
+          }
+
+          .pix-benefits-list {
+            gap: 8px;
+          }
+
+          .pix-benefits-list li {
+            gap: 8px;
+            font-size: 13px;
+          }
+
+          .pix-divider {
+            margin: 16px -14px 0;
+          }
+
+          .pix-payment-section {
+            padding: 14px 0 18px;
+          }
+
+          .pix-payment-title,
+          .pix-value-amount {
+            font-size: 20px;
+          }
+
+          .pix-value-label {
+            font-size: 13px;
+          }
+
+          .pix-qr-container {
+            width: min(220px, calc(100vw - 52px));
+            margin-bottom: 16px;
+            padding: 12px;
+          }
+
+          .pix-code-field {
+            height: 44px;
+            margin-bottom: 12px;
+            padding: 0 12px;
+          }
+
+          .pix-code-field .pix-code-text {
+            font-size: 12px;
+          }
+
+          .pix-copy-key-button {
+            min-height: 48px;
+            height: auto;
+            font-size: 15px;
           }
         }
       `}</style>
@@ -1748,6 +2188,73 @@ export default function PrivacyPage() {
               <div className="pix-modal-name">Vivi Noronha</div>
               <div className="pix-modal-handle">@noronhavivi</div>
             </div>
+
+            {pixModalState === 'form' && (
+              <form className="pix-form" onSubmit={handlePixSubmit} noValidate>
+                <div className="pix-form-heading">
+                  <h3 className="pix-form-title">Receba seu acesso</h3>
+                  <p className="pix-form-subtitle">Informe seus dados para gerar o Pix com segurança.</p>
+                </div>
+
+                <div className="pix-email-notice">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-10 5L2 7" />
+                  </svg>
+                  <span>Depois da confirmação do pagamento, o acesso será enviado diretamente para o e-mail informado.</span>
+                </div>
+
+                <div className="pix-form-field">
+                  <label className="pix-form-label" htmlFor="pix-email">E-mail</label>
+                  <input
+                    className="pix-form-input"
+                    id="pix-email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="voce@email.com"
+                    value={customerEmail}
+                    onChange={(event) => {
+                      setCustomerEmail(event.target.value)
+                      if (formErrors.email) setFormErrors((current) => ({ ...current, email: undefined }))
+                    }}
+                    aria-invalid={Boolean(formErrors.email)}
+                    aria-describedby={formErrors.email ? 'pix-email-error' : undefined}
+                  />
+                  {formErrors.email && <p className="pix-form-error" id="pix-email-error">{formErrors.email}</p>}
+                </div>
+
+                <div className="pix-form-field">
+                  <label className="pix-form-label" htmlFor="pix-cpf">CPF</label>
+                  <input
+                    className="pix-form-input"
+                    id="pix-cpf"
+                    name="cpf"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    placeholder="000.000.000-00"
+                    maxLength={14}
+                    value={customerCpf}
+                    onChange={(event) => {
+                      setCustomerCpf(formatCpf(event.target.value))
+                      if (formErrors.cpf) setFormErrors((current) => ({ ...current, cpf: undefined }))
+                    }}
+                    aria-invalid={Boolean(formErrors.cpf)}
+                    aria-describedby={formErrors.cpf ? 'pix-cpf-error' : undefined}
+                  />
+                  {formErrors.cpf && <p className="pix-form-error" id="pix-cpf-error">{formErrors.cpf}</p>}
+                </div>
+
+                <div className="pix-form-summary">
+                  <span>{pixPlanLabel}</span>
+                  <strong>R$ {pixAmount.toFixed(2).replace('.', ',')}</strong>
+                </div>
+
+                <button className="pix-submit-btn" type="submit">Criar Pix</button>
+              </form>
+            )}
 
             {pixModalState === 'loading' && (
               <div className="pix-loading">
