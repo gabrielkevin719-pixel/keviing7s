@@ -1598,7 +1598,7 @@ export default function PrivacyPage() {
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="/videos/first-video.mp4"
+                    src="/videos/video-project-2.mp4"
                     autoPlay
                     loop
                     muted
@@ -1632,7 +1632,7 @@ export default function PrivacyPage() {
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FjuP8fkp_720p-0nDEFeqyxNTiVgtR5kqFYfjuZmSShe.mp4" 
+                    src="/videos/first-video.mp4" 
                     autoPlay 
                     loop 
                     muted
