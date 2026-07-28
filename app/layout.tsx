@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Privacy | Vivi Noronha',
-  description: 'Conteúdo exclusivo de Vivi Noronha',
+  title: 'Privacy | Sofia Florence',
+  description: 'Conteúdo exclusivo de Sofia Florence',
   icons: {
     icon: '/favicon.png',
   },
