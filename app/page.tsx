@@ -1632,7 +1632,7 @@ export default function PrivacyPage() {
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="/videos/first-video.mp4" 
+                    src="/videos/video-project-3.mp4" 
                     autoPlay 
                     loop 
                     muted
