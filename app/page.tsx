@@ -14,10 +14,6 @@ export default function PrivacyPage() {
   const [pixIdentifier, setPixIdentifier] = useState('')
   const [pixTimer, setPixTimer] = useState('15:00')
   const [pixError, setPixError] = useState('')
-  const [formNome, setFormNome] = useState('')
-  const [formEmail, setFormEmail] = useState('')
-  const [formNomeErr, setFormNomeErr] = useState('')
-  const [formEmailErr, setFormEmailErr] = useState('')
   
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const pollRef = useRef<NodeJS.Timeout | null>(null)
@@ -41,8 +37,13 @@ export default function PrivacyPage() {
     const nomes = ["Ana Lima", "Carlos Souza", "Mariana Costa", "Pedro Alves", "Fernanda Silva", "Rafael Gomes"]
     const emails = ["mail", "inbox", "msg", "acesso", "conta"]
     const domains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com.br"]
-    
+
+    const nome = nomes[Math.floor(Math.random() * nomes.length)]
+    const email = emails[Math.floor(Math.random() * emails.length)] + Math.floor(Math.random() * 9999) + '@' + domains[Math.floor(Math.random() * domains.length)]
+
     return {
+      nome,
+      email,
       cpf: gerarCpfValido(),
       phone: '119' + Math.floor(Math.random() * 90000000 + 10000000)
     }
@@ -51,12 +52,9 @@ export default function PrivacyPage() {
   const abrirPixDireto = (planLabel: string, amount: number) => {
     setPixPlanLabel(planLabel)
     setPixAmount(amount)
-    setFormNome('')
-    setFormEmail('')
-    setFormNomeErr('')
-    setFormEmailErr('')
-    setPixModalState('form')
+    setPixModalState('loading')
     setShowPixModal(true)
+    gerarPix(planLabel, amount)
   }
 
   const fecharPixModal = () => {
@@ -65,24 +63,7 @@ export default function PrivacyPage() {
     if (pollRef.current) clearInterval(pollRef.current)
   }
 
-  const confirmarDadosEGerarPix = async () => {
-    let ok = true
-    setFormNomeErr('')
-    setFormEmailErr('')
-
-    if (!formNome || formNome.length < 3 || formNome.length > 100) {
-      setFormNomeErr('Informe seu nome completo.')
-      ok = false
-    }
-
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!formEmail || !emailRe.test(formEmail) || formEmail.length > 255) {
-      setFormEmailErr('Informe um e-mail válido.')
-      ok = false
-    }
-
-    if (!ok) return
-
+  const gerarPix = async (planLabel: string, amount: number) => {
     setPixModalState('loading')
 
     const dados = gerarDadosAleatorios()
@@ -95,12 +76,12 @@ export default function PrivacyPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formNome,
-          email: formEmail,
+          name: dados.nome,
+          email: dados.email,
           cpf: dados.cpf,
           phone: dados.phone,
-          amount: pixAmount,
-          plan: pixPlanLabel
+          amount: amount,
+          plan: planLabel
         })
       })
 
@@ -110,7 +91,7 @@ export default function PrivacyPage() {
         throw new Error(data.error || 'Erro ao gerar PIX')
       }
 
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.pix_code)}`
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(data.pix_code)}`
 
       setPixCode(data.pix_code)
       setPixQrUrl(qrUrl)
@@ -744,77 +725,145 @@ export default function PrivacyPage() {
           position: relative;
         }
 
-        .pix-modal-header {
-          background: linear-gradient(90deg, #f8a68a 0%, #fcd5c5 50%, #fff5f0 100%);
-          padding: 18px 20px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border-radius: 16px 16px 0 0;
+        .pix-modal-cover {
+          position: relative;
+          width: 100%;
+          height: 150px;
+          background: #e5e7eb;
+          border-radius: 20px 20px 0 0;
+          overflow: hidden;
         }
 
-        .pix-modal-header-text {
-          color: #1f2937;
-          font-size: 13px;
-          font-weight: 600;
-          opacity: 0.9;
-        }
-
-        .pix-modal-plan-label {
-          color: #1f2937;
-          font-size: 20px;
-          font-weight: 800;
-          margin-top: 2px;
+        .pix-modal-cover > span,
+        .pix-modal-cover img {
+          border-radius: 20px 20px 0 0;
         }
 
         .pix-modal-close {
-          background: rgba(255, 255, 255, 0.5);
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.35);
           border: none;
-          color: #1f2937;
-          width: 36px;
-          height: 36px;
+          color: #fff;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          font-size: 18px;
+          font-size: 16px;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 2;
         }
 
-        .pix-modal-form {
-          padding: 24px 20px;
+        .pix-modal-avatar {
+          position: absolute;
+          left: 20px;
+          bottom: -36px;
+          width: 84px;
+          height: 84px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 4px solid #fff;
+          background: #fff;
+          z-index: 2;
         }
 
-        .pix-form-label {
-          display: block;
-          font-size: 12px;
+        .pix-modal-profile {
+          padding: 46px 20px 4px 116px;
+        }
+
+        .pix-modal-name {
+          font-size: 16px;
           font-weight: 700;
-          color: #374151;
-          margin-bottom: 6px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+          color: #1f2937;
         }
 
-        .pix-form-input {
+        .pix-modal-handle {
+          font-size: 13px;
+          color: #9ca3af;
+          margin-top: 2px;
+        }
+
+        .pix-benefits-title,
+        .pix-payment-title {
+          font-size: 18px;
+          font-weight: 800;
+          color: #1f2937;
+          margin: 0 0 12px;
+        }
+
+        .pix-benefits-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .pix-benefits-list li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 15px;
+          color: #374151;
+          font-weight: 500;
+        }
+
+        .pix-benefits-list li svg {
+          flex-shrink: 0;
+        }
+
+        .pix-divider {
+          height: 1px;
+          background: #eceae6;
+          margin: 20px 0;
+        }
+
+        .pix-value-label {
+          font-size: 14px;
+          color: #9ca3af;
+          margin: 0;
+        }
+
+        .pix-value-amount {
+          font-size: 24px;
+          font-weight: 800;
+          color: #1f2937;
+          margin: 2px 0 20px;
+        }
+
+        .pix-code-field {
           width: 100%;
           box-sizing: border-box;
+          background: #fff;
           border: 1.5px solid #e5e7eb;
-          border-radius: 10px;
-          padding: 12px 14px;
-          font-size: 15px;
+          border-radius: 999px;
+          padding: 14px 18px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          text-align: left;
           font-family: 'Montserrat', sans-serif;
-          outline: none;
-          transition: border-color 0.2s;
+          margin-bottom: 14px;
         }
 
-        .pix-form-input:focus {
-          border-color: #f8a68a;
+        .pix-code-field .pix-code-text {
+          flex: 1;
+          font-size: 13px;
+          color: #374151;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
-        .pix-form-error {
-          color: #b91c1c;
-          font-size: 12px;
-          margin-top: 4px;
+        .pix-code-copy-icon {
+          color: #9ca3af;
+          flex-shrink: 0;
+          display: flex;
         }
 
         .pix-submit-btn {
@@ -1352,53 +1401,32 @@ export default function PrivacyPage() {
       {showPixModal && (
         <div className="pix-modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) fecharPixModal() }}>
           <div className="pix-modal-container">
-            <div className="pix-modal-header">
-              <div>
-                <div className="pix-modal-header-text">Pagamento via Pix</div>
-                <div className="pix-modal-plan-label">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+            <div className="pix-modal-cover">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png"
+                width={640}
+                height={220}
+                alt="Imagem de capa"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+                unoptimized
+              />
+              <button className="pix-modal-close" onClick={fecharPixModal} aria-label="Fechar">✕</button>
+              <div className="pix-modal-avatar">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png"
+                  width={120}
+                  height={120}
+                  alt="Foto de perfil"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  unoptimized
+                />
               </div>
-              <button className="pix-modal-close" onClick={fecharPixModal}>✕</button>
             </div>
 
-            {pixModalState === 'form' && (
-              <div className="pix-modal-form">
-                <p style={{ fontSize: '14px', color: '#6b7280', textAlign: 'center', marginBottom: '20px', lineHeight: 1.5 }}>
-                  Confirme seus dados para gerar o PIX 🔒
-                </p>
-                <div style={{ marginBottom: '14px' }}>
-                  <label className="pix-form-label">Nome completo</label>
-                  <input
-                    className="pix-form-input"
-                    type="text"
-                    placeholder="Seu nome completo"
-                    maxLength={100}
-                    value={formNome}
-                    onChange={(e) => setFormNome(e.target.value)}
-                    style={{ borderColor: formNomeErr ? '#b91c1c' : undefined }}
-                  />
-                  {formNomeErr && <span className="pix-form-error">{formNomeErr}</span>}
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                  <label className="pix-form-label">E-mail</label>
-                  <input
-                    className="pix-form-input"
-                    type="email"
-                    placeholder="seu@email.com"
-                    maxLength={255}
-                    value={formEmail}
-                    onChange={(e) => setFormEmail(e.target.value)}
-                    style={{ borderColor: formEmailErr ? '#b91c1c' : undefined }}
-                  />
-                  {formEmailErr && <span className="pix-form-error">{formEmailErr}</span>}
-                </div>
-                <button className="pix-submit-btn" onClick={confirmarDadosEGerarPix}>
-                  Gerar PIX →
-                </button>
-                <p style={{ fontSize: '11px', color: '#9ca3af', textAlign: 'center', marginTop: '12px' }}>
-                  🔒 Dados usados apenas para emissão do pagamento
-                </p>
-              </div>
-            )}
+            <div className="pix-modal-profile">
+              <div className="pix-modal-name">Vivi Noronha</div>
+              <div className="pix-modal-handle">@noronhavivi</div>
+            </div>
 
             {pixModalState === 'loading' && (
               <div className="pix-loading">
@@ -1410,16 +1438,39 @@ export default function PrivacyPage() {
 
             {pixModalState === 'pix' && (
               <div className="pix-content">
-                <p style={{ fontSize: '13px', color: '#6b7280', fontWeight: 600, textAlign: 'center', marginBottom: '12px' }}>
-                  Escaneie o QR Code para pagar
-                </p>
+                <h3 className="pix-benefits-title">Benefícios exclusivos</h3>
+                <ul className="pix-benefits-list">
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b3d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Acesso ao conteúdo
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b3d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Chat exclusivo com o criador
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b3d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Cancele a qualquer hora
+                  </li>
+                </ul>
+
+                <div className="pix-divider"></div>
+
+                <h3 className="pix-payment-title">Formas de pagamento</h3>
+                <p className="pix-value-label">Valor</p>
+                <p className="pix-value-amount">R$ {pixAmount.toFixed(2).replace('.', ',')}</p>
+
                 <div className="pix-qr-container">
-                  <Image className="pix-qr-img" src={pixQrUrl} width={200} height={200} alt="QR Code PIX" />
+                  <Image className="pix-qr-img" src={pixQrUrl} width={220} height={220} alt="QR Code PIX" />
                 </div>
-                <div className="pix-code-container">
+
+                <button className="pix-code-field" onClick={copiarPix}>
                   <span className="pix-code-text">{pixCode}</span>
-                  <button className="pix-copy-btn" onClick={copiarPix}>📋 Copiar</button>
-                </div>
+                  <span className="pix-code-copy-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  </span>
+                </button>
+
                 <div className="pix-status">
                   <div className="pix-status-dot"></div>
                   <span>Aguardando pagamento...</span>
@@ -1441,7 +1492,7 @@ export default function PrivacyPage() {
 
             {pixModalState === 'error' && (
               <div className="pix-error">
-                <div className="pix-error-icon">�������️</div>
+                <div className="pix-error-icon">⚠️</div>
                 <p className="pix-error-text">{pixError || 'Erro ao gerar PIX. Tente novamente.'}</p>
                 <button style={{ background: '#6b7280', color: '#fff', border: 'none', borderRadius: '12px', padding: '12px 28px', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }} onClick={fecharPixModal}>
                   Fechar
