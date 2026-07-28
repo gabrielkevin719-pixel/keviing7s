@@ -59,6 +59,20 @@ async function getAccessToken(): Promise<string> {
   return data.access_token
 }
 
+function isValidCpf(value: string) {
+  const cpf = value.replace(/\D/g, '')
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false
+
+  const calculateDigit = (base: string, initialWeight: number) => {
+    const sum = base.split('').reduce((total, digit, index) => total + Number(digit) * (initialWeight - index), 0)
+    const remainder = (sum * 10) % 11
+    return remainder === 10 ? 0 : remainder
+  }
+
+  return calculateDigit(cpf.slice(0, 9), 10) === Number(cpf[9])
+    && calculateDigit(cpf.slice(0, 10), 11) === Number(cpf[10])
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -67,13 +81,22 @@ export async function POST(request: NextRequest) {
     // Validacoes basicas
     if (!amount) {
       return NextResponse.json(
-        { error: 'Valor do pagamento e obrigatorio.' },
+        { error: 'Valor do pagamento é obrigatório.' },
         { status: 400 }
       )
     }
 
+    const emailClean = typeof email === 'string' ? email.trim().toLowerCase() : ''
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailClean)) {
+      return NextResponse.json({ error: 'Informe um e-mail válido.' }, { status: 400 })
+    }
+
+    if (typeof cpf !== 'string' || !isValidCpf(cpf)) {
+      return NextResponse.json({ error: 'Informe um CPF válido.' }, { status: 400 })
+    }
+
     // Limpa CPF e telefone
-    const cpfClean = cpf?.replace(/\D/g, '') || '00000000000'
+    const cpfClean = cpf.replace(/\D/g, '')
     const phoneClean = phone?.replace(/\D/g, '') || '11999999999'
 
     // Normaliza o valor (substitui virgula por ponto se necessario)
@@ -95,7 +118,7 @@ export async function POST(request: NextRequest) {
       client: {
         name: name || 'Cliente',
         cpf: cpfClean,
-        email: email || 'cliente@email.com',
+        email: emailClean,
         phone: phoneClean
       }
     }
