@@ -14,47 +14,46 @@ export default function PrivacyPage() {
   const [pixIdentifier, setPixIdentifier] = useState('')
   const [pixTimer, setPixTimer] = useState('15:00')
   const [pixError, setPixError] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerCpf, setCustomerCpf] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [cpfError, setCpfError] = useState('')
   
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const pollRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Gera CPF válido
-  const gerarCpfValido = () => {
-    const n = Array.from({ length: 9 }, () => Math.floor(Math.random() * 9))
-    let s1 = 0
-    for (let i = 0; i < 9; i++) s1 += n[i] * (10 - i)
-    let d1 = (s1 * 10) % 11
-    if (d1 === 10 || d1 === 11) d1 = 0
-    let s2 = 0
-    for (let i = 0; i < 9; i++) s2 += n[i] * (11 - i)
-    s2 += d1 * 2
-    let d2 = (s2 * 10) % 11
-    if (d2 === 10 || d2 === 11) d2 = 0
-    return n.concat([d1, d2]).join('')
+  const formatCpf = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 11)
+    return digits
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
   }
 
-  const gerarDadosAleatorios = () => {
-    const nomes = ["Ana Lima", "Carlos Souza", "Mariana Costa", "Pedro Alves", "Fernanda Silva", "Rafael Gomes"]
-    const emails = ["mail", "inbox", "msg", "acesso", "conta"]
-    const domains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com.br"]
+  const isValidCpf = (value: string) => {
+    const cpf = value.replace(/\D/g, '')
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false
 
-    const nome = nomes[Math.floor(Math.random() * nomes.length)]
-    const email = emails[Math.floor(Math.random() * emails.length)] + Math.floor(Math.random() * 9999) + '@' + domains[Math.floor(Math.random() * domains.length)]
-
-    return {
-      nome,
-      email,
-      cpf: gerarCpfValido(),
-      phone: '119' + Math.floor(Math.random() * 90000000 + 10000000)
+    const calculateDigit = (length: number) => {
+      let sum = 0
+      for (let index = 0; index < length; index++) {
+        sum += Number(cpf[index]) * (length + 1 - index)
+      }
+      const remainder = (sum * 10) % 11
+      return remainder === 10 ? 0 : remainder
     }
+
+    return calculateDigit(9) === Number(cpf[9]) && calculateDigit(10) === Number(cpf[10])
   }
 
   const abrirPixDireto = (planLabel: string, amount: number) => {
     setPixPlanLabel(planLabel)
     setPixAmount(amount)
-    setPixModalState('loading')
+    setPixError('')
+    setEmailError('')
+    setCpfError('')
+    setPixModalState('form')
     setShowPixModal(true)
-    gerarPix(planLabel, amount)
   }
 
   const fecharPixModal = () => {
@@ -63,10 +62,22 @@ export default function PrivacyPage() {
     if (pollRef.current) clearInterval(pollRef.current)
   }
 
-  const gerarPix = async (planLabel: string, amount: number) => {
-    setPixModalState('loading')
+  const submitCustomerData = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-    const dados = gerarDadosAleatorios()
+    const normalizedEmail = customerEmail.trim().toLowerCase()
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+    const validCpf = isValidCpf(customerCpf)
+
+    setEmailError(validEmail ? '' : 'Digite um e-mail válido.')
+    setCpfError(validCpf ? '' : 'Digite um CPF válido.')
+
+    if (!validEmail || !validCpf) return
+    gerarPix(pixPlanLabel, pixAmount, normalizedEmail, customerCpf.replace(/\D/g, ''))
+  }
+
+  const gerarPix = async (planLabel: string, amount: number, email: string, cpf: string) => {
+    setPixModalState('loading')
 
     try {
       // Chama a API do SyncPay
@@ -76,10 +87,10 @@ export default function PrivacyPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: dados.nome,
-          email: dados.email,
-          cpf: dados.cpf,
-          phone: dados.phone,
+          name: 'Cliente',
+          email,
+          cpf,
+          phone: '11999999999',
           amount: amount,
           plan: planLabel
         })
@@ -1102,6 +1113,84 @@ export default function PrivacyPage() {
           padding: 13px 38px 0;
         }
 
+        .pix-customer-form {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          padding: 18px 38px 32px;
+        }
+
+        .pix-form-title {
+          margin: 0;
+          color: #222d3d;
+          font-size: 22px;
+          line-height: 1.3;
+          font-weight: 800;
+        }
+
+        .pix-form-message {
+          margin: 0;
+          color: #626b78;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .pix-form-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .pix-form-label {
+          color: #333230;
+          font-size: 14px;
+          font-weight: 700;
+        }
+
+        .pix-form-input {
+          width: 100%;
+          height: 48px;
+          box-sizing: border-box;
+          padding: 0 15px;
+          border: 1px solid #cfd4dc;
+          border-radius: 12px;
+          outline: none;
+          background: #fff;
+          color: #222d3d;
+          font: inherit;
+          font-size: 16px;
+        }
+
+        .pix-form-input:focus {
+          border-color: #ff8736;
+          box-shadow: 0 0 0 3px rgba(255, 135, 54, 0.15);
+        }
+
+        .pix-form-input[aria-invalid="true"] {
+          border-color: #b91c1c;
+        }
+
+        .pix-field-error {
+          margin: 0;
+          color: #b91c1c;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+
+        .pix-form-submit {
+          width: 100%;
+          min-height: 50px;
+          margin-top: 2px;
+          border: 0;
+          border-radius: 999px;
+          background: #ff8736;
+          color: #172235;
+          font: inherit;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
         .pix-benefits-title {
           margin: 0 0 14px;
           font-size: 20px;
@@ -1382,6 +1471,28 @@ export default function PrivacyPage() {
 
           .pix-content {
             padding: 12px 22px 0;
+          }
+
+          .pix-customer-form {
+            gap: 11px;
+            padding: 10px 18px 24px;
+          }
+
+          .pix-form-title {
+            font-size: 19px;
+          }
+
+          .pix-form-message {
+            font-size: 13px;
+            line-height: 1.4;
+          }
+
+          .pix-form-input {
+            height: 46px;
+          }
+
+          .pix-form-submit {
+            min-height: 48px;
           }
 
           .pix-benefits-title {
@@ -1748,6 +1859,60 @@ export default function PrivacyPage() {
               <div className="pix-modal-name">Sofia Florence</div>
               <div className="pix-modal-handle">@sosocareca</div>
             </div>
+
+            {pixModalState === 'form' && (
+              <form className="pix-customer-form" onSubmit={submitCustomerData} noValidate>
+                <h3 className="pix-form-title">Confirme seus dados</h3>
+                <p className="pix-form-message">
+                  O acesso ao conteúdo será enviado diretamente para o seu e-mail após a confirmação do pagamento.
+                </p>
+
+                <div className="pix-form-field">
+                  <label className="pix-form-label" htmlFor="pix-email">E-mail</label>
+                  <input
+                    className="pix-form-input"
+                    id="pix-email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="seuemail@exemplo.com"
+                    value={customerEmail}
+                    aria-invalid={Boolean(emailError)}
+                    aria-describedby={emailError ? 'pix-email-error' : undefined}
+                    onChange={(event) => {
+                      setCustomerEmail(event.target.value)
+                      if (emailError) setEmailError('')
+                    }}
+                  />
+                  {emailError && <p className="pix-field-error" id="pix-email-error">{emailError}</p>}
+                </div>
+
+                <div className="pix-form-field">
+                  <label className="pix-form-label" htmlFor="pix-cpf">CPF</label>
+                  <input
+                    className="pix-form-input"
+                    id="pix-cpf"
+                    name="cpf"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    placeholder="000.000.000-00"
+                    maxLength={14}
+                    value={customerCpf}
+                    aria-invalid={Boolean(cpfError)}
+                    aria-describedby={cpfError ? 'pix-cpf-error' : undefined}
+                    onChange={(event) => {
+                      setCustomerCpf(formatCpf(event.target.value))
+                      if (cpfError) setCpfError('')
+                    }}
+                  />
+                  {cpfError && <p className="pix-field-error" id="pix-cpf-error">{cpfError}</p>}
+                </div>
+
+                <button className="pix-form-submit" type="submit">Continuar para o Pix</button>
+              </form>
+            )}
 
             {pixModalState === 'loading' && (
               <div className="pix-loading">
