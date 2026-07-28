@@ -14,47 +14,63 @@ export default function PrivacyPage() {
   const [pixIdentifier, setPixIdentifier] = useState('')
   const [pixTimer, setPixTimer] = useState('15:00')
   const [pixError, setPixError] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerCpf, setCustomerCpf] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [cpfError, setCpfError] = useState('')
   
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const pollRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Gera CPF válido
-  const gerarCpfValido = () => {
-    const n = Array.from({ length: 9 }, () => Math.floor(Math.random() * 9))
-    let s1 = 0
-    for (let i = 0; i < 9; i++) s1 += n[i] * (10 - i)
-    let d1 = (s1 * 10) % 11
-    if (d1 === 10 || d1 === 11) d1 = 0
-    let s2 = 0
-    for (let i = 0; i < 9; i++) s2 += n[i] * (11 - i)
-    s2 += d1 * 2
-    let d2 = (s2 * 10) % 11
-    if (d2 === 10 || d2 === 11) d2 = 0
-    return n.concat([d1, d2]).join('')
-  }
-
-  const gerarDadosAleatorios = () => {
+  const gerarDadosComplementares = () => {
     const nomes = ["Ana Lima", "Carlos Souza", "Mariana Costa", "Pedro Alves", "Fernanda Silva", "Rafael Gomes"]
-    const emails = ["mail", "inbox", "msg", "acesso", "conta"]
-    const domains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com.br"]
-
-    const nome = nomes[Math.floor(Math.random() * nomes.length)]
-    const email = emails[Math.floor(Math.random() * emails.length)] + Math.floor(Math.random() * 9999) + '@' + domains[Math.floor(Math.random() * domains.length)]
 
     return {
-      nome,
-      email,
-      cpf: gerarCpfValido(),
+      nome: nomes[Math.floor(Math.random() * nomes.length)],
       phone: '119' + Math.floor(Math.random() * 90000000 + 10000000)
     }
   }
 
+  const validarCpf = (cpf: string) => {
+    const clean = cpf.replace(/\D/g, '')
+    if (clean.length !== 11 || /^(\d)\1{10}$/.test(clean)) return false
+
+    const calcularDigito = (base: string, pesoInicial: number) => {
+      const soma = base.split('').reduce((total, digit, index) => total + Number(digit) * (pesoInicial - index), 0)
+      const resto = (soma * 10) % 11
+      return resto === 10 ? 0 : resto
+    }
+
+    return calcularDigito(clean.slice(0, 9), 10) === Number(clean[9])
+      && calcularDigito(clean.slice(0, 10), 11) === Number(clean[10])
+  }
+
+  const formatarCpf = (value: string) => value
+    .replace(/\D/g, '')
+    .slice(0, 11)
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+
   const abrirPixDireto = (planLabel: string, amount: number) => {
     setPixPlanLabel(planLabel)
     setPixAmount(amount)
-    setPixModalState('loading')
+    setPixError('')
+    setEmailError('')
+    setCpfError('')
+    setPixModalState('form')
     setShowPixModal(true)
-    gerarPix(planLabel, amount)
+  }
+
+  const confirmarDadosEGerarPix = () => {
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail.trim())
+    const cpfValido = validarCpf(customerCpf)
+
+    setEmailError(emailValido ? '' : 'Informe um e-mail válido.')
+    setCpfError(cpfValido ? '' : 'Informe um CPF válido.')
+
+    if (!emailValido || !cpfValido) return
+    gerarPix(pixPlanLabel, pixAmount, customerEmail.trim(), customerCpf.replace(/\D/g, ''))
   }
 
   const fecharPixModal = () => {
@@ -63,10 +79,10 @@ export default function PrivacyPage() {
     if (pollRef.current) clearInterval(pollRef.current)
   }
 
-  const gerarPix = async (planLabel: string, amount: number) => {
+  const gerarPix = async (planLabel: string, amount: number, email: string, cpf: string) => {
     setPixModalState('loading')
 
-    const dados = gerarDadosAleatorios()
+    const dados = gerarDadosComplementares()
 
     try {
       // Chama a API do SyncPay
@@ -77,8 +93,8 @@ export default function PrivacyPage() {
         },
         body: JSON.stringify({
           name: dados.nome,
-          email: dados.email,
-          cpf: dados.cpf,
+          email,
+          cpf,
           phone: dados.phone,
           amount: amount,
           plan: planLabel
@@ -880,6 +896,75 @@ export default function PrivacyPage() {
           letter-spacing: 0.3px;
         }
 
+        .pix-customer-form {
+          display: flex;
+          flex-direction: column;
+          padding: 24px 38px 32px;
+        }
+
+        .pix-customer-form h3 {
+          margin-bottom: 6px;
+          color: #252525;
+          font-size: 24px;
+          line-height: 1.35;
+        }
+
+        .pix-customer-form > p {
+          margin-bottom: 22px;
+          color: #737373;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .pix-customer-form label {
+          margin-bottom: 7px;
+          color: #333;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .pix-customer-form input {
+          width: 100%;
+          height: 50px;
+          margin-bottom: 16px;
+          padding: 0 16px;
+          border: 1px solid #d5d9df;
+          border-radius: 12px;
+          outline: none;
+          background: #fff;
+          color: #252525;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 16px;
+        }
+
+        .pix-customer-form input:focus {
+          border-color: #ff8a3d;
+          box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.14);
+        }
+
+        .pix-customer-form input[aria-invalid='true'] {
+          margin-bottom: 5px;
+          border-color: #c81e1e;
+        }
+
+        .pix-field-error {
+          margin-bottom: 14px;
+          color: #b91c1c;
+          font-size: 12px;
+        }
+
+        .pix-generate-button {
+          margin-top: 6px;
+        }
+
+        .pix-customer-form small {
+          margin-top: 12px;
+          color: #8a8a8a;
+          font-size: 11px;
+          line-height: 1.5;
+          text-align: center;
+        }
+
         .pix-loading {
           padding: 40px 20px;
           text-align: center;
@@ -1384,6 +1469,14 @@ export default function PrivacyPage() {
             padding: 12px 22px 0;
           }
 
+          .pix-customer-form {
+            padding: 22px 22px 30px;
+          }
+
+          .pix-customer-form h3 {
+            font-size: 21px;
+          }
+
           .pix-benefits-title {
             font-size: 18px;
           }
@@ -1748,6 +1841,56 @@ export default function PrivacyPage() {
               <div className="pix-modal-name">Vivi Noronha</div>
               <div className="pix-modal-handle">@noronhavivi</div>
             </div>
+
+            {pixModalState === 'form' && (
+              <div className="pix-customer-form">
+                <h3>Complete seus dados</h3>
+                <p>Informe seus dados para gerar o pagamento via PIX.</p>
+
+                <label htmlFor="checkout-email">E-mail</label>
+                <input
+                  id="checkout-email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder="seu@email.com"
+                  value={customerEmail}
+                  aria-invalid={Boolean(emailError)}
+                  aria-describedby={emailError ? 'checkout-email-error' : undefined}
+                  onChange={(event) => {
+                    setCustomerEmail(event.target.value)
+                    if (emailError) setEmailError('')
+                  }}
+                />
+                {emailError && <span id="checkout-email-error" className="pix-field-error">{emailError}</span>}
+
+                <label htmlFor="checkout-cpf">CPF</label>
+                <input
+                  id="checkout-cpf"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  placeholder="000.000.000-00"
+                  maxLength={14}
+                  value={customerCpf}
+                  aria-invalid={Boolean(cpfError)}
+                  aria-describedby={cpfError ? 'checkout-cpf-error' : undefined}
+                  onChange={(event) => {
+                    setCustomerCpf(formatarCpf(event.target.value))
+                    if (cpfError) setCpfError('')
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' && !event.nativeEvent.isComposing && event.keyCode !== 229) confirmarDadosEGerarPix()
+                  }}
+                />
+                {cpfError && <span id="checkout-cpf-error" className="pix-field-error">{cpfError}</span>}
+
+                <button className="pix-copy-key-button pix-generate-button" onClick={confirmarDadosEGerarPix}>
+                  Gerar PIX
+                </button>
+                <small>Seus dados são usados somente para processar o pagamento.</small>
+              </div>
+            )}
 
             {pixModalState === 'loading' && (
               <div className="pix-loading">
