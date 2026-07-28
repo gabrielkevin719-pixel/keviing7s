@@ -1015,6 +1015,212 @@ export default function PrivacyPage() {
           margin-bottom: 20px;
         }
 
+        /* Privacy checkout */
+        .pix-modal-overlay {
+          padding: 0;
+          background: rgba(17, 17, 17, 0.84);
+        }
+
+        .pix-modal-container {
+          width: min(100%, 684px);
+          max-width: 684px;
+          min-height: 100vh;
+          margin: 0;
+          border-radius: 0;
+          background: #faf8f5;
+          color: #333230;
+          overflow: hidden;
+        }
+
+        .pix-modal-cover {
+          height: 100px;
+          border-radius: 0;
+          overflow: hidden;
+        }
+
+        .pix-modal-cover > span,
+        .pix-modal-cover img {
+          border-radius: 0;
+        }
+
+        .pix-cover-reference {
+          position: absolute;
+          inset: 0 auto auto 0;
+          width: 100%;
+          height: auto;
+          max-width: none;
+        }
+
+        .pix-avatar-reference {
+          position: absolute;
+          top: -60px;
+          left: -8px;
+          width: 683px;
+          height: auto;
+          max-width: none;
+        }
+
+        .pix-modal-close {
+          top: 10px;
+          right: 10px;
+          width: 28px;
+          height: 28px;
+          padding: 0;
+          background: transparent;
+          color: #d6d3d1;
+          font-size: 23px;
+          font-weight: 300;
+        }
+
+        .pix-modal-avatar {
+          top: 60px;
+          left: 9px;
+          bottom: auto;
+          width: 118px;
+          height: 118px;
+          border: 0;
+          box-shadow: none;
+        }
+
+        .pix-modal-profile {
+          min-height: 80px;
+          box-sizing: border-box;
+          padding: 15px 38px 12px 138px;
+        }
+
+        .pix-modal-name {
+          font-size: 16px;
+          line-height: 1.3;
+          font-weight: 500;
+          color: #222d3d;
+        }
+
+        .pix-modal-handle {
+          margin-top: 0;
+          font-size: 16px;
+          line-height: 1.3;
+          color: #7b8490;
+        }
+
+        .pix-content {
+          padding: 13px 38px 0;
+        }
+
+        .pix-benefits-title {
+          margin: 0 0 14px;
+          font-size: 20px;
+          line-height: 1.35;
+          font-weight: 700;
+          color: #111;
+        }
+
+        .pix-benefits-list {
+          gap: 7px;
+        }
+
+        .pix-benefits-list li {
+          gap: 12px;
+          font-size: 20px;
+          line-height: 1.2;
+          font-weight: 400;
+          color: #42413f;
+        }
+
+        .pix-benefits-list li svg {
+          width: 20px;
+          height: 20px;
+          stroke: #ff8736;
+        }
+
+        .pix-divider {
+          height: 1px;
+          margin: 28px -38px 0;
+          background: #d9dce1;
+        }
+
+        .pix-payment-section {
+          padding: 21px 16px 24px;
+        }
+
+        .pix-payment-title {
+          margin: 0 0 8px;
+          font-size: 26px;
+          line-height: 1.3;
+          font-weight: 800;
+          color: #363533;
+        }
+
+        .pix-value-label {
+          font-size: 18px;
+          line-height: 1.4;
+          color: #b0b4bc;
+        }
+
+        .pix-value-amount {
+          margin: 1px 0 28px;
+          font-size: 26px;
+          line-height: 1.35;
+          font-weight: 800;
+          color: #363533;
+        }
+
+        .pix-qr-container {
+          width: 294px;
+          height: 294px;
+          box-sizing: border-box;
+          margin: 0 auto 30px;
+          padding: 20px;
+          align-items: center;
+          border: 2px solid #172235;
+          border-radius: 10px;
+          background: #fff;
+        }
+
+        .pix-qr-img {
+          width: 250px;
+          height: 250px;
+          border: 0;
+          border-radius: 0;
+        }
+
+        .pix-code-field {
+          height: 51px;
+          margin: 0 0 20px;
+          padding: 0 18px;
+          border: 1px solid #d5dce6;
+          border-radius: 24px;
+          background: #fbfcfd;
+        }
+
+        .pix-code-field .pix-code-text {
+          display: block;
+          width: 100%;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 17px;
+          line-height: 1;
+          font-weight: 400;
+          color: #172235;
+          text-align: left;
+        }
+
+        .pix-copy-key-button {
+          width: 100%;
+          height: 57px;
+          border: 0;
+          border-radius: 29px;
+          background: linear-gradient(90deg, #ff943f 0%, #f9b0a8 100%);
+          color: #172235;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 20px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          cursor: pointer;
+        }
+
+        .pix-copy-key-button:active {
+          transform: scale(0.99);
+        }
+
         /* Popup Overlay */
         .popup-overlay {
           display: none;
@@ -1403,29 +1609,29 @@ export default function PrivacyPage() {
           <div className="pix-modal-container">
             <div className="pix-modal-cover">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png"
-                width={640}
-                height={220}
-                alt="Imagem de capa"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+                className="pix-cover-reference"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fu2cDEnAVtyXvytVX66RsqmkABT27s.png"
+                width={683}
+                height={912}
+                alt="Imagem de capa de BAD MI | MC MIRELLA"
                 unoptimized
               />
               <button className="pix-modal-close" onClick={fecharPixModal} aria-label="Fechar">✕</button>
-              <div className="pix-modal-avatar">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png"
-                  width={120}
-                  height={120}
-                  alt="Foto de perfil"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  unoptimized
-                />
-              </div>
+            </div>
+            <div className="pix-modal-avatar">
+              <Image
+                className="pix-avatar-reference"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fu2cDEnAVtyXvytVX66RsqmkABT27s.png"
+                width={683}
+                height={912}
+                alt="Foto de perfil de BAD MI | MC MIRELLA"
+                unoptimized
+              />
             </div>
 
             <div className="pix-modal-profile">
-              <div className="pix-modal-name">Vivi Noronha</div>
-              <div className="pix-modal-handle">@noronhavivi</div>
+              <div className="pix-modal-name">BAD MI | MC MIRELLA</div>
+              <div className="pix-modal-handle">@badmi</div>
             </div>
 
             {pixModalState === 'loading' && (
@@ -1456,28 +1662,23 @@ export default function PrivacyPage() {
 
                 <div className="pix-divider"></div>
 
-                <h3 className="pix-payment-title">Formas de pagamento</h3>
-                <p className="pix-value-label">Valor</p>
-                <p className="pix-value-amount">R$ {pixAmount.toFixed(2).replace('.', ',')}</p>
+                <div className="pix-payment-section">
+                  <h3 className="pix-payment-title">Formas de pagamento</h3>
+                  <p className="pix-value-label">Valor</p>
+                  <p className="pix-value-amount">R$ {pixAmount.toFixed(2).replace('.', ',')}</p>
 
-                <div className="pix-qr-container">
-                  <Image className="pix-qr-img" src={pixQrUrl} width={220} height={220} alt="QR Code PIX" />
+                  <div className="pix-qr-container">
+                    <Image className="pix-qr-img" src={pixQrUrl} width={250} height={250} alt="QR Code PIX" />
+                  </div>
+
+                  <button className="pix-code-field" onClick={copiarPix} aria-label="Copiar código PIX">
+                    <span className="pix-code-text">{pixCode}</span>
+                  </button>
+
+                  <button className="pix-copy-key-button" onClick={copiarPix}>
+                    Copiar chave Pix
+                  </button>
                 </div>
-
-                <button className="pix-code-field" onClick={copiarPix}>
-                  <span className="pix-code-text">{pixCode}</span>
-                  <span className="pix-code-copy-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                  </span>
-                </button>
-
-                <div className="pix-status">
-                  <div className="pix-status-dot"></div>
-                  <span>Aguardando pagamento...</span>
-                </div>
-                <p style={{ fontSize: '12px', color: '#9ca3af', textAlign: 'center' }}>
-                  QR Code expira em <strong>{pixTimer}</strong>
-                </p>
               </div>
             )}
 
