@@ -9,6 +9,10 @@ let cachedToken: { token: string; expiresAt: number } | null = null
 
 // Funcao para obter o token de autenticacao
 async function getAccessToken(): Promise<string> {
+  if (!CLIENT_ID || !CLIENT_SECRET) {
+    throw new Error('Credenciais do SyncPay não configuradas.')
+  }
+
   // Verifica se tem token em cache e ainda e valido (com margem de 5 minutos)
   if (cachedToken && cachedToken.expiresAt > Date.now() + 5 * 60 * 1000) {
     return cachedToken.token
@@ -41,8 +45,12 @@ async function getAccessToken(): Promise<string> {
     throw new Error('Resposta invalida da autenticacao SyncPay')
   }
 
+  if (!data.access_token) {
+    throw new Error(data.message || 'O SyncPay não retornou um token de acesso.')
+  }
+
   // Armazena o token em cache (expira em 1 hora por padrao)
-  const expiresIn = data.expires_in || 3600
+  const expiresIn = Number(data.expires_in) || 3600
   cachedToken = {
     token: data.access_token,
     expiresAt: Date.now() + expiresIn * 1000
@@ -125,16 +133,32 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorMsg = data.message || data.error || 'Erro ao gerar PIX'
-      console.error('[SyncPay PIX Error]', data)
+      console.error('[SyncPay PIX Error]', { status: response.status, message: errorMsg })
       return NextResponse.json(
         { error: errorMsg },
         { status: response.status }
       )
     }
 
-    // Extrai os dados do PIX da resposta do SyncPay
-    const pixCode = data.pix_code || data.qr_code || data.emv
-    const pixIdentifier = data.identifier || data.id || data.transaction_id
+    // A API pode responder HTTP 200 com uma mensagem de erro.
+    const pixCode = data.pix_code
+    const pixIdentifier = data.identifier
+
+    if (!pixCode || !pixIdentifier) {
+      const syncPayMessage = typeof data.message === 'string' ? data.message : ''
+      const unauthorized = syncPayMessage.toLowerCase().includes('unauthenticated')
+      const error = unauthorized
+        ? 'SyncPay recusou a operação. Autorize a chave da API e o IP do projeto no painel SyncPay.'
+        : syncPayMessage || 'O SyncPay não retornou o código PIX e o identificador da transação.'
+
+      console.error('[SyncPay CashIn Invalid Response]', {
+        hasPixCode: Boolean(pixCode),
+        hasIdentifier: Boolean(pixIdentifier),
+        message: syncPayMessage
+      })
+
+      return NextResponse.json({ error }, { status: unauthorized ? 401 : 502 })
+    }
 
     // Retorna os dados do PIX gerado
     return NextResponse.json({
