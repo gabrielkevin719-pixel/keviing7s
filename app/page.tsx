@@ -1598,7 +1598,7 @@ export default function PrivacyPage() {
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MW99mEQP_720p-cVwcozR3cE63jN9e48fifC4Av5nMnS.mp4"
+                    src="/videos/first-video.mp4"
                     autoPlay
                     loop
                     muted
