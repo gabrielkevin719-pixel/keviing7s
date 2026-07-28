@@ -160,9 +160,22 @@ export default function PrivacyPage() {
           box-sizing: border-box;
         }
 
+        html {
+          background-color: #f5f5f5;
+          color-scheme: light;
+          overflow-x: hidden;
+        }
+
         body {
+          min-width: 0;
           font-family: 'Montserrat', sans-serif;
           background-color: #f5f5f5;
+          overflow-x: hidden;
+        }
+
+        button,
+        input {
+          font-family: inherit;
         }
 
         .nav-container {
@@ -1371,6 +1384,30 @@ export default function PrivacyPage() {
         }
 
         @media (max-width: 600px) {
+          .navbar,
+          .nav-container {
+            width: 100%;
+          }
+
+          .nav-container {
+            height: 52px;
+            padding: 8px 16px;
+          }
+
+          .logo img {
+            width: 78px;
+            height: auto;
+          }
+
+          .globe-icon {
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
           .top-bar-content {
             gap: 10px;
             justify-content: center;
@@ -1388,13 +1425,15 @@ export default function PrivacyPage() {
           }
 
           .main-container {
-            margin: 16px auto;
-            padding: 0 12px;
+            width: 100%;
+            margin: 10px auto 16px;
+            padding: 0 8px;
           }
 
           .profile-info {
             gap: 10px;
-            padding: 0 14px;
+            margin-top: -34px;
+            padding: 0 12px;
           }
 
           .profile-image {
@@ -1406,24 +1445,58 @@ export default function PrivacyPage() {
             flex-direction: column;
             align-items: stretch;
             gap: 8px;
-            padding-top: 40px;
+            padding-top: 36px;
           }
 
           .profile-name {
             font-size: 16px;
+            line-height: 1.3;
+          }
+
+          .profile-username {
+            font-size: 12px;
           }
 
           .stats {
-            gap: 12px;
-            flex-wrap: wrap;
+            width: 100%;
+            gap: 8px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            font-size: 11px;
+          }
+
+          .stats span {
+            white-space: nowrap;
           }
 
           .profile-bio {
-            padding: 16px 14px;
+            padding: 12px;
+          }
+
+          .bio-text {
+            font-size: 12px;
+            line-height: 1.55;
+          }
+
+          .bio-toggle {
+            min-height: 44px;
+            margin: 0;
+            padding: 10px 0;
+          }
+
+          .social-icons {
+            gap: 8px;
+            margin-bottom: 14px;
+          }
+
+          .social-icon {
+            width: 44px;
+            height: 44px;
           }
 
           .plan-card {
-            padding: 14px 18px;
+            min-height: 48px;
+            padding: 12px 16px;
           }
 
           .plan-card .plan-title,
@@ -1442,26 +1515,105 @@ export default function PrivacyPage() {
             height: 132px;
           }
 
+          .content-toggle {
+            width: 100%;
+            gap: 4px;
+            margin: 14px 0;
+            flex-wrap: nowrap;
+          }
+
+          .toggle-btn {
+            min-height: 44px;
+            padding: 8px 10px;
+            font-size: 12px;
+            white-space: nowrap;
+          }
+
           .content-tabs {
             overflow-x: auto;
+            scrollbar-width: none;
+          }
+
+          .content-tabs::-webkit-scrollbar {
+            display: none;
           }
 
           .tab-item {
-            min-width: 96px;
-            padding: 14px 10px;
-            font-size: 13px;
+            min-width: 88px;
+            min-height: 44px;
+            padding: 12px 8px;
+            font-size: 12px;
+          }
+
+          .feed-gallery {
+            margin-top: 12px;
+            padding: 0;
           }
 
           .feed-grid {
             grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .feed-media {
+            aspect-ratio: 4 / 5;
+          }
+
+          .lock-bubble {
+            width: 58px;
+            height: 58px;
+          }
+
+          .feed-footer {
+            min-height: 44px;
+            padding: 8px 10px;
+          }
+
+          .info-container {
+            margin: 14px auto;
+            padding: 0 8px;
           }
 
           .faq-container {
-            padding: 20px 14px;
+            padding: 14px 12px;
+          }
+
+          .faq-titulo {
+            margin-bottom: 8px;
+            font-size: 16px;
+          }
+
+          .faq-item {
+            padding: 6px 0;
+          }
+
+          .faq-question {
+            min-height: 44px;
+            font-size: 12px;
+            line-height: 1.4;
+          }
+
+          .faq-answer {
+            padding: 8px 0 8px 28px;
+            font-size: 12px;
           }
 
           .footer-cta {
-            padding: 0 12px;
+            margin-top: 18px;
+            padding: 0 8px;
+          }
+
+          .footer-legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 12px;
+            padding: 12px 16px 20px;
+            line-height: 1.5;
+          }
+
+          .footer-legal-links .separator {
+            display: none;
           }
 
           .pix-modal-overlay {
@@ -1580,13 +1732,65 @@ export default function PrivacyPage() {
             font-size: 13px;
           }
 
-          .pix-modal-overlay {
+          .main-container {
+            padding: 0 6px;
+          }
+
+          .cover-image {
+            height: 112px;
+          }
+
+          .profile-image {
+            width: 64px;
+            height: 64px;
+          }
+
+          .profile-header-row {
+            padding-top: 30px;
+          }
+
+          .profile-bio {
+            padding: 10px;
+          }
+
+          .plan-card {
+            padding: 10px 12px;
+          }
+
+          .content-toggle {
+            overflow-x: auto;
+            justify-content: flex-start;
+            scrollbar-width: none;
+          }
+
+          .content-toggle::-webkit-scrollbar {
+            display: none;
+          }
+
+          .feed-header {
             padding: 8px;
           }
 
+          .stats-pill {
+            bottom: 8px;
+            left: 8px;
+            gap: 8px;
+            padding: 6px 9px;
+            font-size: 10px;
+          }
+
+          .pix-modal-overlay {
+            align-items: center;
+            padding: max(6px, env(safe-area-inset-top)) 6px max(6px, env(safe-area-inset-bottom));
+          }
+
           .pix-modal-container {
+            max-height: calc(100dvh - 12px);
+            min-height: 0;
             margin: 0;
             border-radius: 16px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
           }
 
           .pix-modal-cover {
@@ -1634,7 +1838,70 @@ export default function PrivacyPage() {
           }
 
           .pix-submit-btn {
+            min-height: 44px;
+            padding: 10px 14px;
+          }
+
+          .pix-loading,
+          .pix-error {
+            min-height: 220px;
+            padding: 20px 14px;
+          }
+
+          .pix-content {
+            padding: 10px 14px 0;
+          }
+
+          .pix-benefits-title {
+            font-size: 16px;
+          }
+
+          .pix-benefits-list {
+            gap: 8px;
+          }
+
+          .pix-benefits-list li {
+            gap: 8px;
+            font-size: 13px;
+          }
+
+          .pix-divider {
+            margin: 16px -14px 0;
+          }
+
+          .pix-payment-section {
+            padding: 14px 0 18px;
+          }
+
+          .pix-payment-title,
+          .pix-value-amount {
+            font-size: 20px;
+          }
+
+          .pix-value-label {
+            font-size: 13px;
+          }
+
+          .pix-qr-container {
+            width: min(220px, calc(100vw - 52px));
+            margin-bottom: 16px;
             padding: 12px;
+          }
+
+          .pix-code-field {
+            height: 44px;
+            margin-bottom: 12px;
+            padding: 0 12px;
+          }
+
+          .pix-code-field .pix-code-text {
+            font-size: 12px;
+          }
+
+          .pix-copy-key-button {
+            min-height: 48px;
+            height: auto;
+            font-size: 15px;
           }
         }
       `}</style>
