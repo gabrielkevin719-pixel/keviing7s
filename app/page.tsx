@@ -1044,20 +1044,16 @@ export default function PrivacyPage() {
         }
 
         .pix-cover-reference {
-          position: absolute;
-          inset: 0 auto auto 0;
           width: 100%;
-          height: auto;
-          max-width: none;
+          height: 100%;
+          object-fit: cover;
+          object-position: center 30%;
         }
 
         .pix-avatar-reference {
-          position: absolute;
-          top: -60px;
-          left: -8px;
-          width: 683px;
-          height: auto;
-          max-width: none;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .pix-modal-close {
@@ -1317,6 +1313,121 @@ export default function PrivacyPage() {
           .plan-card .plan-title,
           .plan-card .plan-price {
             font-size: 14px;
+          }
+
+          .profile-card,
+          .content-tabs,
+          .feed-section,
+          .info-container {
+            border-radius: 14px;
+          }
+
+          .cover-image {
+            height: 132px;
+          }
+
+          .content-tabs {
+            overflow-x: auto;
+          }
+
+          .tab-item {
+            min-width: 96px;
+            padding: 14px 10px;
+            font-size: 13px;
+          }
+
+          .feed-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .faq-container {
+            padding: 20px 14px;
+          }
+
+          .footer-cta {
+            padding: 0 12px;
+          }
+
+          .pix-modal-overlay {
+            align-items: flex-start;
+            overflow-y: auto;
+          }
+
+          .pix-modal-container {
+            width: 100%;
+            max-width: none;
+            min-height: 100dvh;
+          }
+
+          .pix-modal-cover {
+            height: 100px;
+          }
+
+          .pix-modal-avatar {
+            top: 60px;
+            left: 12px;
+            width: 88px;
+            height: 88px;
+          }
+
+          .pix-modal-profile {
+            min-height: 72px;
+            padding: 14px 16px 10px 112px;
+          }
+
+          .pix-modal-name,
+          .pix-modal-handle {
+            font-size: 14px;
+          }
+
+          .pix-content {
+            padding: 12px 22px 0;
+          }
+
+          .pix-benefits-title {
+            font-size: 18px;
+          }
+
+          .pix-benefits-list li {
+            gap: 10px;
+            font-size: 16px;
+          }
+
+          .pix-divider {
+            margin: 24px -22px 0;
+          }
+
+          .pix-payment-section {
+            padding: 20px 0 28px;
+          }
+
+          .pix-payment-title,
+          .pix-value-amount {
+            font-size: 24px;
+          }
+
+          .pix-value-label {
+            font-size: 16px;
+          }
+
+          .pix-qr-container {
+            width: min(294px, calc(100vw - 44px));
+            height: auto;
+            aspect-ratio: 1;
+            padding: 18px;
+          }
+
+          .pix-qr-img {
+            width: 100%;
+            height: 100%;
+          }
+
+          .pix-code-field .pix-code-text {
+            font-size: 14px;
+          }
+
+          .pix-copy-key-button {
+            font-size: 17px;
           }
         }
 
@@ -1610,28 +1721,32 @@ export default function PrivacyPage() {
             <div className="pix-modal-cover">
               <Image
                 className="pix-cover-reference"
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fu2cDEnAVtyXvytVX66RsqmkABT27s.png"
-                width={683}
-                height={912}
-                alt="Imagem de capa de BAD MI | MC MIRELLA"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png"
+                width={640}
+                height={350}
+                alt="Imagem de capa de Vivi Noronha"
                 unoptimized
               />
-              <button className="pix-modal-close" onClick={fecharPixModal} aria-label="Fechar">✕</button>
+              <button className="pix-modal-close" onClick={fecharPixModal} aria-label="Fechar">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
             </div>
             <div className="pix-modal-avatar">
               <Image
                 className="pix-avatar-reference"
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Fu2cDEnAVtyXvytVX66RsqmkABT27s.png"
-                width={683}
-                height={912}
-                alt="Foto de perfil de BAD MI | MC MIRELLA"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png"
+                width={250}
+                height={250}
+                alt="Foto de perfil de Vivi Noronha"
                 unoptimized
               />
             </div>
 
             <div className="pix-modal-profile">
-              <div className="pix-modal-name">BAD MI | MC MIRELLA</div>
-              <div className="pix-modal-handle">@badmi</div>
+              <div className="pix-modal-name">Vivi Noronha</div>
+              <div className="pix-modal-handle">@noronhavivi</div>
             </div>
 
             {pixModalState === 'loading' && (

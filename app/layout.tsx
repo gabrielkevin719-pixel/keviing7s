@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Privacy | BAD MI | MC MIRELLA',
-  description: 'Conteúdo exclusivo de BAD MI | MC MIRELLA',
+  title: 'Privacy | Vivi Noronha',
+  description: 'Conteúdo exclusivo de Vivi Noronha',
   icons: {
     icon: '/favicon.png',
   },
