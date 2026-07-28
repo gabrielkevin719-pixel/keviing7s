@@ -7,6 +7,25 @@ const CLIENT_SECRET = process.env.SYNCPAY_CLIENT_SECRET || ''
 // Cache do token para evitar requisicoes desnecessarias
 let cachedToken: { token: string; expiresAt: number } | null = null
 
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
+function isValidCpf(value: string) {
+  if (value.length !== 11 || /^(\d)\1{10}$/.test(value)) return false
+
+  const calculateDigit = (length: number) => {
+    const sum = value
+      .slice(0, length)
+      .split('')
+      .reduce((total, digit, index) => total + Number(digit) * (length + 1 - index), 0)
+    const remainder = (sum * 10) % 11
+    return remainder === 10 ? 0 : remainder
+  }
+
+  return calculateDigit(9) === Number(value[9]) && calculateDigit(10) === Number(value[10])
+}
+
 // Funcao para obter o token de autenticacao
 async function getAccessToken(): Promise<string> {
   if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -62,24 +81,36 @@ async function getAccessToken(): Promise<string> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { amount, plan, name, email, cpf, phone } = body
+    const { amount, plan, email, cpf } = body
 
-    // Validacoes basicas
-    if (!amount) {
+    const emailClean = typeof email === 'string' ? email.trim().toLowerCase() : ''
+    const cpfClean = typeof cpf === 'string' ? cpf.replace(/\D/g, '') : ''
+
+    if (!emailClean || !isValidEmail(emailClean)) {
       return NextResponse.json(
-        { error: 'Valor do pagamento e obrigatorio.' },
+        { error: 'Informe um e-mail válido.' },
         { status: 400 }
       )
     }
 
-    // Limpa CPF e telefone
-    const cpfClean = cpf?.replace(/\D/g, '') || '00000000000'
-    const phoneClean = phone?.replace(/\D/g, '') || '11999999999'
+    if (!isValidCpf(cpfClean)) {
+      return NextResponse.json(
+        { error: 'Informe um CPF válido.' },
+        { status: 400 }
+      )
+    }
 
     // Normaliza o valor (substitui virgula por ponto se necessario)
-    const amountNormalized = String(amount).replace(',', '.')
+    const amountNormalized = String(amount ?? '').replace(',', '.')
     // Valor em reais (double) para SyncPay - NAO converter para centavos
     const amountValue = parseFloat(amountNormalized)
+
+    if (!Number.isFinite(amountValue) || amountValue <= 0) {
+      return NextResponse.json(
+        { error: 'O valor do pagamento é obrigatório.' },
+        { status: 400 }
+      )
+    }
 
     // Obtem o token de autenticacao
     const accessToken = await getAccessToken()
@@ -93,10 +124,9 @@ export async function POST(request: NextRequest) {
       description: plan || 'Pagamento via PIX',
       webhook_url: webhookUrl,
       client: {
-        name: name || 'Cliente',
+        name: 'Cliente',
         cpf: cpfClean,
-        email: email || 'cliente@email.com',
-        phone: phoneClean
+        email: emailClean
       }
     }
 
