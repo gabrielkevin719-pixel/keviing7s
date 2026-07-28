@@ -1019,6 +1019,50 @@ export default function PrivacyPage() {
             padding: 6px 14px;
             background: rgba(255, 255, 255, 0.14);
           }
+
+          .main-container {
+            margin: 16px auto;
+            padding: 0 12px;
+          }
+
+          .profile-info {
+            gap: 10px;
+            padding: 0 14px;
+          }
+
+          .profile-image {
+            width: 72px;
+            height: 72px;
+          }
+
+          .profile-header-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            padding-top: 40px;
+          }
+
+          .profile-name {
+            font-size: 16px;
+          }
+
+          .stats {
+            gap: 12px;
+            flex-wrap: wrap;
+          }
+
+          .profile-bio {
+            padding: 16px 14px;
+          }
+
+          .plan-card {
+            padding: 14px 18px;
+          }
+
+          .plan-card .plan-title,
+          .plan-card .plan-price {
+            font-size: 14px;
+          }
         }
 
         @media (max-width: 380px) {
@@ -1038,6 +1082,20 @@ export default function PrivacyPage() {
           .mini-badge {
             font-size: 11px;
             padding: 2px 6px;
+          }
+
+          .stats {
+            gap: 10px;
+            font-size: 11px;
+          }
+
+          .plan-card {
+            padding: 13px 16px;
+          }
+
+          .plan-card .plan-title,
+          .plan-card .plan-price {
+            font-size: 13px;
           }
         }
       `}</style>
