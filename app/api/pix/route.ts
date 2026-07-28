@@ -7,6 +7,22 @@ const CLIENT_SECRET = process.env.SYNCPAY_CLIENT_SECRET || ''
 // Cache do token para evitar requisicoes desnecessarias
 let cachedToken: { token: string; expiresAt: number } | null = null
 
+function isValidCpf(value: string) {
+  const cpf = value.replace(/\D/g, '')
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false
+
+  const calculateDigit = (length: number) => {
+    let sum = 0
+    for (let index = 0; index < length; index++) {
+      sum += Number(cpf[index]) * (length + 1 - index)
+    }
+    const remainder = (sum * 10) % 11
+    return remainder === 10 ? 0 : remainder
+  }
+
+  return calculateDigit(9) === Number(cpf[9]) && calculateDigit(10) === Number(cpf[10])
+}
+
 // Funcao para obter o token de autenticacao
 async function getAccessToken(): Promise<string> {
   if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -67,13 +83,29 @@ export async function POST(request: NextRequest) {
     // Validacoes basicas
     if (!amount) {
       return NextResponse.json(
-        { error: 'Valor do pagamento e obrigatorio.' },
+        { error: 'Valor do pagamento é obrigatório.' },
         { status: 400 }
       )
     }
 
-    // Limpa CPF e telefone
-    const cpfClean = cpf?.replace(/\D/g, '') || '00000000000'
+    const emailClean = typeof email === 'string' ? email.trim().toLowerCase() : ''
+    const cpfClean = typeof cpf === 'string' ? cpf.replace(/\D/g, '') : ''
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailClean)) {
+      return NextResponse.json(
+        { error: 'Informe um e-mail válido para receber o acesso.' },
+        { status: 400 }
+      )
+    }
+
+    if (!isValidCpf(cpfClean)) {
+      return NextResponse.json(
+        { error: 'Informe um CPF válido.' },
+        { status: 400 }
+      )
+    }
+
+    // Limpa telefone
     const phoneClean = phone?.replace(/\D/g, '') || '11999999999'
 
     // Normaliza o valor (substitui virgula por ponto se necessario)
@@ -95,7 +127,7 @@ export async function POST(request: NextRequest) {
       client: {
         name: name || 'Cliente',
         cpf: cpfClean,
-        email: email || 'cliente@email.com',
+        email: emailClean,
         phone: phoneClean
       }
     }
