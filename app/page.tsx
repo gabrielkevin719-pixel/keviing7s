@@ -1484,18 +1484,18 @@ export default function PrivacyPage() {
           <div className="profile-card">
             <div className="cover-section">
               <div className="cover-image">
-                <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} unoptimized />
+                <Image src="/images/cover.jpg" width={640} height={350} alt="Imagem de capa" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} unoptimized />
               </div>
 
               <div className="profile-info">
                 <div className="profile-image">
-                  <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
+                  <Image src="/images/profile.jpg" width={250} height={250} alt="Foto de perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} unoptimized />
                 </div>
                 <div className="profile-text">
                   <div className="profile-header-row">
                     <div>
                       <div className="profile-name">
-                        Vivi Noronha
+                        Sofia Florence
                         <span className="verified">
                           <svg aria-label="Verificado" fill="#f97316" height="16" role="img" viewBox="0 0 40 40" width="16" xmlns="http://www.w3.org/2000/svg">
                             <title>Verificado</title>
@@ -1503,7 +1503,7 @@ export default function PrivacyPage() {
                           </svg>
                         </span>
                       </div>
-                      <div className="profile-username">@noronhavivi</div>
+                      <div className="profile-username">@sosocareca</div>
                     </div>
                     <div className="stats">
                       <span><svg className="stat-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg> 81</span>
@@ -1589,16 +1589,16 @@ export default function PrivacyPage() {
               {/* Video 1 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Vivi Noronha</div>
-                    <div className="feed-handle">@noronhavivi</div>
+                    <div className="feed-name">Sofia Florence</div>
+                    <div className="feed-handle">@sosocareca</div>
                   </div>
                 </header>
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MW99mEQP_720p-cVwcozR3cE63jN9e48fifC4Av5nMnS.mp4"
+                    src="/videos/video-project-2.mp4"
                     autoPlay
                     loop
                     muted
@@ -1623,16 +1623,16 @@ export default function PrivacyPage() {
               {/* Video 2 */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Vivi Noronha</div>
-                    <div className="feed-handle">@noronhavivi</div>
+                    <div className="feed-name">Sofia Florence</div>
+                    <div className="feed-handle">@sosocareca</div>
                   </div>
                 </header>
                 <div className="feed-media">
                   <video 
                     className="locked-media" 
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FjuP8fkp_720p-0nDEFeqyxNTiVgtR5kqFYfjuZmSShe.mp4" 
+                    src="/videos/first-video.mp4" 
                     autoPlay 
                     loop 
                     muted
@@ -1657,14 +1657,14 @@ export default function PrivacyPage() {
               {/* Imagem */}
               <article className="feed-card">
                 <header className="feed-header">
-                  <Image className="feed-avatar" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png" width={28} height={28} alt="Avatar" unoptimized />
+                  <Image className="feed-avatar" src="/images/profile.jpg" width={28} height={28} alt="Avatar" unoptimized />
                   <div className="feed-head-text">
-                    <div className="feed-name">Vivi Noronha</div>
-                    <div className="feed-handle">@noronhavivi</div>
+                    <div className="feed-name">Sofia Florence</div>
+                    <div className="feed-handle">@sosocareca</div>
                   </div>
                 </header>
                 <div className="feed-media">
-                  <Image className="locked-media" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagem3%20%281%29-9gKE8kTbUvc2m9h6jWMrYQam9m5GFH.png" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
+                  <Image className="locked-media" src="/images/third-photo.jpg" width={400} height={711} alt="Previa" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(8px)' }} unoptimized />
                   <div className="lock-bubble">🔒</div>
                   <div className="stats-pill">
                     <span>245K</span>
@@ -1721,10 +1721,10 @@ export default function PrivacyPage() {
             <div className="pix-modal-cover">
               <Image
                 className="pix-cover-reference"
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kamylinha%20%281%29-wo8rGRy9AU0QIOkxZiprDZqNsF7GQy.png"
+                src="/images/cover.jpg"
                 width={640}
                 height={350}
-                alt="Imagem de capa de Vivi Noronha"
+                alt="Imagem de capa de Sofia Florence"
                 unoptimized
               />
               <button className="pix-modal-close" onClick={fecharPixModal} aria-label="Fechar">
@@ -1736,17 +1736,17 @@ export default function PrivacyPage() {
             <div className="pix-modal-avatar">
               <Image
                 className="pix-avatar-reference"
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/perfil1%20%281%29-vkwPEgVvHcHpu7WWLNMjNeiYYz5BUv.png"
+                src="/images/profile.jpg"
                 width={250}
                 height={250}
-                alt="Foto de perfil de Vivi Noronha"
+                alt="Foto de perfil de Sofia Florence"
                 unoptimized
               />
             </div>
 
             <div className="pix-modal-profile">
-              <div className="pix-modal-name">Vivi Noronha</div>
-              <div className="pix-modal-handle">@noronhavivi</div>
+              <div className="pix-modal-name">Sofia Florence</div>
+              <div className="pix-modal-handle">@sosocareca</div>
             </div>
 
             {pixModalState === 'loading' && (
